@@ -1,0 +1,6 @@
+*.out
+*.log
+*.o
+*.exe
+*.zip
+.vscode/
