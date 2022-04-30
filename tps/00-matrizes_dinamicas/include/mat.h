@@ -11,13 +11,9 @@
 
 #include "memlog.h"
 
-#ifndef MAXTAM 
-#define MAXTAM 500
-#endif
-
 typedef struct mat{
-	double m[MAXTAM][MAXTAM];
-	int tamx, tamy;
+	double **m;
+    char *matrix_path;
 	int id;
 } mat_tipo;
 
