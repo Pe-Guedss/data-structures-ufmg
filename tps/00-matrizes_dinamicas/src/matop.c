@@ -55,7 +55,7 @@ void parse_args(int argc, char **argv) {
 
     // getopt - letra indica a opcao, : junto a letra indica parametro
     // no caso de escolher mais de uma operacao, vale a ultima
-    while (( c = getopt(argc, argv, "smtp:1:o:lh") ) != EOF){
+    while (( c = getopt(argc, argv, "smtp:1::2:o:lh") ) != EOF){
         switch(c) {
             case 'm':
                 avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
@@ -134,11 +134,11 @@ int main(int argc, char **argv) {
         // matriz c é impressa e todas as matrizes sao destruidas
         case OPSOMAR:
             defineFaseMemLog(0);
-            criaMatriz(&a,0);
+            criaMatrizInput(&a, matrixPath1, 0);
             inicializaMatrizAleatoria(&a);
-            criaMatriz(&b,1);
+            criaMatrizInput(&b, matrixPath2, 1);
             inicializaMatrizAleatoria(&b);
-            criaMatriz(&c,2);
+            criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
@@ -159,11 +159,11 @@ int main(int argc, char **argv) {
         // matriz c é impressa e todas as matrizes sao destruidas
         case OPMULTIPLICAR:
             defineFaseMemLog(0);
-            criaMatriz(&a,0);
+            criaMatrizInput(&a, matrixPath1, 0);
             inicializaMatrizAleatoria(&a);
-            criaMatriz(&b,1);
+            criaMatrizInput(&b, matrixPath2, 1);
             inicializaMatrizAleatoria(&b);
-            criaMatriz(&c,2);
+            criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
@@ -183,8 +183,10 @@ int main(int argc, char **argv) {
             // cria matriz a aleatoria, que e transposta, impressa e destruida
         case OPTRANSPOR:
             defineFaseMemLog(0);
-            criaMatriz(&a,0);
+            criaMatrizInput(&a, matrixPath1, 0);
             inicializaMatrizAleatoria(&a);
+            criaMatrizOutput(&c, matrixPathRes, 1, 1, 1);
+            inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
             acessaMatriz(&a);
