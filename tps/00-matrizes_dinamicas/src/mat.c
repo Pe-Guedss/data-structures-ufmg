@@ -10,6 +10,17 @@
 // Macro que realiza swap sem variavel auxiliar
 #define ELEMSWAP(x, y) (x += y, y = x - y, x -= y)
 
+void dimensoesMatriz(mat_tipo *mat) {
+    FILE *arq;
+
+    arq = fopen(mat->matrixPath, "r");
+
+    fscanf(arq, "%d", mat->tamX);
+    fscanf(arq, "%d", mat->tamY);
+
+    fclose(arq);
+}
+
 // Descricao: cria matriz com dimensoes tx X ty
 // Entrada: mat, tx, ty, id
 // Saida: mat
@@ -17,6 +28,22 @@ void criaMatriz(mat_tipo *mat, char *matrixPath,  int id) {
     // Verifica se matrixPath contem um caminho não nulo
     erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
     mat->matrixPath = matrixPath;
+
+    // Inicializa dimensões da matriz
+    dimensoesMatriz(mat);
+    // Verifica se as dimensões são válidas
+    erroAssert(mat->tamX > 0, "As dimensões da matriz não podem ser nulas");
+    erroAssert(mat->tamY > 0, "As dimensões da matriz não podem ser nulas");
+
+    // Aloca as linhas matriz de acordo com as dimensões especificadas
+    mat->m = (double*)malloc(mat->tamX * sizeof(double*));
+    erroAssert(mat->m != NULL, "Ocorreu um erro ao alocar a matriz");
+
+    for (int i = 0; i < mat->tamX; i++) {
+        // Aloca as colunas da matriz de acordo com as dimensões especificadas
+        mat->m[i] = (double*)malloc(mat->tamY * sizeof(double));
+        erroAssert(mat->m[i] != NULL, "Ocorreu um erro ao alocar a matriz");
+    }
 
     // inicializa o identificador da matriz, para rastreamento
     mat->id = id;
