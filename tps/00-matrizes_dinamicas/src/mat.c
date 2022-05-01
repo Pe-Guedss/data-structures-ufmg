@@ -202,7 +202,6 @@ void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
     erroAssert(a->tamY == b->tamY, "Dimensoes incompativeis");
 
     // inicializa a matriz c garantindo a compatibilidade das dimensoes
-    criaMatriz(c, a->matrixPath, c->id);
     inicializaMatrizNula(c);
 
     // faz a soma elemento a elemento
@@ -226,7 +225,6 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
     erroAssert( a->tamY == b->tamX, "Dimensoes incompativeis" );
 
     // cria e inicializa a matriz c
-    criaMatriz(c, a->matrixPath, c->id);
     inicializaMatrizNula(c);
 
     // realiza a multiplicacao de matrizes
