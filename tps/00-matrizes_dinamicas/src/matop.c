@@ -135,9 +135,9 @@ int main(int argc, char **argv) {
         case OPSOMAR:
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
-            inicializaMatrizAleatoria(&a);
+            leMatrizDoTxt(&a);
             criaMatrizInput(&b, matrixPath2, 1);
-            inicializaMatrizAleatoria(&b);
+            leMatrizDoTxt(&b);
             criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
             inicializaMatrizNula(&c);
 
@@ -160,9 +160,9 @@ int main(int argc, char **argv) {
         case OPMULTIPLICAR:
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
-            inicializaMatrizAleatoria(&a);
+            leMatrizDoTxt(&a);
             criaMatrizInput(&b, matrixPath2, 1);
-            inicializaMatrizAleatoria(&b);
+            leMatrizDoTxt(&b);
             criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
             inicializaMatrizNula(&c);
 
@@ -184,7 +184,7 @@ int main(int argc, char **argv) {
         case OPTRANSPOR:
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
-            inicializaMatrizAleatoria(&a);
+            leMatrizDoTxt(&a);
             criaMatrizOutput(&c, matrixPathRes, 1, 1, 1);
             inicializaMatrizNula(&c);
 
