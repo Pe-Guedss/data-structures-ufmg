@@ -18,6 +18,10 @@ void dimensoesMatriz(mat_tipo *mat) {
     fscanf(arq, "%d", mat->tamX);
     fscanf(arq, "%d", mat->tamY);
 
+    // Verifica se as dimensões são válidas
+    erroAssert(mat->tamX > 0, "As dimensões da matriz não podem ser nulas");
+    erroAssert(mat->tamY > 0, "As dimensões da matriz não podem ser nulas");
+
     fclose(arq);
 }
 
@@ -31,9 +35,6 @@ void criaMatrizInput(mat_tipo *mat, char *matrixPath,  int id) {
 
     // Inicializa dimensões da matriz
     dimensoesMatriz(mat);
-    // Verifica se as dimensões são válidas
-    erroAssert(mat->tamX > 0, "As dimensões da matriz não podem ser nulas");
-    erroAssert(mat->tamY > 0, "As dimensões da matriz não podem ser nulas");
 
     // Aloca as linhas matriz de acordo com as dimensões especificadas
     mat->m = (double*)malloc(mat->tamX * sizeof(double*));
@@ -246,7 +247,18 @@ void transpoeMatriz(mat_tipo *a) {
 // Saida: a
 void destroiMatriz(mat_tipo *a) {
     // apenas um aviso se a matriz for destruida mais de uma vez
-    avisoAssert(( (a->tamX > 0) && (a->tamY > 0) ), "Matriz já foi destruida");
+    avisoAssert(a->m != NULL , "Matriz já foi desalocada");
+
+    for (int i = 0; i < a->tamX; i++) {
+        // Aloca as colunas da matriz de acordo com as dimensões especificadas
+        // a->m[i] = (double*)malloc(a->tamY * sizeof(double));
+        free(a->m[i]);
+        erroAssert(a->m[i] == NULL, "Ocorreu um erro ao desalocar a matriz");
+    }
+
+    // Aloca as linhas matriz de acordo com as dimensões especificadas
+    a->m = (double*)malloc(a->tamX * sizeof(double*));
+    erroAssert(a->m == NULL, "Ocorreu um erro ao desalocar a matriz");
 
     // torna as dimensoes invalidas
     a->id = a->tamX = a->tamY = -1;
