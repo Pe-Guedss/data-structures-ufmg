@@ -17,6 +17,8 @@ static int opescolhida;
 char lognome[100];
 int regmem;
 
+char *matrixPath1, *matrixPath2, *matrixPathRes;
+
 // Descricao: imprime as opcoes de uso
 // Entrada: nao tem
 // Saida: impressao das opcoes de linha de comando
@@ -25,6 +27,9 @@ void uso() {
     fprintf(stderr, "\t-s \t(somar matrizes) \n");
     fprintf(stderr, "\t-m \t(multiplicar matrizes) \n");
     fprintf(stderr, "\t-t \t(transpor matriz)\n");
+    fprintf(stderr, "\t-1 <arq1.txt>\t(caminho para arquivo de texto contendo a matriz 1)\n");
+    fprintf(stderr, "\t-2 <arq2.txt>\t(caminho para arquivo de texto contendo a matriz 2)\n");
+    fprintf(stderr, "\t-o <arq_res.txt>\t(caminho para arquivo de texto onde sera armazenada a matriz de resultado da operacao)\n");
     fprintf(stderr, "\t-p <arq>\t(arquivo de registro de acesso)\n");
     fprintf(stderr, "\t-l \t(registrar acessos a memoria)\n");
 }
@@ -46,9 +51,11 @@ void parse_args(int argc, char **argv) {
     regmem = 0;
     lognome[0] = 0;
 
+    matrixPath1 = matrixPath2 = matrixPathRes = NULL;
+
     // getopt - letra indica a opcao, : junto a letra indica parametro
     // no caso de escolher mais de uma operacao, vale a ultima
-    while (( c = getopt(argc, argv, "smtp:x:y:lh") ) != EOF){
+    while (( c = getopt(argc, argv, "smtp:1:o:lh") ) != EOF){
         switch(c) {
             case 'm':
                 avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
@@ -63,6 +70,21 @@ void parse_args(int argc, char **argv) {
             case 't':
                 avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
                 opescolhida = OPTRANSPOR;
+            break;
+
+            case '1':
+                avisoAssert(matrixPath1==NULL, "Ja havia sido informado um arquivo para a matriz 1");
+                matrixPath1 = optarg;
+            break;
+
+            case '2':
+                avisoAssert(matrixPath2==NULL, "Ja havia sido informado um arquivo para a matriz 2");
+                matrixPath2 = optarg;
+            break;
+
+            case 'o':
+                avisoAssert(matrixPathRes==NULL, "Ja havia sido informado um arquivo para a matriz o");
+                matrixPathRes = optarg;
             break;
 
             case 'p': 
