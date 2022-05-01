@@ -127,23 +127,26 @@ double leElemento (mat_tipo *mat, int x, int y) {
 // Descricao: faz uma copia de src em dst
 // Entrada: src, dst_id
 // Saida: dst
-void copiaMatriz(mat_tipo *src, mat_tipo *dst, int dst_id) {
+void matrizParaTxt(mat_tipo *src) {
     int i,j;
 
-    // cria novamente a matriz dst para ajustar as suas dimensoes
-    criaMatriz(dst, src->tamX, src->tamY, dst_id);
+    FILE *matriz;
 
-    // inicializa a matriz dst como nula
-    inicializaMatrizNula(dst);
+    matriz = fopen(src->matrix_path, "w");
+
+    // Verificando se a abertura do arquivo ocorreu corretamente
+    erroAssert(matriz != NULL, "Ocorreu um erro ao abrir o arquivo.");
     
     // copia os elementos da matriz src
     for (i = 0; i < src->tamX; i++){
         for(j = 0; j < src->tamY; j++){
-            dst->m[i][j] = src->m[i][j];
+            fprintf(matriz, "%f ", src->m[i][j]);
             LEMEMLOG( (long int) ( &(src->m[i][j]) ), sizeof(double), src->id );
-            ESCREVEMEMLOG( (long int) ( &(dst->m[i][j]) ), sizeof(double), dst->id );
         }
+        fprintf(matriz, "\n");
     }
+
+    fclose(matriz);
 }
 
 // Descricao: soma as matrizes a e b e armazena o resultado em c
