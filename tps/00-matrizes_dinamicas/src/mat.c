@@ -72,11 +72,14 @@ void leMatrizDoTxt(mat_tipo *mat) {
     FILE *arq;
 
     double num;
+    double auxDims;
 
     // inicializa a matriz com valores nulos, por seguranca
     inicializaMatrizNula(mat);
     
     arq = fopen(mat->matrixPath, "r");
+
+    fscanf(arq, "%d %d", &auxDims, &auxDims);
 
     while (!feof(arq)) {
         for (int i = 0; i < mat->tamX; i++) {
@@ -172,6 +175,9 @@ void matrizParaTxt(mat_tipo *src) {
 
     // Verificando se a abertura do arquivo ocorreu corretamente
     erroAssert(matriz != NULL, "Ocorreu um erro ao abrir o arquivo.");
+
+    // copia as dimensões de src para o arquivo
+    fprintf(matriz, "%d %d\n", src->tamX, src->tamY);
     
     // copia os elementos da matriz src
     for (i = 0; i < src->tamX; i++){
