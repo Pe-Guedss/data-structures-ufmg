@@ -25,8 +25,6 @@ void inicializaMatrizNula(mat_tipo *mat);
 void leMatrizDoTxt(mat_tipo *mat);
 double acessaMatriz(mat_tipo *mat);
 void matrizParaTxt(mat_tipo *mat);
-void escreveElemento(mat_tipo *mat, int x, int y, double v);
-double leElemento (mat_tipo *mat, int x, int y);
 void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
 void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
 void transpoeMatriz(mat_tipo *a);

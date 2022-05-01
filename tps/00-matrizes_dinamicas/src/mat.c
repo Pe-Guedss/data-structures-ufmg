@@ -140,30 +140,6 @@ double acessaMatriz(mat_tipo *mat) {
     return s; // apenas para evitar que acesso seja eliminado
 }
 
-// Descricao: atribui o valor v ao elemento (x,y) de mat
-// Entrada: mat, x, y, v
-// Saida: mat
-void escreveElemento(mat_tipo *mat, int x, int y, double v) {
-    // verifica se x e y sao validos
-    erroAssert( (x < 0) || (x >= mat->tamX), "Indice invalido" );
-    erroAssert( (y < 0) || (y >= mat->tamY), "Indice invalido" );
-
-    mat->m[x][y] = v;
-    ESCREVEMEMLOG( (long int) ( &(mat->m[x][y]) ), sizeof(double), mat->id );
-}
-
-// Descricao: retorna o elemento (x,y) de mat 
-// Entrada: mat, x, y
-// Saida: mat[x][y]
-double leElemento (mat_tipo *mat, int x, int y) {
-    // verifica se x e y sao validos
-    erroAssert( (x < 0) || (x >= mat->tamX), "Indice invalido" );
-    erroAssert( (y < 0) || (y >= mat->tamY), "Indice invalido" );
-
-    LEMEMLOG( (long int) ( &(mat->m[x][y]) ), sizeof(double), mat->id );
-    return mat->m[x][y];
-}
-
 // Descricao: escreve os elementos de src em seu respectivo arquivo de texto
 // Entrada: src, dst_id
 // Saida: dst
