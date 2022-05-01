@@ -18,7 +18,8 @@ typedef struct mat{
 	int id;
 } mat_tipo;
 
-void criaMatriz(mat_tipo *mat, char *matrixPath, int id);
+void criaMatrizInput(mat_tipo *mat, char *matrixPath, int id);
+void criaMatrizOutput(mat_tipo *mat, char *matrixPath, int tamX, int tamY, int id);
 void dimensoesMatriz(mat_tipo *mat);
 void inicializaMatrizNula(mat_tipo *mat);
 void leMatrizDoTxt(mat_tipo *mat);

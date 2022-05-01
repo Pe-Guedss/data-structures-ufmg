@@ -24,7 +24,7 @@ void dimensoesMatriz(mat_tipo *mat) {
 // Descricao: cria matriz com dimensoes tx X ty
 // Entrada: mat, tx, ty, id
 // Saida: mat
-void criaMatriz(mat_tipo *mat, char *matrixPath,  int id) {
+void criaMatrizInput(mat_tipo *mat, char *matrixPath,  int id) {
     // Verifica se matrixPath contem um caminho não nulo
     erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
     mat->matrixPath = matrixPath;
@@ -39,6 +39,31 @@ void criaMatriz(mat_tipo *mat, char *matrixPath,  int id) {
     mat->m = (double*)malloc(mat->tamX * sizeof(double*));
     erroAssert(mat->m != NULL, "Ocorreu um erro ao alocar a matriz");
 
+    for (int i = 0; i < mat->tamX; i++) {
+        // Aloca as colunas da matriz de acordo com as dimensões especificadas
+        mat->m[i] = (double*)malloc(mat->tamY * sizeof(double));
+        erroAssert(mat->m[i] != NULL, "Ocorreu um erro ao alocar a matriz");
+    }
+
+    // inicializa o identificador da matriz, para rastreamento
+    mat->id = id;
+}
+
+void criaMatrizOutput(mat_tipo *mat, char *matrixPath, int tamX, int tamY, int id) {
+    // Verifica se matrixPath contem um caminho não nulo
+    erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
+    mat->matrixPath = matrixPath;
+
+    // Verifica se as dimensões são válidas
+    erroAssert(tamX > 0, "As dimensões da matriz não podem ser nulas");
+    mat->tamX = tamX;
+    erroAssert(tamY > 0, "As dimensões da matriz não podem ser nulas");
+    mat->tamY = tamY;
+
+    // Aloca as linhas matriz de acordo com as dimensões especificadas
+    mat->m = (double*)malloc(mat->tamX * sizeof(double*));
+    erroAssert(mat->m != NULL, "Ocorreu um erro ao alocar a matriz");
+    
     for (int i = 0; i < mat->tamX; i++) {
         // Aloca as colunas da matriz de acordo com as dimensões especificadas
         mat->m[i] = (double*)malloc(mat->tamY * sizeof(double));
