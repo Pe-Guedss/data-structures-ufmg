@@ -21,7 +21,7 @@ typedef struct mat{
 void criaMatriz(mat_tipo *mat, char *matrixPath, int id);
 void dimensoesMatriz(mat_tipo *mat);
 void inicializaMatrizNula(mat_tipo *mat);
-void inicializaMatrizAleatoria(mat_tipo *mat);
+void leMatrizDoTxt(mat_tipo *mat);
 double acessaMatriz(mat_tipo *mat);
 void imprimeMatriz(mat_tipo *mat);
 void matrizParaTxt(mat_tipo *mat);

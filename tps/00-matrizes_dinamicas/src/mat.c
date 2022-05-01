@@ -64,22 +64,34 @@ void inicializaMatrizNula(mat_tipo *mat) {
     }
 }
 
-// Descricao: inicializa mat com valores aleatorios
+// Descricao: inicializa mat com os valores do txt
 // Entrada: mat 
 // Saida: mat
-void inicializaMatrizAleatoria(mat_tipo *mat) {
+void leMatrizDoTxt(mat_tipo *mat) {
     int i, j;
+    FILE *arq;
+
+    double num;
 
     // inicializa a matriz com valores nulos, por seguranca
     inicializaMatrizNula(mat);
     
-    // inicializa a parte alocada da matriz com valores aleatorios
-    for (i = 0; i < mat->tamX; i++){
-        for(j = 0; j < mat->tamY; j++){
-            mat->m[i][j] = drand48()*INITRANDOMRANGE;
-            ESCREVEMEMLOG( (long int) ( &(mat->m[i][j]) ), sizeof(double), mat->id );
+    arq = fopen(mat->matrixPath, "r");
+
+    while (!feof(arq)) {
+        for (int i = 0; i < mat->tamX; i++) {
+            for(int j = 0; j < mat->tamY; j++) {
+                // Armazena o elemento do txt na matriz
+                erroAssert(fscanf(arq, "%lf ", &num) == 1, "Matriz informada não bate com as especificações ditas (menor)");
+                mat->m[i][j] = num;
+                ESCREVEMEMLOG( (long int) ( &(mat->m[i][j]) ), sizeof(double), mat->id );
+            }
         }
+
+        erroAssert(fscanf(arq, "%lf ", &num) != -1, "Matriz informada não bate com as especificações ditas (maior)");
     }
+
+    fclose(arq);
 }
 
 // Descricao: acessa mat para fins de registro de acesso
