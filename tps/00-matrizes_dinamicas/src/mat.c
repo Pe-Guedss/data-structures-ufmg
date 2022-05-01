@@ -13,14 +13,11 @@
 // Descricao: cria matriz com dimensoes tx X ty
 // Entrada: mat, tx, ty, id
 // Saida: mat
-void criaMatriz(mat_tipo *mat, int tx, int ty, int id) {
-    // verifica se os valores de tx e ty são validos
-    erroAssert(tx > 0, "Dimensao nula");
-    erroAssert(ty > 0, "Dimensao nula");
+void criaMatriz(mat_tipo *mat, char *matrixPath,  int id) {
+    // Verifica se matrixPath contem um caminho não nulo
+    erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
+    mat->matrixPath = matrixPath;
 
-    // inicializa as dimensoes da matriz
-    mat->tamX = tx;
-    mat->tamY = ty;
     // inicializa o identificador da matriz, para rastreamento
     mat->id = id;
 }
@@ -132,7 +129,7 @@ void matrizParaTxt(mat_tipo *src) {
 
     FILE *matriz;
 
-    matriz = fopen(src->matrix_path, "w");
+    matriz = fopen(src->matrixPath, "w");
 
     // Verificando se a abertura do arquivo ocorreu corretamente
     erroAssert(matriz != NULL, "Ocorreu um erro ao abrir o arquivo.");
@@ -160,7 +157,7 @@ void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
     erroAssert(a->tamY == b->tamY, "Dimensoes incompativeis");
 
     // inicializa a matriz c garantindo a compatibilidade das dimensoes
-    criaMatriz(c, a->tamX, a->tamY, c->id);
+    criaMatriz(c, a->matrixPath, c->id);
     inicializaMatrizNula(c);
 
     // faz a soma elemento a elemento
@@ -184,7 +181,7 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
     erroAssert( a->tamY == b->tamX, "Dimensoes incompativeis" );
 
     // cria e inicializa a matriz c
-    criaMatriz(c, a->tamX, b->tamY, c->id);
+    criaMatriz(c, a->matrixPath, c->id);
     inicializaMatrizNula(c);
 
     // realiza a multiplicacao de matrizes

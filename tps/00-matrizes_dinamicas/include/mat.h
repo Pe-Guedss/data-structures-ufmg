@@ -13,12 +13,12 @@
 
 typedef struct mat{
 	double **m;
-    char *matrix_path;
+    char *matrixPath;
     int tamX, tamY;
 	int id;
 } mat_tipo;
 
-void criaMatriz(mat_tipo *mat, int tx, int ty, int id);
+void criaMatriz(mat_tipo *mat, char *matrixPath, int id);
 void inicializaMatrizNula(mat_tipo *mat);
 void inicializaMatrizAleatoria(mat_tipo *mat);
 double acessaMatriz(mat_tipo *mat);
