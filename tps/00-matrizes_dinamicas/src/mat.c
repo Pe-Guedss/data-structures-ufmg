@@ -140,30 +140,6 @@ double acessaMatriz(mat_tipo *mat) {
     return s; // apenas para evitar que acesso seja eliminado
 }
 
-// Descricao: imprime a matriz com a identificacao de linhas e colunas
-// Entrada: mat
-// Saida: impressao na saida padrao (stdout) 
-void imprimeMatriz(mat_tipo *mat) {
-    int i,j;
-
-    // imprime os identificadores de coluna
-    printf("%9s", " ");
-    for(j = 0; j < mat->tamY; j++){
-        printf("%8d ", j);
-    }
-    printf("\n");
-
-    // imprime as linhas
-    for (i = 0; i < mat->tamX; i++) {
-        printf("%8d ", i);
-        for(j = 0; j < mat->tamY; j++) {
-            printf("%8.2f ", mat->m[i][j]);
-            LEMEMLOG( (long int) ( &(mat->m[i][j]) ), sizeof(double), mat->id );
-        }
-        printf("\n");
-    }
-}
-
 // Descricao: atribui o valor v ao elemento (x,y) de mat
 // Entrada: mat, x, y, v
 // Saida: mat
@@ -188,7 +164,7 @@ double leElemento (mat_tipo *mat, int x, int y) {
     return mat->m[x][y];
 }
 
-// Descricao: faz uma copia de src em dst
+// Descricao: escreve os elementos de src em seu respectivo arquivo de texto
 // Entrada: src, dst_id
 // Saida: dst
 void matrizParaTxt(mat_tipo *src) {
