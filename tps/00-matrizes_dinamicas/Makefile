@@ -56,6 +56,25 @@ TRANSPERF = analises/trans/perf/resultados
 
 EXE = $(BIN)/matop
 
+
+folders:
+	@echo criando estrutura de pastas para análise dos resultados.
+
+	@ mkdir analises
+
+	@ mkdir analises/soma analises/soma/mem analises/soma/perf
+
+	@ mkdir analises/mult analises/mult/mem analises/mult/perf
+
+	@ mkdir analises/trans analises/trans/mem analises/trans/perf
+
+	@ mkdir $(SOMALOGS) $(SOMAGPROF) $(SOMAMATRIZESMEM) $(SOMAMEM) $(SOMAMATRIZESPERF) $(SOMAPERF)
+
+	@ mkdir $(MULTLOGS) $(MULTGPROF) $(MULTMATRIZESMEM) $(MULTMEM) $(MULTMATRIZESPERF) $(MULTPERF)
+
+	@ mkdir $(TRANSLOGS) $(TRANSGPROF) $(TRANSMATRIZESMEM) $(TRANSMEM) $(TRANSMATRIZESPERF) $(TRANSPERF)
+
+
 all: mem perf gprof
 
 mem: $(EXE)
