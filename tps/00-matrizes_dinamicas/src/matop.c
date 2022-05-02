@@ -4,8 +4,8 @@
 #include <getopt.h>
 #include <string.h>
 #include "mat.h"
-#include "memlog.h" 
-#include "msgassert.h" 
+#include "memlog.h"
+#include "msgassert.h"
 
 // definicoes de operacoes a serem testadas
 #define OPSOMAR 1
@@ -17,7 +17,7 @@ static int opescolhida;
 char lognome[100];
 int regmem;
 
-char *matrixPath1, *matrixPath2, *matrixPathRes;
+char matrixPath1[100], matrixPath2[100], matrixPathRes[100];
 
 // Descricao: imprime as opcoes de uso
 // Entrada: nao tem
@@ -49,13 +49,11 @@ void parse_args(int argc, char **argv) {
     // inicializacao variaveis globais para opcoes
     opescolhida = -1;
     regmem = 0;
-    lognome[0] = 0;
-
-    matrixPath1 = matrixPath2 = matrixPathRes = NULL;
+    lognome[0] = matrixPath1[0] = matrixPath2[0] = matrixPathRes[0] = 0;
 
     // getopt - letra indica a opcao, : junto a letra indica parametro
     // no caso de escolher mais de uma operacao, vale a ultima
-    while (( c = getopt(argc, argv, "smtp:1::2:o:lh") ) != EOF){
+    while (( c = getopt(argc, argv, "smtp:1:2:o:lh") ) != EOF){
         switch(c) {
             case 'm':
                 avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
@@ -74,21 +72,21 @@ void parse_args(int argc, char **argv) {
 
             case '1':
                 avisoAssert(matrixPath1==NULL, "Ja havia sido informado um arquivo para a matriz 1");
-                matrixPath1 = optarg;
+                strcpy(matrixPath1, optarg);
             break;
 
             case '2':
                 avisoAssert(matrixPath2==NULL, "Ja havia sido informado um arquivo para a matriz 2");
-                matrixPath2 = optarg;
+                strcpy(matrixPath2, optarg);
             break;
 
             case 'o':
                 avisoAssert(matrixPathRes==NULL, "Ja havia sido informado um arquivo para a matriz o");
-                matrixPathRes = optarg;
+                strcpy(matrixPathRes, optarg);
             break;
 
             case 'p': 
-                strcpy(lognome,optarg);
+                strcpy(lognome, optarg);
             break;
 
             case 'l': 
@@ -138,7 +136,7 @@ int main(int argc, char **argv) {
             leMatrizDoTxt(&a);
             criaMatrizInput(&b, matrixPath2, 1);
             leMatrizDoTxt(&b);
-            criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
+            criaMatrizOutput(&c, matrixPathRes, a.tamX, a.tamY, 2);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
@@ -163,7 +161,7 @@ int main(int argc, char **argv) {
             leMatrizDoTxt(&a);
             criaMatrizInput(&b, matrixPath2, 1);
             leMatrizDoTxt(&b);
-            criaMatrizOutput(&c, matrixPathRes, 1, 1, 2);
+            criaMatrizOutput(&c, matrixPathRes, a.tamX, b.tamY, 2);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
@@ -185,7 +183,7 @@ int main(int argc, char **argv) {
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
             leMatrizDoTxt(&a);
-            criaMatrizOutput(&c, matrixPathRes, 1, 1, 1);
+            criaMatrizOutput(&c, matrixPathRes, a.tamX, a.tamY, 1);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
