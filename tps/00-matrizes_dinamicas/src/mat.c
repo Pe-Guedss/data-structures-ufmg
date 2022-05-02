@@ -12,15 +12,19 @@
 
 void dimensoesMatriz(mat_tipo *mat) {
     FILE *arq;
+    int rows, columns;
 
     arq = fopen(mat->matrixPath, "r");
 
-    fscanf(arq, "%d", mat->tamX);
-    fscanf(arq, "%d", mat->tamY);
+    fscanf(arq, "%d", &rows);
+    fscanf(arq, "%d", &columns);
 
     // Verifica se as dimensões são válidas
-    erroAssert(mat->tamX > 0, "As dimensões da matriz não podem ser nulas");
-    erroAssert(mat->tamY > 0, "As dimensões da matriz não podem ser nulas");
+    erroAssert(rows > 0, "As dimensões da matriz não podem ser nulas");
+    erroAssert(columns > 0, "As dimensões da matriz não podem ser nulas");
+
+    mat->tamX = rows;
+    mat->tamY = columns;
 
     fclose(arq);
 }
@@ -37,7 +41,7 @@ void criaMatrizInput(mat_tipo *mat, char *matrixPath,  int id) {
     dimensoesMatriz(mat);
 
     // Aloca as linhas matriz de acordo com as dimensões especificadas
-    mat->m = (double*)malloc(mat->tamX * sizeof(double*));
+    mat->m = (double**)malloc(mat->tamX * sizeof(double*));
     erroAssert(mat->m != NULL, "Ocorreu um erro ao alocar a matriz");
 
     for (int i = 0; i < mat->tamX; i++) {
@@ -62,7 +66,7 @@ void criaMatrizOutput(mat_tipo *mat, char *matrixPath, int tamX, int tamY, int i
     mat->tamY = tamY;
 
     // Aloca as linhas matriz de acordo com as dimensões especificadas
-    mat->m = (double*)malloc(mat->tamX * sizeof(double*));
+    mat->m = (double**)malloc(mat->tamX * sizeof(double*));
     erroAssert(mat->m != NULL, "Ocorreu um erro ao alocar a matriz");
     
     for (int i = 0; i < mat->tamX; i++) {
@@ -98,7 +102,7 @@ void leMatrizDoTxt(mat_tipo *mat) {
     FILE *arq;
 
     double num;
-    double auxDims;
+    int auxDims;
 
     // inicializa a matriz com valores nulos, por seguranca
     inicializaMatrizNula(mat);
@@ -108,8 +112,8 @@ void leMatrizDoTxt(mat_tipo *mat) {
     fscanf(arq, "%d %d", &auxDims, &auxDims);
 
     while (!feof(arq)) {
-        for (int i = 0; i < mat->tamX; i++) {
-            for(int j = 0; j < mat->tamY; j++) {
+        for (i = 0; i < mat->tamX; i++) {
+            for(j = 0; j < mat->tamY; j++) {
                 // Armazena o elemento do txt na matriz
                 erroAssert(fscanf(arq, "%lf ", &num) == 1, "Matriz informada não bate com as especificações ditas (menor)");
                 mat->m[i][j] = num;
@@ -117,7 +121,7 @@ void leMatrizDoTxt(mat_tipo *mat) {
             }
         }
 
-        erroAssert(fscanf(arq, "%lf ", &num) != -1, "Matriz informada não bate com as especificações ditas (maior)");
+        erroAssert(fscanf(arq, "%lf ", &num) == -1, "Matriz informada não bate com as especificações ditas (maior)");
     }
 
     fclose(arq);
@@ -262,19 +266,18 @@ void transpoeMatriz(mat_tipo *a) {
 // Entrada: a
 // Saida: a
 void destroiMatriz(mat_tipo *a) {
+    int i;
+
     // apenas um aviso se a matriz for destruida mais de uma vez
     avisoAssert(a->m != NULL , "Matriz já foi desalocada");
 
-    for (int i = 0; i < a->tamX; i++) {
-        // Aloca as colunas da matriz de acordo com as dimensões especificadas
-        // a->m[i] = (double*)malloc(a->tamY * sizeof(double));
+    for (i = 0; i < a->tamX; i++) {
         free(a->m[i]);
-        erroAssert(a->m[i] == NULL, "Ocorreu um erro ao desalocar a matriz");
+        a->m[i] = NULL;
     }
 
-    // Aloca as linhas matriz de acordo com as dimensões especificadas
     free(a->m);
-    erroAssert(a->m == NULL, "Ocorreu um erro ao desalocar a matriz");
+    a->m = NULL;
 
     // torna as dimensoes invalidas
     a->id = a->tamX = a->tamY = -1;
