@@ -71,17 +71,17 @@ void parse_args(int argc, char **argv) {
             break;
 
             case '1':
-                avisoAssert(matrixPath1==NULL, "Ja havia sido informado um arquivo para a matriz 1");
+                avisoAssert(matrixPath1[0]==0, "Ja havia sido informado um arquivo para a matriz 1");
                 strcpy(matrixPath1, optarg);
             break;
 
             case '2':
-                avisoAssert(matrixPath2==NULL, "Ja havia sido informado um arquivo para a matriz 2");
+                avisoAssert(matrixPath2[0]==0, "Ja havia sido informado um arquivo para a matriz 2");
                 strcpy(matrixPath2, optarg);
             break;
 
             case 'o':
-                avisoAssert(matrixPathRes==NULL, "Ja havia sido informado um arquivo para a matriz o");
+                avisoAssert(matrixPathRes[0]==0, "Ja havia sido informado um arquivo para a matriz o");
                 strcpy(matrixPathRes, optarg);
             break;
 
