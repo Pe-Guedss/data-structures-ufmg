@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
 
             defineFaseMemLog(2);
             acessaMatriz(&c);
-            if (regmem) imprimeMatriz(&c);
+            matrizParaTxt(&c);
             destroiMatriz(&a);
             destroiMatriz(&b);
             destroiMatriz(&c);
@@ -174,7 +174,7 @@ int main(int argc, char **argv) {
 
             defineFaseMemLog(2);
             acessaMatriz(&c);
-            if (regmem) imprimeMatriz(&c);
+            matrizParaTxt(&c);
             destroiMatriz(&a);
             destroiMatriz(&b);
             destroiMatriz(&c);
@@ -191,11 +191,13 @@ int main(int argc, char **argv) {
             defineFaseMemLog(1);
             acessaMatriz(&a);
             transpoeMatriz(&a);
+            copiaMatrizes(&a, &c);
 
             defineFaseMemLog(2);
             acessaMatriz(&a);
-            if (regmem) imprimeMatriz(&a);
+            matrizParaTxt(&c);
             destroiMatriz(&a);
+            destroiMatriz(&c);
         break;
 
         // nao deve ser executado, pois ha um erroAssert em parse_args
