@@ -98,7 +98,7 @@ perf: $(EXE)
 
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_500.txt -2 $(MULTMATRIZESPERF)/m2_500.txt -o $(MULTMATRIZESPERF)/mult_res_500.txt -p $(MULTPERF)/mult500.out
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_500.txt -o $(TRANSMATRIZESPERF)/transp_res_500.txt -p $(TRANSPERF)/transp500.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_500.txt -o $(TRANSMATRIZESPERF)/transp_res_500.txt -p $(TRANSPERF)/transp500.out
 
 
 
@@ -106,7 +106,7 @@ perf: $(EXE)
 
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_600.txt -2 $(MULTMATRIZESPERF)/m2_600.txt -o $(MULTMATRIZESPERF)/mult_res_600.txt -p $(MULTPERF)/mult600.out
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_600.txt -o $(TRANSMATRIZESPERF)/transp_res_600.txt -p $(TRANSPERF)/transp600.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_600.txt -o $(TRANSMATRIZESPERF)/transp_res_600.txt -p $(TRANSPERF)/transp600.out
 
 
 
@@ -114,7 +114,7 @@ perf: $(EXE)
 
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_700.txt -2 $(MULTMATRIZESPERF)/m2_700.txt -o $(MULTMATRIZESPERF)/mult_res_700.txt -p $(MULTPERF)/mult700.out
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_700.txt -o $(TRANSMATRIZESPERF)/transp_res_700.txt -p $(TRANSPERF)/transp700.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_700.txt -o $(TRANSMATRIZESPERF)/transp_res_700.txt -p $(TRANSPERF)/transp700.out
 
 
 
@@ -122,7 +122,7 @@ perf: $(EXE)
 
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_800.txt -2 $(MULTMATRIZESPERF)/m2_800.txt -o $(MULTMATRIZESPERF)/mult_res_800.txt -p $(MULTPERF)/mult800.out
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_800.txt -o $(TRANSMATRIZESPERF)/transp_res_800.txt -p $(TRANSPERF)/transp800.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_800.txt -o $(TRANSMATRIZESPERF)/transp_res_800.txt -p $(TRANSPERF)/transp800.out
 
 
 
@@ -130,7 +130,7 @@ perf: $(EXE)
 
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_900.txt -2 $(MULTMATRIZESPERF)/m2_900.txt -o $(MULTMATRIZESPERF)/mult_res_900.txt -p $(MULTPERF)/mult900.out
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_900.txt -o $(TRANSMATRIZESPERF)/transp_res_900.txt -p $(TRANSPERF)/transp900.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_900.txt -o $(TRANSMATRIZESPERF)/transp_res_900.txt -p $(TRANSPERF)/transp900.out
 
 gprof: $(BIN)/matop
 	$(EXE) -s -1 $(SOMAMATRIZESPERF)/m1_900.txt -2 $(SOMAMATRIZESPERF)/m2_900.txt -o $(SOMAMATRIZESPERF)/soma_res_900.txt -p $(SOMAGPROF)/soma900gprof.out
@@ -139,7 +139,7 @@ gprof: $(BIN)/matop
 	$(EXE) -m -1 $(MULTMATRIZESPERF)/m1_900.txt -2 $(MULTMATRIZESPERF)/m2_900.txt -o $(MULTMATRIZESPERF)/mult_res_900.txt -p $(MULTGPROF)/mult900gprof.out
 	gprof $(EXE) gmon.out > $(MULTGPROF)/mult900gprof.txt
 
-	$(EXE) -m -1 $(TRANSMATRIZESPERF)/m1_900.txt -o $(TRANSMATRIZESPERF)/transp_res_900.txt -p $(TRANSGPROF)/transp900gprof.out
+	$(EXE) -t -1 $(TRANSMATRIZESPERF)/m1_900.txt -o $(TRANSMATRIZESPERF)/transp_res_900.txt -p $(TRANSGPROF)/transp900gprof.out
 	gprof $(EXE) gmon.out > $(TRANSGPROF)/transp900gprof.txt
 	
 
