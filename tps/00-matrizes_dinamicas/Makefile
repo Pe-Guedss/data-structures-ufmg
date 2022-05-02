@@ -91,7 +91,7 @@ mem: $(EXE)
 	$(EXE) -t -1 $(TRANSMATRIZESMEM)/m1.txt -o $(TRANSMATRIZESMEM)/res.txt -p $(TRANSLOGS)/transplog.out -l
 	rm -rf $(TRANSMEM)
 	mkdir $(TRANSMEM)
-	$(ANALISAMEM) -i $(TRANSLOGS)/translog.out -p $(TRANSMEM)/transmat
+	$(ANALISAMEM) -i $(TRANSLOGS)/transplog.out -p $(TRANSMEM)/transmat
 
 perf: $(EXE)
 	$(EXE) -s -1 $(SOMAMATRIZESPERF)/m1_500.txt -2 $(SOMAMATRIZESPERF)/m2_500.txt -o $(SOMAMATRIZESPERF)/soma_res_500.txt -p $(SOMAPERF)/soma500.out
