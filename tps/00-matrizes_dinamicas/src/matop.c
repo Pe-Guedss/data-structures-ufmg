@@ -81,7 +81,7 @@ void parse_args(int argc, char **argv) {
             break;
 
             case 'o':
-                avisoAssert(matrixPathRes[0]==0, "Ja havia sido informado um arquivo para a matriz o");
+                avisoAssert(matrixPathRes[0]==0, "Ja havia sido informado um arquivo para a matriz de output");
                 strcpy(matrixPathRes, optarg);
             break;
 
