@@ -141,9 +141,25 @@ double acessaMatriz(mat_tipo *mat) {
     return s; // apenas para evitar que acesso seja eliminado
 }
 
-// Descricao: escreve os elementos de src em seu respectivo arquivo de texto
-// Entrada: src, dst_id
+// Descricao: Itera pelos elementos de "src" copiando-os para "dst"
+// Entrada: src e dst
 // Saida: dst
+void copiaMatrizes(mat_tipo *src, mat_tipo *dst) {
+    int row, column;
+
+    dst->tamX = src->tamX;
+    dst->tamY = src->tamY;
+    
+    for (row = 0; row < src->tamX; row++) {
+        for (column = 0; column < src->tamY; column++) {
+            dst->m[row][column] = src->m[row][column];
+        }
+    }
+}
+
+// Descricao: escreve os elementos de src em seu respectivo arquivo de texto
+// Entrada: src
+// Saida: src->matrixPath.txt
 void matrizParaTxt(mat_tipo *src) {
     int i,j;
 
@@ -257,7 +273,7 @@ void destroiMatriz(mat_tipo *a) {
     }
 
     // Aloca as linhas matriz de acordo com as dimensões especificadas
-    a->m = (double*)malloc(a->tamX * sizeof(double*));
+    free(a->m);
     erroAssert(a->m == NULL, "Ocorreu um erro ao desalocar a matriz");
 
     // torna as dimensoes invalidas

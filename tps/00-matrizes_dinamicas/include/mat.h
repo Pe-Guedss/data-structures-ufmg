@@ -24,6 +24,7 @@ void dimensoesMatriz(mat_tipo *mat);
 void inicializaMatrizNula(mat_tipo *mat);
 void leMatrizDoTxt(mat_tipo *mat);
 double acessaMatriz(mat_tipo *mat);
+void copiaMatrizes(mat_tipo *src, mat_tipo *dst);
 void matrizParaTxt(mat_tipo *mat);
 void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
 void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
