@@ -10,6 +10,9 @@
 // Macro que realiza swap sem variavel auxiliar
 #define ELEMSWAP(x, y) (x += y, y = x - y, x -= y)
 
+// Descricao: Lê o arquivo de texto armazenado na estrutura da matriz e define o tamanhho dela com base na primeira linha do mesmo
+// Entrada: mat
+// Saída: mat
 void dimensoesMatriz(mat_tipo *mat) {
     FILE *arq;
     int rows, columns;
@@ -29,10 +32,10 @@ void dimensoesMatriz(mat_tipo *mat) {
     fclose(arq);
 }
 
-// Descricao: cria matriz com dimensoes tx X ty
-// Entrada: mat, tx, ty, id
+// Descricao: cria matriz de input de acordo com informações do txt
+// Entrada: mat, matrixPath, id
 // Saida: mat
-void criaMatrizInput(mat_tipo *mat, char *matrixPath,  int id) {
+void criaMatrizInput(mat_tipo *mat, char *matrixPath, int id) {
     // Verifica se matrixPath contem um caminho não nulo
     erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
     mat->matrixPath = matrixPath;
@@ -54,6 +57,9 @@ void criaMatrizInput(mat_tipo *mat, char *matrixPath,  int id) {
     mat->id = id;
 }
 
+// Descricao: cria matriz de output com dimensões informadas previamente
+// Entrada: mat, matrixPath, tamX, tamY, id
+// Saida: mat
 void criaMatrizOutput(mat_tipo *mat, char *matrixPath, int tamX, int tamY, int id) {
     // Verifica se matrixPath contem um caminho não nulo
     erroAssert(matrixPath != NULL, "O caminho para a matriz precisa ser especificado");
@@ -157,6 +163,9 @@ void copiaMatrizes(mat_tipo *src, mat_tipo *dst) {
     for (row = 0; row < src->tamX; row++) {
         for (column = 0; column < src->tamY; column++) {
             dst->m[row][column] = src->m[row][column];
+            
+            LEMEMLOG((long int)(&(src->m[row][column])),sizeof(double),src->id);
+            ESCREVEMEMLOG((long int)(&(dst->m[row][column])),sizeof(double),dst->id);
         }
     }
 }

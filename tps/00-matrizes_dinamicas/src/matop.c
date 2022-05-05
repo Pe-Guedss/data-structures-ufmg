@@ -131,6 +131,10 @@ int main(int argc, char **argv) {
         // cria matrizes a e b aleatorias, que sao somadas para a matriz c
         // matriz c é impressa e todas as matrizes sao destruidas
         case OPSOMAR:
+            erroAssert(matrixPath1[0] != 0, "Deve ser informado um arquivo de texto contendo a matriz 1.");
+            erroAssert(matrixPath2[0] != 0, "Deve ser informado um arquivo de texto contendo a matriz 2.");
+            erroAssert(matrixPathRes[0] != 0, "Deve ser informado um arquivo de texto para armazenar o resultado da operação.");
+
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
             leMatrizDoTxt(&a);
@@ -156,6 +160,10 @@ int main(int argc, char **argv) {
         // cria matrizes a e b aleatorias, que sao multiplicadas para matriz c
         // matriz c é impressa e todas as matrizes sao destruidas
         case OPMULTIPLICAR:
+            erroAssert(matrixPath1[0] != 0, "Deve ser informado um arquivo de texto contendo a matriz 1.");
+            erroAssert(matrixPath2[0] != 0, "Deve ser informado um arquivo de texto contendo a matriz 2.");
+            erroAssert(matrixPathRes[0] != 0, "Deve ser informado um arquivo de texto para armazenar o resultado da operação.");
+
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
             leMatrizDoTxt(&a);
@@ -180,6 +188,9 @@ int main(int argc, char **argv) {
 
             // cria matriz a aleatoria, que e transposta, impressa e destruida
         case OPTRANSPOR:
+            erroAssert(matrixPath1[0] != 0, "Deve ser informado um arquivo de texto contendo a matriz 1.");
+            erroAssert(matrixPathRes[0] != 0, "Deve ser informado um arquivo de texto para armazenar o resultado da operação.");
+
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
             leMatrizDoTxt(&a);
