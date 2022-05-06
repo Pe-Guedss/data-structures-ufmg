@@ -249,26 +249,24 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
     }
 }
 
-// Descricao: transpoe a matriz a
+// Descricao: transpoe a matriz a armazenando os valores em b
 // Entrada: a
-// Saida: a
-void transpoeMatriz(mat_tipo *a) {
-    int i, j, dim;
-    
-    // determina a maior dimensao entre tamX e tamY
-    dim = ( a->tamX > a->tamY ? a->tamX : a->tamY );
+// Saida: b
+void transpoeMatriz(mat_tipo *a, mat_tipo *b) {
+    int i, j;
+
+    // cria e inicializa a matriz b
+    criaMatrizOutput(b, b->matrixPath, a->tamY, a->tamX, b->id);
+    inicializaMatrizNula(b);
 
     // faz a transposicao como se a matriz fosse quadrada
-    for (i = 0; i < dim; i++){
-        for(j = i + 1; j < dim; j++){
-            ELEMSWAP( (a->m[i][j]), (a->m[j][i]) );
-            ESCREVEMEMLOG( (long int) ( &(a->m[i][j]) ), sizeof(double), a->id );
-            ESCREVEMEMLOG( (long int) ( &(a->m[j][i]) ), sizeof(double), a->id );
+    for (i = 0; i < a->tamX; i++){
+        for(j = 0; j < a->tamY; j++){
+            b->m[j][i] = a->m[i][j];
+            LEMEMLOG( (long int) ( &(a->m[i][j]) ), sizeof(double), a->id );
+            ESCREVEMEMLOG( (long int) ( &(b->m[j][i]) ), sizeof(double), b->id );
         }
     }
-
-    // inverte as dimensoes da matriz transposta
-    ELEMSWAP(a->tamX, a->tamY);
 }
 
 // Descricao: destroi a matriz a, que se torna inacessível

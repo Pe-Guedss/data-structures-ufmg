@@ -28,7 +28,7 @@ void copiaMatrizes(mat_tipo *src, mat_tipo *dst);
 void matrizParaTxt(mat_tipo *mat);
 void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
 void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c);
-void transpoeMatriz(mat_tipo *a);
+void transpoeMatriz(mat_tipo *a, mat_tipo *b);
 void destroiMatriz(mat_tipo *a);
 
 #endif

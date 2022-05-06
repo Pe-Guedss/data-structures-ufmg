@@ -194,13 +194,12 @@ int main(int argc, char **argv) {
             defineFaseMemLog(0);
             criaMatrizInput(&a, matrixPath1, 0);
             leMatrizDoTxt(&a);
-            criaMatrizOutput(&c, matrixPathRes, a.tamX, a.tamY, 1);
+            criaMatrizOutput(&c, matrixPathRes, a.tamY, a.tamX, 1);
             inicializaMatrizNula(&c);
 
             defineFaseMemLog(1);
             acessaMatriz(&a);
-            transpoeMatriz(&a);
-            copiaMatrizes(&a, &c);
+            transpoeMatriz(&a, &c);
 
             defineFaseMemLog(2);
             acessaMatriz(&a);
