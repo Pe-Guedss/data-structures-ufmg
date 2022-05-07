@@ -3,21 +3,21 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
-100.12      0.02     0.02        4     5.01     5.01  acessaMatriz
-  0.00      0.02     0.00        4     0.00     0.00  inicializaMatrizNula
-  0.00      0.02     0.00        3     0.00     0.00  defineFaseMemLog
-  0.00      0.02     0.00        3     0.00     0.00  destroiMatriz
-  0.00      0.02     0.00        2     0.00     0.00  criaMatrizInput
-  0.00      0.02     0.00        2     0.00     0.00  criaMatrizOutput
-  0.00      0.02     0.00        2     0.00     0.00  dimensoesMatriz
-  0.00      0.02     0.00        2     0.00     0.00  leMatrizDoTxt
-  0.00      0.02     0.00        1     0.00     0.00  clkDifMemLog
-  0.00      0.02     0.00        1     0.00     0.00  desativaMemLog
-  0.00      0.02     0.00        1     0.00     0.00  finalizaMemLog
-  0.00      0.02     0.00        1     0.00     0.00  iniciaMemLog
-  0.00      0.02     0.00        1     0.00     0.00  matrizParaTxt
-  0.00      0.02     0.00        1     0.00     0.00  parse_args
-  0.00      0.02     0.00        1     0.00     0.00  somaMatrizes
+ 50.06      0.02     0.02        2    10.01    10.01  leMatrizDoTxt
+ 25.03      0.03     0.01        4     2.50     2.50  acessaMatriz
+ 25.03      0.04     0.01        1    10.01    10.01  somaMatrizes
+  0.00      0.04     0.00        4     0.00     0.00  inicializaMatrizNula
+  0.00      0.04     0.00        3     0.00     0.00  defineFaseMemLog
+  0.00      0.04     0.00        3     0.00     0.00  destroiMatriz
+  0.00      0.04     0.00        2     0.00     0.00  criaMatrizInput
+  0.00      0.04     0.00        2     0.00     0.00  criaMatrizOutput
+  0.00      0.04     0.00        2     0.00     0.00  dimensoesMatriz
+  0.00      0.04     0.00        1     0.00     0.00  clkDifMemLog
+  0.00      0.04     0.00        1     0.00     0.00  desativaMemLog
+  0.00      0.04     0.00        1     0.00     0.00  finalizaMemLog
+  0.00      0.04     0.00        1     0.00     0.00  iniciaMemLog
+  0.00      0.04     0.00        1     0.00     0.00  matrizParaTxt
+  0.00      0.04     0.00        1     0.00     0.00  parse_args
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -55,77 +55,77 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 49.94% of 0.02 seconds
+granularity: each sample hit covers 2 byte(s) for 24.97% of 0.04 seconds
 
 index % time    self  children    called     name
-                0.02    0.00       4/4           main [2]
-[1]    100.0    0.02    0.00       4         acessaMatriz [1]
------------------------------------------------
                                                  <spontaneous>
-[2]    100.0    0.00    0.02                 main [2]
-                0.02    0.00       4/4           acessaMatriz [1]
-                0.00    0.00       3/3           defineFaseMemLog [4]
-                0.00    0.00       3/3           destroiMatriz [5]
-                0.00    0.00       2/2           criaMatrizInput [6]
-                0.00    0.00       2/2           leMatrizDoTxt [9]
-                0.00    0.00       1/1           parse_args [15]
-                0.00    0.00       1/1           iniciaMemLog [13]
-                0.00    0.00       1/1           desativaMemLog [11]
-                0.00    0.00       1/2           criaMatrizOutput [7]
-                0.00    0.00       1/4           inicializaMatrizNula [3]
-                0.00    0.00       1/1           somaMatrizes [16]
-                0.00    0.00       1/1           matrizParaTxt [14]
-                0.00    0.00       1/1           finalizaMemLog [12]
+[1]    100.0    0.00    0.04                 main [1]
+                0.02    0.00       2/2           leMatrizDoTxt [2]
+                0.01    0.00       4/4           acessaMatriz [3]
+                0.01    0.00       1/1           somaMatrizes [4]
+                0.00    0.00       3/3           defineFaseMemLog [6]
+                0.00    0.00       3/3           destroiMatriz [7]
+                0.00    0.00       2/2           criaMatrizInput [8]
+                0.00    0.00       1/1           parse_args [16]
+                0.00    0.00       1/1           iniciaMemLog [14]
+                0.00    0.00       1/1           desativaMemLog [12]
+                0.00    0.00       1/2           criaMatrizOutput [9]
+                0.00    0.00       1/4           inicializaMatrizNula [5]
+                0.00    0.00       1/1           matrizParaTxt [15]
+                0.00    0.00       1/1           finalizaMemLog [13]
 -----------------------------------------------
-                0.00    0.00       1/4           main [2]
-                0.00    0.00       1/4           somaMatrizes [16]
-                0.00    0.00       2/4           leMatrizDoTxt [9]
-[3]      0.0    0.00    0.00       4         inicializaMatrizNula [3]
+                0.02    0.00       2/2           main [1]
+[2]     50.0    0.02    0.00       2         leMatrizDoTxt [2]
+                0.00    0.00       2/4           inicializaMatrizNula [5]
 -----------------------------------------------
-                0.00    0.00       3/3           main [2]
-[4]      0.0    0.00    0.00       3         defineFaseMemLog [4]
+                0.01    0.00       4/4           main [1]
+[3]     25.0    0.01    0.00       4         acessaMatriz [3]
 -----------------------------------------------
-                0.00    0.00       3/3           main [2]
-[5]      0.0    0.00    0.00       3         destroiMatriz [5]
+                0.01    0.00       1/1           main [1]
+[4]     25.0    0.01    0.00       1         somaMatrizes [4]
+                0.00    0.00       1/2           criaMatrizOutput [9]
+                0.00    0.00       1/4           inicializaMatrizNula [5]
 -----------------------------------------------
-                0.00    0.00       2/2           main [2]
-[6]      0.0    0.00    0.00       2         criaMatrizInput [6]
-                0.00    0.00       2/2           dimensoesMatriz [8]
+                0.00    0.00       1/4           main [1]
+                0.00    0.00       1/4           somaMatrizes [4]
+                0.00    0.00       2/4           leMatrizDoTxt [2]
+[5]      0.0    0.00    0.00       4         inicializaMatrizNula [5]
 -----------------------------------------------
-                0.00    0.00       1/2           main [2]
-                0.00    0.00       1/2           somaMatrizes [16]
-[7]      0.0    0.00    0.00       2         criaMatrizOutput [7]
+                0.00    0.00       3/3           main [1]
+[6]      0.0    0.00    0.00       3         defineFaseMemLog [6]
 -----------------------------------------------
-                0.00    0.00       2/2           criaMatrizInput [6]
-[8]      0.0    0.00    0.00       2         dimensoesMatriz [8]
+                0.00    0.00       3/3           main [1]
+[7]      0.0    0.00    0.00       3         destroiMatriz [7]
 -----------------------------------------------
-                0.00    0.00       2/2           main [2]
-[9]      0.0    0.00    0.00       2         leMatrizDoTxt [9]
-                0.00    0.00       2/4           inicializaMatrizNula [3]
+                0.00    0.00       2/2           main [1]
+[8]      0.0    0.00    0.00       2         criaMatrizInput [8]
+                0.00    0.00       2/2           dimensoesMatriz [10]
 -----------------------------------------------
-                0.00    0.00       1/1           finalizaMemLog [12]
-[10]     0.0    0.00    0.00       1         clkDifMemLog [10]
+                0.00    0.00       1/2           main [1]
+                0.00    0.00       1/2           somaMatrizes [4]
+[9]      0.0    0.00    0.00       2         criaMatrizOutput [9]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[11]     0.0    0.00    0.00       1         desativaMemLog [11]
+                0.00    0.00       2/2           criaMatrizInput [8]
+[10]     0.0    0.00    0.00       2         dimensoesMatriz [10]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[12]     0.0    0.00    0.00       1         finalizaMemLog [12]
-                0.00    0.00       1/1           clkDifMemLog [10]
+                0.00    0.00       1/1           finalizaMemLog [13]
+[11]     0.0    0.00    0.00       1         clkDifMemLog [11]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[13]     0.0    0.00    0.00       1         iniciaMemLog [13]
+                0.00    0.00       1/1           main [1]
+[12]     0.0    0.00    0.00       1         desativaMemLog [12]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[14]     0.0    0.00    0.00       1         matrizParaTxt [14]
+                0.00    0.00       1/1           main [1]
+[13]     0.0    0.00    0.00       1         finalizaMemLog [13]
+                0.00    0.00       1/1           clkDifMemLog [11]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[15]     0.0    0.00    0.00       1         parse_args [15]
+                0.00    0.00       1/1           main [1]
+[14]     0.0    0.00    0.00       1         iniciaMemLog [14]
 -----------------------------------------------
-                0.00    0.00       1/1           main [2]
-[16]     0.0    0.00    0.00       1         somaMatrizes [16]
-                0.00    0.00       1/2           criaMatrizOutput [7]
-                0.00    0.00       1/4           inicializaMatrizNula [3]
+                0.00    0.00       1/1           main [1]
+[15]     0.0    0.00    0.00       1         matrizParaTxt [15]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[16]     0.0    0.00    0.00       1         parse_args [16]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -218,8 +218,8 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [1] acessaMatriz           [11] desativaMemLog          [3] inicializaMatrizNula
-  [10] clkDifMemLog            [5] destroiMatriz           [9] leMatrizDoTxt
-   [6] criaMatrizInput         [8] dimensoesMatriz        [14] matrizParaTxt
-   [7] criaMatrizOutput       [12] finalizaMemLog         [15] parse_args
-   [4] defineFaseMemLog       [13] iniciaMemLog           [16] somaMatrizes
+   [3] acessaMatriz           [12] desativaMemLog          [5] inicializaMatrizNula
+  [11] clkDifMemLog            [7] destroiMatriz           [2] leMatrizDoTxt
+   [8] criaMatrizInput        [10] dimensoesMatriz        [15] matrizParaTxt
+   [9] criaMatrizOutput       [13] finalizaMemLog         [16] parse_args
+   [6] defineFaseMemLog       [14] iniciaMemLog            [4] somaMatrizes
