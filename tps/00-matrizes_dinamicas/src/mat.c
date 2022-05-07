@@ -18,6 +18,7 @@ void dimensoesMatriz(mat_tipo *mat) {
     int rows, columns;
 
     arq = fopen(mat->matrixPath, "r");
+    erroAssert(arq != NULL, "Ocorreu um erro ao abrir o arquivo da matriz");
 
     fscanf(arq, "%d", &rows);
     fscanf(arq, "%d", &columns);
@@ -89,6 +90,8 @@ void criaMatrizOutput(mat_tipo *mat, char *matrixPath, int tamX, int tamY, int i
 // Entrada: mat
 // Saida: mat
 void inicializaMatrizNula(mat_tipo *mat) {
+    erroAssert(mat->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i, j;
 
     // inicializa todos os elementos da matriz com 0, por seguranca 
@@ -104,6 +107,8 @@ void inicializaMatrizNula(mat_tipo *mat) {
 // Entrada: mat 
 // Saida: mat
 void leMatrizDoTxt(mat_tipo *mat) {
+    erroAssert(mat->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i, j;
     FILE *arq;
 
@@ -114,6 +119,7 @@ void leMatrizDoTxt(mat_tipo *mat) {
     inicializaMatrizNula(mat);
     
     arq = fopen(mat->matrixPath, "r");
+    erroAssert(arq != NULL, "Ocorreu um erro ao abrir o arquivo da matriz");
 
     fscanf(arq, "%d %d", &auxDims, &auxDims);
 
@@ -137,6 +143,8 @@ void leMatrizDoTxt(mat_tipo *mat) {
 // Entrada: mat
 // Saida: mat
 double acessaMatriz(mat_tipo *mat) {
+    erroAssert(mat->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i, j;
 
     double aux, s = 0.0;
@@ -155,6 +163,9 @@ double acessaMatriz(mat_tipo *mat) {
 // Entrada: src e dst
 // Saida: dst
 void copiaMatrizes(mat_tipo *src, mat_tipo *dst) {
+    erroAssert(src->m != NULL, "Matriz informada como fonte ainda não foi alocada, portanto, não pode ser inicializada");
+    erroAssert(dst->m != NULL, "Matriz informada como destino ainda não foi alocada, portanto, não pode ser inicializada");
+
     int row, column;
 
     dst->tamX = src->tamX;
@@ -174,6 +185,8 @@ void copiaMatrizes(mat_tipo *src, mat_tipo *dst) {
 // Entrada: src
 // Saida: src->matrixPath.txt
 void matrizParaTxt(mat_tipo *src) {
+    erroAssert(src->m != NULL, "Matriz informada como fonte ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i,j;
 
     FILE *matriz;
@@ -202,6 +215,9 @@ void matrizParaTxt(mat_tipo *src) {
 // Entrada: a, b
 // Saida: c
 void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
+    erroAssert(a->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+    erroAssert(b->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i,j;
 
     // verifica se as dimensoes das matrizes a e b sao as mesmas
@@ -227,6 +243,9 @@ void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
 // Entrada: a,b
 // Saida: c
 void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
+    erroAssert(a->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+    erroAssert(b->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i,j,k;
 
     // verifica a compatibilidade das dimensoes 
@@ -253,6 +272,8 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c) {
 // Entrada: a
 // Saida: b
 void transpoeMatriz(mat_tipo *a, mat_tipo *b) {
+    erroAssert(a->m != NULL, "Matriz informada ainda não foi alocada, portanto, não pode ser inicializada");
+
     int i, j;
 
     // cria e inicializa a matriz b
