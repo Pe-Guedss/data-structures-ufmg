@@ -1,0 +1,39 @@
+Card
+- número da carta
+- naipe da carta
+- definir operadores de comparação entre cartas
+
+Deck
+- 1 array de 52 cartas em ordem crescente pelo número e naipes organizados na ordem (ouro < espada < copas < paus)
+- enumeração dos naipes para acesso ao array no formato (numCard × cardNipe)
+- inicialização do baralho
+- Remoção de cartas do baralho
+- Verificação de robustez: Se uma carta não está no baralho, ela não pode ser usada para uma mão
+
+Hand
+- 1 array de 5 cartas ordenadas
+- método para verificar quais as combinações (Royal Flush, Straight Flush, ...) podem ser feitas com a carta
+- atributo para guardar a melhor combinação
+- definição de comparadores para as mãos
+
+Player
+- nome do jogador (pode conter espaços std::string aux; while std::cin >> aux ...)
+- total atual de fichas
+- mão da rodada atual
+- método para fazer aposta
+- método de teste de sanidade (verificar se o saldo de fichas permite a aposta)
+-> friend class Round
+
+Round
+- array de jogadores
+- atributo contendo o valor do pingo
+- método para cobrar o pingo de todos os jogadores (inclusive os que não estão na rodada)
+- método para verificar o ganhador da rodada
+- pote com o dinheiro dos pingos e apostas
+- método para transferir o dinheiro do pote para o vencedor
+
+Match
+- array de rodadas
+- Valor de fichas iniciais para os jogadores
+- Método para verificar vencedor da partida
+- Imprimir resultado da partida
