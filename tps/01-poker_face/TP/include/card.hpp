@@ -27,9 +27,12 @@ class Card {
          */
         Card(const std::string &cardCode);
 
-        bool operator<(Card const &card)
-        {
+        bool operator < (Card const &card) {
             return this->number < card.number;
+        }
+
+        bool operator > (Card const &card) {
+            return this->number > card.number;
         }
 
         friend std::ostream &operator<<(std::ostream &out, const Card *card);
