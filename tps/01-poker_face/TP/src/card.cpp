@@ -7,7 +7,6 @@ Card::Card() {
 }
 
 Card::Card(const std::string &cardCode) {
-    const char &i = *"";
     int it = 0;
     for (auto &&i : cardCode)
     {
