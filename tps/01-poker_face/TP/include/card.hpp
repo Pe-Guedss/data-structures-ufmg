@@ -35,6 +35,17 @@ class Card {
             return this->number > card.number;
         }
 
+        /**
+         * @brief Operador de comparação de igualdade entre cartas.
+         * Se uma carta foi declarada como ponteiro (Card *c;), lembre-se de desreferenciá-la (*c == *d).
+         * 
+         * @param card 
+         * @return true (1) ou false (0) dependendo da igualdade
+         */
+        bool operator == (Card const &card) {
+            return ( !(this->number > card.number) && !(this->number < card.number) );
+        }
+
         friend std::ostream &operator<<(std::ostream &out, const Card *card);
         friend std::ostream &operator<<(std::ostream &out, const Card card);
 
