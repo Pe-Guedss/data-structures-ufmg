@@ -30,5 +30,13 @@ Deck::Deck() {
                 break;
         }
     }
+}
+
+Deck::~Deck() {
+    delete [] this->cardDeck;
+    for (int i = 0; i < this->totalCards; i++)
+    {
+        this->cardDeck[i] = nullptr;
+    }
     
 }
