@@ -7,7 +7,8 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "deck.hpp"
+#include <iostream>
+#include <string>
 
 /**
  * @brief Classe que armazena e gerencia as informacoes das cartas do baralho, enquanto objetos individuais.

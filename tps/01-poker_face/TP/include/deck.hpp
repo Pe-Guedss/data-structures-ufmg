@@ -8,8 +8,6 @@
 #define DECK_H
 
 #include "card.hpp"
-#include <iostream>
-#include <string>
 
 /**
  * @brief Classe que armazena todas as cartas do baralho, removendo-as para as mãos dos jogadores a cada nova rodada e restringindo que cartas repetidas sejam distribuídas.
