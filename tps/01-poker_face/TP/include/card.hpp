@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo	: card.h
+// Arquivo	: card.hpp
 // Conteudo	: definicoes da classe Carta
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
@@ -52,6 +52,8 @@ class Card {
     private:
         int number;
         std::string nipe;
+
+    friend class Deck;
 };
 
 #endif
