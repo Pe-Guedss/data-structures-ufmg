@@ -8,6 +8,8 @@
 #define DECK_H
 
 #include "card.hpp"
+#include <iostream>
+#include <string>
 
 class Deck {
 
