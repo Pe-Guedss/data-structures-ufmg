@@ -31,11 +31,18 @@ class Deck {
 
         /**
          * @brief Remove a carta do baralho de acordo com o código recebido.
+         * Se a carta não estiver presente, joga um novo erro.
          * 
          * @param cardCode 
          * @return Ponteiro de carta que se quer utilizar.
          */
         Card* getCard(std::string cardCode);
+
+        /**
+         * @brief Mostra o baralho completo para o usuário.
+         * 
+         */
+        void showDeck();
 
     private:
         Card *cardDeck[52];
