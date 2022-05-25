@@ -29,7 +29,13 @@ class Deck {
          */
         ~Deck();
 
-        
+        /**
+         * @brief Remove a carta do baralho de acordo com o código recebido.
+         * 
+         * @param cardCode 
+         * @return Ponteiro de carta que se quer utilizar.
+         */
+        Card* getCard(std::string cardCode);
 
     private:
         Card *cardDeck[52];
