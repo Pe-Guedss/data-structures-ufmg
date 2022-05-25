@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo	: card.h
+// Arquivo	: card.hpp
 // Conteudo	: definicoes da classe Carta
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
@@ -7,8 +7,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <iostream>
-#include <string>
+#include "deck.hpp"
 
 /**
  * @brief Classe que armazena e gerencia as informacoes das cartas do baralho, enquanto objetos individuais.
@@ -52,6 +51,8 @@ class Card {
     private:
         int number;
         std::string nipe;
+
+    friend class Deck;
 };
 
 #endif
