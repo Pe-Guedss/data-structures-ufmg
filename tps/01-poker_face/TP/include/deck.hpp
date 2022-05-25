@@ -43,6 +43,7 @@ class Deck {
         void showDeck();
 
     private:
+        Card* locateCard(int cardNum, std::string cardNipe);
         const int cardsPerNipe = 13;
         const int totalCards = 52;
         Card *cardDeck[52];
