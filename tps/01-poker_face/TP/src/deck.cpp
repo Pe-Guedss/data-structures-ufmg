@@ -1,4 +1,5 @@
 #include "deck.hpp"
+#include "msgassert.hpp"
 
 Deck::Deck() {
     for (int i = 0; i < 4; i++) {
@@ -50,6 +51,7 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
     {
         Card *aux;
         aux = this->cardDeck[ (cardNum + ouro * this->cardsPerNipe) - 1 ];
+        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + ouro * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
@@ -57,6 +59,7 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
     {
         Card *aux;
         aux = this->cardDeck[ (cardNum + espada * this->cardsPerNipe) - 1 ];
+        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + espada * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
@@ -64,6 +67,7 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
     {
         Card *aux;
         aux = this->cardDeck[ (cardNum + copas * this->cardsPerNipe) - 1 ];
+        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + copas * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
@@ -71,6 +75,7 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
     {
         Card *aux;
         aux = this->cardDeck[ (cardNum + paus * this->cardsPerNipe) - 1 ];
+        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + paus * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
@@ -101,7 +106,7 @@ void Deck::showDeck() {
             std::cout << this->cardDeck[i] << std::endl;
         } else {
             std::cout << "===== Card Info =====" << std::endl;
-            std::cout << "This card is in someone's hand!" << std::endl;
+            std::cout << "This card is in someone's hand!\n" << std::endl;
         }
     }
 }
