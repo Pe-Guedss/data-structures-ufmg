@@ -6,8 +6,11 @@ int main()
     cardDeck = new Deck();
 
     std::cout << cardDeck->getCard("13O") << std::endl;
-    std::cout << cardDeck->getCard("13O") << std::endl;
+    cardDeck->cleanDeck();
     std::cout << "\n\n==============================================\n\n";
+    cardDeck->showDeck();
+    std::cout << "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++\n\n";
+    cardDeck->initializeDeck();
     cardDeck->showDeck();
 
     delete cardDeck;
