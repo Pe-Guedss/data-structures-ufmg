@@ -75,6 +75,12 @@ class Hand {
          * @return String contendo o código da melhor combinação presente na mão.
          */
         std::string getBestCombinationCode();
+        /**
+         * @brief Adiciona uma nova carta à mão do jogador.
+         * 
+         * @param cardCode Código da carta (Ex.: "13E")
+         */
+        void addCard(std::string cardCode);
 
     private:
         const int maxCards = 5;
