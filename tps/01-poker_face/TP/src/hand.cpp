@@ -30,4 +30,7 @@ void Hand::cleanHand() {
         delete this->cards[i];
         this->cards[i] = nullptr;
     }
+
+    delete this->highestCard;
+    this->highestCard = nullptr;
 }
