@@ -4,11 +4,18 @@
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
 
-#ifndef DECK_H
-#define DECK_H
+#ifndef HAND_H
+#define HAND_H
 
-class hand {
+#include "deck.hpp"
 
+class Hand {
+    public:
+
+    private:
+        const int maxCards = 5;
+        Card *cards[5];
+        std::string bestCombination;
 };
 
 #endif
