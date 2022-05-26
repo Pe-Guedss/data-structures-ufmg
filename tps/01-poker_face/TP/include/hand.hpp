@@ -40,6 +40,10 @@ class Hand {
                      !(this->bestCombination < hand.bestCombination) );
         }
 
+        void sortHand();
+        void findBestCombination();
+        std::string getBestCombinationCode();
+
     private:
         const int maxCards = 5;
         Card *cards[5];
