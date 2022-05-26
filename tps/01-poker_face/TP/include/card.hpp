@@ -10,6 +10,13 @@
 #include <iostream>
 #include <string>
 
+#define swapCards(A, B) \
+    {                      \
+        Card *aux = A;       \
+        A = B;             \
+        B = aux;           \
+    }
+
 /**
  * @brief Classe que armazena e gerencia as informacoes das cartas do baralho, enquanto objetos individuais.
  *
