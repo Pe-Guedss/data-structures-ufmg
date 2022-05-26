@@ -96,6 +96,7 @@ class Hand {
         bool checkStraight();
         bool checkFlush();
         bool checkRoyalStraight();
+        void findHighestCard();
 };
 
 #endif
