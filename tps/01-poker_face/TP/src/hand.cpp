@@ -46,6 +46,23 @@ bool Hand::checkFlush() {
     return true;
 }
 
+bool Hand::checkRoyalStraight() {
+    if (this->cards[0]->number != 1) {
+        return false;
+    }
+    int royalCardsNumber = 10;
+    for (auto &&card : this->cards)
+    {
+        if (card->number != royalCardsNumber)
+        {
+            return false;
+        }
+        royalCardsNumber++;
+    }
+    
+    return true;
+}
+
 void Hand::cleanHand() {
     for (int i = 0; i < this->maxCards; i++)
     {
