@@ -81,6 +81,11 @@ class Hand {
          * @param cardCode Código da carta (Ex.: "13E")
          */
         void addCard(std::string cardCode);
+        /**
+         * @brief Limpa todas as cartas utilizadas da mão, tornando os elementos do array ponteiros nulos.
+         * 
+         */
+        void cleanHand();
 
     private:
         const int maxCards = 5;
