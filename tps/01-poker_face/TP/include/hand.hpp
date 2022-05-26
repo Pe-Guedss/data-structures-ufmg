@@ -93,9 +93,31 @@ class Hand {
         int bestCombination;
         Card *highestCard;
 
+        /**
+         * @brief Verifica se há uma sequência de cartas no baralho.
+         * 
+         * @return true (1) ou false (0) dependendo de se há uma sequência ou não.
+         */
         bool checkStraight();
+
+        /**
+         * @brief Verifica se todas as cartas do baralho são do mesmo naipe.
+         * 
+         * @return true (1) ou false (0) dependendo de se as cartas são ou não do mesmo naipe.
+         */
         bool checkFlush();
+
+        /**
+         * @brief Verifica se há uma sequência de cartas no baralho e se essa sequência é: Ás(1), 10, Valete(11), Dama(12) e Rei(13).
+         * 
+         * @return true (1) ou false (0) dependendo de se há uma sequência real ou não.
+         */
         bool checkRoyalStraight();
+
+        /**
+         * @brief Encontra a maior carta e a registra na variável this->highestCard.
+         * 
+         */
         void findHighestCard();
 };
 
