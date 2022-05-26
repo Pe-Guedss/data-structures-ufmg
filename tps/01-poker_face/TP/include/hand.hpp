@@ -11,6 +11,8 @@
 
 class Hand {
     public:
+        Hand();
+        ~Hand();
 
     private:
         const int maxCards = 5;
