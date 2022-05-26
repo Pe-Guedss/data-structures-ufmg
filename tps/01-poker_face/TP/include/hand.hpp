@@ -10,14 +10,40 @@
 #include "deck.hpp"
 
 class Hand {
+    enum {
+        HC,
+        OP,
+        TP,
+        TK,
+        S,
+        F,
+        FH,
+        FK,
+        SF,
+        RSF
+    };
+        
     public:
         Hand();
         ~Hand();
 
+        bool operator < (Hand const &hand) {
+            return this->bestCombination < hand.bestCombination;
+        }
+
+        bool operator > (Hand const &hand) {
+            return this->bestCombination > hand.bestCombination;
+        }
+
+        bool operator == (Hand const &hand) {
+            return ( !(this->bestCombination > hand.bestCombination) && 
+                     !(this->bestCombination < hand.bestCombination) );
+        }
+
     private:
         const int maxCards = 5;
         Card *cards[5];
-        std::string bestCombination;
+        int bestCombination;
 };
 
 #endif
