@@ -2,33 +2,7 @@
 #include "msgassert.hpp"
 
 Deck::Deck() {
-    for (int i = 0; i < 4; i++) {
-        switch (i) {
-            case 0:
-                for (int j = 0; j < this->cardsPerNipe; j++) {
-                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "O");
-                }
-                break;
-            case 1:
-                for (int j = 0; j < this->cardsPerNipe; j++) {
-                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "E");
-                }
-                break;
-            case 2:
-                for (int j = 0; j < this->cardsPerNipe; j++) {
-                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "C");
-                }
-                break;
-            case 3:
-                for (int j = 0; j < this->cardsPerNipe; j++) {
-                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "P");
-                }
-                break;
-            
-            default:
-                break;
-        }
-    }
+    this->initializeDeck();
 }
 
 Deck::~Deck() {
@@ -112,5 +86,35 @@ void Deck::cleanDeck() {
     {
         delete this->cardDeck[i];
         this->cardDeck[i] = nullptr;
+    }
+}
+
+void Deck::initializeDeck() {
+    for (int i = 0; i < 4; i++) {
+        switch (i) {
+            case 0:
+                for (int j = 0; j < this->cardsPerNipe; j++) {
+                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "O");
+                }
+                break;
+            case 1:
+                for (int j = 0; j < this->cardsPerNipe; j++) {
+                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "E");
+                }
+                break;
+            case 2:
+                for (int j = 0; j < this->cardsPerNipe; j++) {
+                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "C");
+                }
+                break;
+            case 3:
+                for (int j = 0; j < this->cardsPerNipe; j++) {
+                    this->cardDeck[j + i * this->cardsPerNipe] = new Card(std::to_string(j + 1) + "P");
+                }
+                break;
+            
+            default:
+                break;
+        }
     }
 }
