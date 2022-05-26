@@ -69,6 +69,15 @@ void Hand::findHighestCard() {
     }
 }
 
+void Hand::addCard(std::string cardCode) {
+    for (auto &&card : this->cards) {
+        if (!card) {
+            card = new Card(cardCode);
+            break;
+        }
+    }
+}
+
 void Hand::cleanHand() {
     for (int i = 0; i < this->maxCards; i++)
     {
