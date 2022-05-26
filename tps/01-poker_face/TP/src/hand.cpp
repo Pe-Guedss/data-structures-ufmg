@@ -51,16 +51,22 @@ bool Hand::checkRoyalStraight() {
         return false;
     }
     int royalCardsNumber = 10;
-    for (auto &&card : this->cards)
-    {
-        if (card->number != royalCardsNumber)
-        {
+    for (auto &&card : this->cards) {
+        if (card->number != royalCardsNumber) {
             return false;
         }
         royalCardsNumber++;
     }
     
     return true;
+}
+
+void Hand::findHighestCard() {
+    if (this->cards[0]->number == 1) {
+        this->highestCard = this->cards[0];
+    } else {
+        this->highestCard = this->cards[this->maxCards - 1];
+    }
 }
 
 void Hand::cleanHand() {
