@@ -32,11 +32,7 @@ Deck::Deck() {
 }
 
 Deck::~Deck() {
-    for (int i = 0; i < this->totalCards; i++)
-    {
-        delete this->cardDeck[i];
-        this->cardDeck[i] = nullptr;
-    }
+    this->cleanDeck();
 }
 
 Card* Deck::locateCard(int cardNum, std::string cardNipe) {
@@ -108,5 +104,13 @@ void Deck::showDeck() {
             std::cout << "===== Card Info =====" << std::endl;
             std::cout << "This card is in someone's hand!\n" << std::endl;
         }
+    }
+}
+
+void Deck::cleanDeck() {
+    for (int i = 0; i < this->totalCards; i++)
+    {
+        delete this->cardDeck[i];
+        this->cardDeck[i] = nullptr;
     }
 }
