@@ -24,6 +24,19 @@ void Hand::sortHand() {
     }
 }
 
+bool Hand::checkFlush() {
+    std::string previousNipe = this->cards[0]->nipe;
+    for (auto &&card : this->cards)
+    {
+        if (card->nipe != previousNipe)
+        {
+            return false;
+        }
+        previousNipe = card->nipe;
+    }
+    return true;
+}
+
 void Hand::cleanHand() {
     for (int i = 0; i < this->maxCards; i++)
     {
