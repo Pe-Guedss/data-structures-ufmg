@@ -9,6 +9,10 @@
 
 #include "deck.hpp"
 
+/**
+ * @brief Classe para armazenar as cartas na mão do jogador.
+ * 
+ */
 class Hand {
     enum {
         HC,
@@ -24,7 +28,15 @@ class Hand {
     };
         
     public:
+        /**
+         * @brief Construtor da mão de cartas do jogador.
+         * 
+         */
         Hand();
+        /**
+         * @brief Destrutor da mão de cartas do jogador
+         * 
+         */
         ~Hand();
 
         bool operator < (Hand const &hand) {
@@ -35,13 +47,33 @@ class Hand {
             return this->bestCombination > hand.bestCombination;
         }
 
+        /**
+         * @brief Operador de comparação de igualdade entre mãos de cartas dos jogadores.
+         * Se uma mão foi declarada como ponteiro (Hand *h;), lembre-se de desreferenciá-la (*h == *g).
+         * 
+         * @param card 
+         * @return true (1) ou false (0) dependendo da igualdade
+         */
         bool operator == (Hand const &hand) {
             return ( !(this->bestCombination > hand.bestCombination) && 
                      !(this->bestCombination < hand.bestCombination) );
         }
 
+        /**
+         * @brief Ordena a mão de cartas do jogador, deixando a menor carta na primeira posição do array e a maior na última.
+         * 
+         */
         void sortHand();
+        /**
+         * @brief Encontra a melhor combinação de cartas presente na mão do usuário.
+         * 
+         */
         void findBestCombination();
+        /**
+         * @brief Depois de definida a melhor combinação de cartas na mão do jogador, mapeia a enumeração para os respectivos códigos em string, retornando o código encontrado.
+         * 
+         * @return String contendo o código da melhor combinação presente na mão.
+         */
         std::string getBestCombinationCode();
 
     private:
