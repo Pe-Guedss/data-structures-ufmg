@@ -47,6 +47,8 @@ class Deck {
          */
         void cleanDeck();
 
+        void initializeDeck();
+
     private:
         Card* locateCard(int cardNum, std::string cardNipe);
         const int cardsPerNipe = 13;
