@@ -95,7 +95,7 @@ class Hand {
 
         bool checkStraight();
         bool checkFlush();
-        bool checkRoyal();
+        bool checkRoyalStraight();
 };
 
 #endif
