@@ -78,6 +78,54 @@ void Hand::addCard(std::string cardCode) {
     }
 }
 
+std::string Hand::getBestCombinationCode() {
+    switch (this->bestCombination) {
+        case this->HC:
+            return "HC";
+            break;
+        
+        case this->OP:
+            return "OC";
+            break;
+
+        case this->TP:
+            return "TP";
+            break;
+
+        case this->TK:
+            return "TK";
+            break;
+
+        case this->S:
+            return "S";
+            break;
+
+        case this->F:
+            return "F";
+            break;
+
+        case this->FH:
+            return "FH";
+            break;
+
+        case this->FK:
+            return "FK";
+            break;
+
+        case this->SF:
+            return "SF";
+            break;
+
+        case this->RSF:
+            return "RSF";
+            break;
+        
+        default:
+            return "";
+            break;
+    }
+}
+
 void Hand::cleanHand() {
     for (int i = 0; i < this->maxCards; i++)
     {
@@ -87,4 +135,6 @@ void Hand::cleanHand() {
 
     delete this->highestCard;
     this->highestCard = nullptr;
+
+    this->bestCombination = -1;
 }
