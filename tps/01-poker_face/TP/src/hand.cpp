@@ -24,12 +24,21 @@ void Hand::sortHand() {
     }
 }
 
+bool Hand::checkStraight() {
+    int previousNumber = this->cards[0]->number;
+    for (int i = 1; i < this->maxCards; i++) {
+        if (this->cards[i]->number != previousNumber + 1) {
+            return false;
+        }
+        previousNumber = this->cards[i]->number;
+    }
+    return true;
+}
+
 bool Hand::checkFlush() {
     std::string previousNipe = this->cards[0]->nipe;
-    for (auto &&card : this->cards)
-    {
-        if (card->nipe != previousNipe)
-        {
+    for (auto &&card : this->cards) {
+        if (card->nipe != previousNipe) {
             return false;
         }
         previousNipe = card->nipe;
