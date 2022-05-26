@@ -91,6 +91,10 @@ class Hand {
         const int maxCards = 5;
         Card *cards[5];
         int bestCombination;
+
+        bool checkStraight();
+        bool checkFlush();
+        bool checkRoyal();
 };
 
 #endif
