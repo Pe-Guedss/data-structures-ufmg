@@ -41,6 +41,11 @@ class Deck {
          * 
          */
         void showDeck();
+        /**
+         * @brief Remove todas as cartas do baralho
+         * 
+         */
+        void cleanDeck();
 
     private:
         Card* locateCard(int cardNum, std::string cardNipe);
