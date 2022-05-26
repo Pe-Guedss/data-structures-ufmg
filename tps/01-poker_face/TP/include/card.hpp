@@ -46,14 +46,15 @@ class Card {
             return ( !(this->number > card.number) && !(this->number < card.number) );
         }
 
-        friend std::ostream &operator<<(std::ostream &out, const Card *card);
-        friend std::ostream &operator<<(std::ostream &out, const Card card);
-
     private:
         int number;
         std::string nipe;
 
     friend class Deck;
+    friend class Hand;
+
+    friend std::ostream &operator<<(std::ostream &out, const Card *card);
+    friend std::ostream &operator<<(std::ostream &out, const Card card);
 };
 
 #endif
