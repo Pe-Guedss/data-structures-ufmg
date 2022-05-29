@@ -131,9 +131,16 @@ class Hand {
         /**
          * @brief Verifica se há dois pares distintos presente na mão do jogador.
          * 
-         * @return true (1) ou false (0) dependendo de se há um par ou não.
+         * @return true (1) ou false (0) dependendo de se há dois pares ou não.
          */
         bool checkTwoPairs();
+
+        /**
+         * @brief Verifica se há uma tripla presente na mão do jogador.
+         * 
+         * @return true (1) ou false (0) dependendo de se há uma tripla ou não.
+         */
+        bool checkThreeOfAKind();
 
         /**
          * @brief Encontra a maior carta e a registra na variável this->highestCard.
