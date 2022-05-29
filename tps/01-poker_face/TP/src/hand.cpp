@@ -123,6 +123,16 @@ bool Hand::checkFullHouse() {
     return isPairFirst || isPairLast;
 }
 
+bool Hand::checkValidHand() {
+    for (auto &&card : this->cards) {
+        if (!card) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 void Hand::findHighestCard() {
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
