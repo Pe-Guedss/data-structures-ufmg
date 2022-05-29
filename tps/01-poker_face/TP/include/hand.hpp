@@ -15,16 +15,16 @@
  */
 class Hand {
     enum {
-        HC,
-        OP,
-        TP,
-        TK,
-        S,
-        F,
-        FH,
-        FK,
-        SF,
-        RSF
+        HC, // Highest Card
+        OP, // One Pair
+        TP, // Two Pairs
+        TK, // Three of a kind
+        S, // Straight
+        F, // Flush 
+        FH, // Full House
+        FK, // Four of a Kind
+        SF, // Straight Flush
+        RSF // Royal Straight Flush
     };
         
     public:
