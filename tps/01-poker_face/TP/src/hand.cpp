@@ -19,8 +19,6 @@ Hand::~Hand() {
 }
 
 void Hand::sortHand() {
-    std::cout << this << std::endl;
-
     for (int i = 0; i < this->maxCards; i++) {
         int minCardPos = i;
         for (int j = i; j < this->maxCards; j++) {
@@ -29,7 +27,6 @@ void Hand::sortHand() {
             }
         }
         swapCards(this->cards[i], this->cards[minCardPos]);
-        std::cout << this << std::endl;
     }
 }
 
@@ -174,8 +171,6 @@ std::string Hand::getBestCombinationCode() {
         this->findBestCombination();
     }
 
-    std::cout << "Melhor combinação: " << this->bestCombination << std::endl;
-
     switch (this->bestCombination) {
         case this->HC:
             return "HC";
@@ -233,7 +228,6 @@ void Hand::findBestCombination() {
     this->findHighestCard();
 
     bool isRoyalStraight = this->checkRoyalStraight();
-    std::cout << "Is Royal Straight: " << isRoyalStraight << std::endl;
     bool isFourOfAKind = this->checkFourOfAKind();
     bool isFullHouse = this->checkFullHouse();
     bool isFlush = this->checkFlush();
