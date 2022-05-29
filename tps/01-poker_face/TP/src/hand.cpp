@@ -122,8 +122,8 @@ bool Hand::checkThreeOfAKind() {
 bool Hand::checkFullHouse() {
     bool isPairFirst = false, isPairLast = false;
 
-    isPairFirst = (*this->cards[0] == *this->cards[1]) && (this->cards[2] == this->cards[4]);
-    isPairFirst = (*this->cards[3] == *this->cards[4]) && (this->cards[0] == this->cards[2]);
+    isPairFirst = (*this->cards[0] == *this->cards[1]) && (*this->cards[2] == *this->cards[4]);
+    isPairLast = (*this->cards[3] == *this->cards[4]) && (*this->cards[0] == *this->cards[2]);
 
     return isPairFirst || isPairLast;
 }
