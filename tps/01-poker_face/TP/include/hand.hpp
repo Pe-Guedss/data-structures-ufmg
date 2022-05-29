@@ -129,6 +129,13 @@ class Hand {
         bool checkOnePair();
 
         /**
+         * @brief Verifica se há dois pares distintos presente na mão do jogador.
+         * 
+         * @return true (1) ou false (0) dependendo de se há um par ou não.
+         */
+        bool checkTwoPairs();
+
+        /**
          * @brief Encontra a maior carta e a registra na variável this->highestCard.
          * 
          */
