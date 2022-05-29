@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
-// Arquivo	: deck.hpp
-// Conteudo	: definicoes da classe Baralho
+// Arquivo	: hand.hpp
+// Conteudo	: definicoes da classe Mão
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ class Hand {
          * 
          * @param cardCode Código da carta (Ex.: "13E")
          */
-        void addCard(std::string cardCode);
+        void addCard(std::string cardCode, Deck *cardDeck);
         /**
          * @brief Limpa todas as cartas utilizadas da mão, tornando os elementos do array ponteiros nulos.
          * 

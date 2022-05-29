@@ -131,10 +131,10 @@ void Hand::findHighestCard() {
     }
 }
 
-void Hand::addCard(std::string cardCode) {
+void Hand::addCard(std::string cardCode, Deck *cardDeck) {
     for (auto &&card : this->cards) {
         if (!card) {
-            card = new Card(cardCode);
+            card = cardDeck->getCard(cardCode);
             break;
         }
     }
