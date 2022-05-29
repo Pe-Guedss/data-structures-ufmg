@@ -186,6 +186,10 @@ class Hand {
          * 
          */
         void findHighestCard();
+
+    
+    friend std::ostream &operator<<(std::ostream &out, const Hand *hand);
+    friend std::ostream &operator<<(std::ostream &out, const Hand hand);
 };
 
 #endif

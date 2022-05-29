@@ -12,16 +12,17 @@ Hand::~Hand() {
 }
 
 void Hand::sortHand() {
+    std::cout << this << std::endl;
+
     for (int i = 0; i < this->maxCards; i++) {
         Card *minCard = this->cards[i];
-        for (int j = i; j < this->maxCards; j++)
-        {
-            if (this->cards[j] < minCard)
-            {
+        for (int j = i; j < this->maxCards; j++) {
+            if (*this->cards[j] < *minCard) {
                 minCard = this->cards[j];
             }
         }
         swapCards(this->cards[i], minCard);
+        std::cout << this << std::endl;
     }
 }
 
@@ -290,4 +291,26 @@ void Hand::cleanHand() {
     this->highestCard = nullptr;
 
     this->bestCombination = -1;
+}
+
+std::ostream &operator<<(std::ostream &out, const Hand *hand)
+{
+    out << "===== Current hand state =====" << std::endl;
+    for (auto &&card : hand->cards) {
+        out << card->getCardNumber() << card->getCardNipe() << " ";
+    }
+    std::cout << std::endl;
+    
+    return out;
+}
+
+std::ostream &operator<<(std::ostream &out, const Hand hand)
+{
+    out << "===== Current hand state =====" << std::endl;
+    for (auto &&card : hand.cards) {
+        out << card->getCardNumber() << card->getCardNipe() << " ";
+    }
+    std::cout << std::endl;
+    
+    return out;
 }
