@@ -73,10 +73,30 @@ bool Hand::checkFourOfAKind() {
 
 bool Hand::checkOnePair() {
     int previousNumber = this->cards[0]->number;
-    
+
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
             return true;
+        }
+        previousNumber = this->cards[i]->number;
+    }
+
+    return false;
+}
+
+bool Hand::checkTwoPairs() {
+    bool firstPairFound = false, secondPairFound = false;
+
+    int previousNumber = this->cards[0]->number;
+
+    for (int i = 1; i < this->maxCards; i++) {
+        if (this->cards[i]->number == previousNumber) {
+            firstPairFound == false ? (firstPairFound = true) : (secondPairFound = true);
+            if (secondPairFound)
+            {
+                return true;
+            }
+            i++;
         }
         previousNumber = this->cards[i]->number;
     }
