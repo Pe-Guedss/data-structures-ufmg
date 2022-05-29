@@ -17,6 +17,10 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
         paus
     };
 
+    if (cardNum > 13) {
+        return nullptr;
+    }
+
     if (cardNipe == "O")
     {
         Card *aux;
@@ -66,7 +70,10 @@ Card* Deck::getCard(std::string cardCode) {
     std::string num = cardCode.substr(0, it);
     std::string cardNipe = cardCode.substr(it, cardCode.length() - 1);
 
-    return this->locateCard(atoi(num.c_str()), cardNipe);
+    Card *card = this->locateCard(atoi(num.c_str()), cardNipe);
+    erroAssert(card != nullptr, "Essa carta não existe no baralho!");
+
+    return card;
 }
 
 void Deck::showDeck() {
