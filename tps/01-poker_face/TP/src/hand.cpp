@@ -97,11 +97,14 @@ bool Hand::checkTwoPairs() {
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
             firstPairFound == false ? (firstPairFound = true) : (secondPairFound = true);
-            if (secondPairFound)
-            {
+            if (secondPairFound) {
                 return true;
             }
+            
             i++;
+            if (i >= this->maxCards) {
+                return false;
+            }
         }
         previousNumber = this->cards[i]->number;
     }
@@ -177,7 +180,7 @@ std::string Hand::getBestCombinationCode() {
             break;
         
         case this->OP:
-            return "OC";
+            return "OP";
             break;
 
         case this->TP:
