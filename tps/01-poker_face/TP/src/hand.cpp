@@ -4,6 +4,7 @@
 Hand::Hand() {
     this->cleanHand();
     this->bestCombination = -1;
+    this->highestCard = nullptr;
 }
 
 Hand::~Hand() {
