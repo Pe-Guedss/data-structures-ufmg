@@ -115,6 +115,13 @@ class Hand {
         bool checkRoyalStraight();
 
         /**
+         * @brief Verifica se há uma quadra presente na mão do jogador.
+         * 
+         * @return true (1) ou false (0) dependendo de se há uma quadra ou não.
+         */
+        bool checkFourOfAKind();
+
+        /**
          * @brief Encontra a maior carta e a registra na variável this->highestCard.
          * 
          */
