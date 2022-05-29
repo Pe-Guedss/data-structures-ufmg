@@ -85,23 +85,34 @@ class Hand {
          * 
          */
         void sortHand();
+
         /**
          * @brief Encontra a melhor combinação de cartas presente na mão do usuário.
          * 
          */
         void findBestCombination();
+
         /**
          * @brief Depois de definida a melhor combinação de cartas na mão do jogador, mapeia a enumeração para os respectivos códigos em string, retornando o código encontrado.
          * 
          * @return String contendo o código da melhor combinação presente na mão.
          */
         std::string getBestCombinationCode();
+
         /**
          * @brief Adiciona uma nova carta à mão do jogador.
          * 
          * @param cardCode Código da carta (Ex.: "13E")
          */
         void addCard(std::string cardCode, Deck *cardDeck);
+
+        /**
+         * @brief Verifica se a mão é válida. Isto é, se todas as posições de cartas da mão foram preenchidas.
+         * 
+         * @return true (1) ou false (0), dependendo se a mão é válida ou não.
+         */
+        bool checkValidHand();
+
         /**
          * @brief Limpa todas as cartas utilizadas da mão, tornando os elementos do array ponteiros nulos.
          * 
