@@ -126,6 +126,7 @@ bool Hand::checkFullHouse() {
 bool Hand::checkValidHand() {
     for (auto &&card : this->cards) {
         if (!card) {
+            std::cout << "Esta mão não é válida. Há cartas faltantes." << std::endl;
             return false;
         }
     }
@@ -134,6 +135,11 @@ bool Hand::checkValidHand() {
 }
 
 void Hand::findHighestCard() {
+    bool isHandValid = this->checkValidHand();
+    if (!isHandValid) {
+        return;
+    }
+
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
     } else {
@@ -151,6 +157,11 @@ void Hand::addCard(std::string cardCode, Deck *cardDeck) {
 }
 
 std::string Hand::getBestCombinationCode() {
+    bool isHandValid = this->checkValidHand();
+    if (!isHandValid) {
+        return "";
+    }
+
     if (this->bestCombination == -1) {
         this->findBestCombination();
     }
@@ -203,6 +214,11 @@ std::string Hand::getBestCombinationCode() {
 }
 
 void Hand::findBestCombination() {
+    bool isHandValid = this->checkValidHand();
+    if (!isHandValid) {
+        return;
+    }
+
     this->sortHand();
     this->findHighestCard();
 
