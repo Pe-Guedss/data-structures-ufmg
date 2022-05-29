@@ -104,6 +104,16 @@ bool Hand::checkTwoPairs() {
     return false;
 }
 
+bool Hand::checkThreeOfAKind() {
+    bool isFirstThree = false, isMiddleThree = false, isLastThree = false;
+
+    isFirstThree = *this->cards[0] == *this->cards[2];
+    isMiddleThree = *this->cards[1] == *this->cards[3];
+    isLastThree = *this->cards[2] == *this->cards[4];
+
+    return isFirstThree || isMiddleThree || isLastThree;
+}
+
 void Hand::findHighestCard() {
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
