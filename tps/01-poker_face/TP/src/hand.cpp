@@ -249,36 +249,36 @@ void Hand::findBestCombination() {
             return;
         }
     }
-    else if (isFourOfAKind) {
+    if (isFourOfAKind) {
         this->bestCombination = this->FK;
         return;
     }
-    else if (isFullHouse) {
+    if (isFullHouse) {
         this->bestCombination = this->FH;
         return;
     }
-    else if (isFlush) {
+    if (isFlush) {
         this->bestCombination = this->F;
         return;
     }
-    else if (isStraight) {
+    if (isStraight || isRoyalStraight) {
         this->bestCombination = this->S;
         return;
     }
-    else if (isThreeOfAKind) {
+    if (isThreeOfAKind) {
         this->bestCombination = this->TK;
         return;
     }
-    else if (isTwoPairs) {
+    if (isTwoPairs) {
         this->bestCombination = this->TP;
         return;
     }
-    else if (isOnePair)
+    if (isOnePair)
     {
         this->bestCombination = this->OP;
         return;
     }
-    else {
+    {
         this->bestCombination = this->HC;
         return;
     }
