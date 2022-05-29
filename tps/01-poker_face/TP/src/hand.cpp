@@ -62,6 +62,15 @@ bool Hand::checkRoyalStraight() {
     return true;
 }
 
+bool Hand::checkFourOfAKind() {
+    bool isFirstFour, isLastFour;
+
+    isFirstFour = *this->cards[0] == *this->cards[3];
+    isLastFour = *this->cards[1] == *this->cards[4];
+    
+    return isFirstFour || isLastFour;
+}
+
 void Hand::findHighestCard() {
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
