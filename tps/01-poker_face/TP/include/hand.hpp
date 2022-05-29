@@ -39,11 +39,17 @@ class Hand {
          */
         ~Hand();
 
-        bool operator < (Hand const &hand) {
+        bool operator < (Hand &hand) {
+            this->findBestCombination();
+            hand.findBestCombination();
+
             return this->bestCombination < hand.bestCombination;
         }
 
-        bool operator > (Hand const &hand) {
+        bool operator > (Hand &hand) {
+            this->findBestCombination();
+            hand.findBestCombination();
+
             return this->bestCombination > hand.bestCombination;
         }
 
@@ -54,7 +60,10 @@ class Hand {
          * @param card 
          * @return true (1) ou false (0) dependendo da igualdade
          */
-        bool operator == (Hand const &hand) {
+        bool operator == (Hand &hand) {
+            this->findBestCombination();
+            hand.findBestCombination();
+
             return ( !(this->bestCombination > hand.bestCombination) && 
                      !(this->bestCombination < hand.bestCombination) );
         }
