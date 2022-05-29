@@ -126,6 +126,29 @@ std::string Hand::getBestCombinationCode() {
     }
 }
 
+void Hand::findBestCombination() {
+    this->sortHand();
+    this->findHighestCard();
+
+    bool isFlush, isStraight, isRoyalStraight;
+
+    isStraight = this->checkStraight();
+    isFlush = this->checkFlush();
+    if (isFlush) {
+        isRoyalStraight = this->checkRoyalStraight();
+        if (isRoyalStraight) {
+            this->bestCombination = this->RSF;
+            return;
+        }
+        
+        if (isStraight) {
+            this->bestCombination = this->SF;
+            return;
+        }
+    }
+    
+}
+
 void Hand::cleanHand() {
     for (int i = 0; i < this->maxCards; i++)
     {
