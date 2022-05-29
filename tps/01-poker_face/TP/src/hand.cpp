@@ -52,8 +52,8 @@ bool Hand::checkRoyalStraight() {
         return false;
     }
     int royalCardsNumber = 10;
-    for (auto &&card : this->cards) {
-        if (card->number != royalCardsNumber) {
+    for (int i = 1; i < this->maxCards; i++) {
+        if (this->cards[i]->number != royalCardsNumber) {
             return false;
         }
         royalCardsNumber++;
@@ -166,6 +166,8 @@ std::string Hand::getBestCombinationCode() {
         this->findBestCombination();
     }
 
+    std::cout << "Melhor combinação: " << this->bestCombination << std::endl;
+
     switch (this->bestCombination) {
         case this->HC:
             return "HC";
@@ -223,6 +225,7 @@ void Hand::findBestCombination() {
     this->findHighestCard();
 
     bool isRoyalStraight = this->checkRoyalStraight();
+    std::cout << "Is Royal Straight: " << isRoyalStraight << std::endl;
     bool isFourOfAKind = this->checkFourOfAKind();
     bool isFullHouse = this->checkFullHouse();
     bool isFlush = this->checkFlush();
