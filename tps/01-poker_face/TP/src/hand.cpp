@@ -22,13 +22,13 @@ void Hand::sortHand() {
     std::cout << this << std::endl;
 
     for (int i = 0; i < this->maxCards; i++) {
-        Card *minCard = this->cards[i];
+        int minCardPos = i;
         for (int j = i; j < this->maxCards; j++) {
-            if (*this->cards[j] < *minCard) {
-                minCard = this->cards[j];
+            if (*this->cards[j] < *this->cards[minCardPos]) {
+                minCardPos = j;
             }
         }
-        swapCards(this->cards[i], minCard);
+        swapCards(this->cards[i], this->cards[minCardPos]);
         std::cout << this << std::endl;
     }
 }
