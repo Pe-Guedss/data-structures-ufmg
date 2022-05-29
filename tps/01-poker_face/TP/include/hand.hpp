@@ -40,15 +40,23 @@ class Hand {
         ~Hand();
 
         bool operator < (Hand &hand) {
-            this->findBestCombination();
-            hand.findBestCombination();
+            if (this->bestCombination == -1) {
+                this->findBestCombination();
+            }
+            if (hand.bestCombination == -1) {
+                hand.findBestCombination();
+            }
 
             return this->bestCombination < hand.bestCombination;
         }
 
         bool operator > (Hand &hand) {
-            this->findBestCombination();
-            hand.findBestCombination();
+            if (this->bestCombination == -1) {
+                this->findBestCombination();
+            }
+            if (hand.bestCombination == -1) {
+                hand.findBestCombination();
+            }
 
             return this->bestCombination > hand.bestCombination;
         }
@@ -61,8 +69,12 @@ class Hand {
          * @return true (1) ou false (0) dependendo da igualdade
          */
         bool operator == (Hand &hand) {
-            this->findBestCombination();
-            hand.findBestCombination();
+            if (this->bestCombination == -1) {
+                this->findBestCombination();
+            }
+            if (hand.bestCombination == -1) {
+                hand.findBestCombination();
+            }
 
             return ( !(this->bestCombination > hand.bestCombination) && 
                      !(this->bestCombination < hand.bestCombination) );

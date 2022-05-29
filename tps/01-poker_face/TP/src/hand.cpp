@@ -141,6 +141,10 @@ void Hand::addCard(std::string cardCode, Deck *cardDeck) {
 }
 
 std::string Hand::getBestCombinationCode() {
+    if (this->bestCombination == -1) {
+        this->findBestCombination();
+    }
+
     switch (this->bestCombination) {
         case this->HC:
             return "HC";
