@@ -1,6 +1,13 @@
 #include "hand.hpp"
 #include "msgassert.hpp"
 
+#define swapCards(A, B) \
+    {                      \
+        Card *aux = A;       \
+        A = B;             \
+        B = aux;           \
+    }
+
 Hand::Hand() {
     this->cleanHand();
     this->bestCombination = -1;
