@@ -114,6 +114,15 @@ bool Hand::checkThreeOfAKind() {
     return isFirstThree || isMiddleThree || isLastThree;
 }
 
+bool Hand::checkFullHouse() {
+    bool isPairFirst = false, isPairLast = false;
+
+    isPairFirst = (*this->cards[0] == *this->cards[1]) && (this->cards[2] == this->cards[4]);
+    isPairFirst = (*this->cards[3] == *this->cards[4]) && (this->cards[0] == this->cards[2]);
+
+    return isPairFirst || isPairLast;
+}
+
 void Hand::findHighestCard() {
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
