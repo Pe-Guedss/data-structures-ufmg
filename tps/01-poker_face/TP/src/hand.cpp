@@ -71,6 +71,19 @@ bool Hand::checkFourOfAKind() {
     return isFirstFour || isLastFour;
 }
 
+bool Hand::checkOnePair() {
+    int previousNumber = this->cards[0]->number;
+    
+    for (int i = 1; i < this->maxCards; i++) {
+        if (this->cards[i]->number == previousNumber) {
+            return true;
+        }
+        previousNumber = this->cards[i]->number;
+    }
+
+    return false;
+}
+
 void Hand::findHighestCard() {
     if (this->cards[0]->number == 1) {
         this->highestCard = this->cards[0];
