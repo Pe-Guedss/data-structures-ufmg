@@ -143,6 +143,13 @@ class Hand {
         bool checkThreeOfAKind();
 
         /**
+         * @brief Verifica se a mão presente representa uma combinação de Full House.
+         * 
+         * @return true (1) ou false (0) dependendo de se é um Full House ou não.
+         */
+        bool checkFullHouse();
+
+        /**
          * @brief Encontra a maior carta e a registra na variável this->highestCard.
          * 
          */
