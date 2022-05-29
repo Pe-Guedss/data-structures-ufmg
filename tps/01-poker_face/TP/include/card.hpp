@@ -34,6 +34,20 @@ class Card {
          */
         Card(const std::string &cardCode);
 
+        /**
+         * @brief Retorna o número da carta.
+         * 
+         * @return int number
+         */
+        int getCardNumber();
+
+        /**
+         * @brief Retorna o naipe da carta.
+         * 
+         * @return std::string number
+         */
+        std::string getCardNipe();
+
         bool operator < (Card const &card) {
             return this->number < card.number;
         }
