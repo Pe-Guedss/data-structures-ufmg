@@ -192,23 +192,58 @@ void Hand::findBestCombination() {
     this->sortHand();
     this->findHighestCard();
 
-    bool isFlush, isStraight, isRoyalStraight;
+    bool isRoyalStraight = this->checkRoyalStraight();
+    bool isFourOfAKind = this->checkFourOfAKind();
+    bool isFullHouse = this->checkFullHouse();
+    bool isFlush = this->checkFlush();
+    bool isStraight = this->checkStraight();
+    bool isThreeOfAKind = this->checkThreeOfAKind();
+    bool isTwoPairs = this->checkTwoPairs();
+    bool isOnePair = this->checkOnePair();
 
-    isStraight = this->checkStraight();
-    isFlush = this->checkFlush();
     if (isFlush) {
-        isRoyalStraight = this->checkRoyalStraight();
         if (isRoyalStraight) {
             this->bestCombination = this->RSF;
             return;
         }
-        
-        if (isStraight) {
+        else if (isStraight) {
             this->bestCombination = this->SF;
             return;
         }
     }
-    
+    else if (isFourOfAKind) {
+        this->bestCombination = this->FK;
+        return;
+    }
+    else if (isFullHouse) {
+        this->bestCombination = this->FH;
+        return;
+    }
+    else if (isFlush) {
+        this->bestCombination = this->F;
+        return;
+    }
+    else if (isStraight) {
+        this->bestCombination = this->S;
+        return;
+    }
+    else if (isThreeOfAKind) {
+        this->bestCombination = this->TK;
+        return;
+    }
+    else if (isTwoPairs) {
+        this->bestCombination = this->TP;
+        return;
+    }
+    else if (isOnePair)
+    {
+        this->bestCombination = this->OP;
+        return;
+    }
+    else {
+        this->bestCombination = this->HC;
+        return;
+    }
 }
 
 void Hand::cleanHand() {
