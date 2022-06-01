@@ -282,9 +282,7 @@ void Hand::cleanHand() {
     this->bestCombination = -1;
 }
 
-std::ostream &operator<<(std::ostream &out, const Hand *hand)
-{
-    out << "===== Current hand state =====" << std::endl;
+std::ostream &operator<<(std::ostream &out, const Hand *hand) {
     for (auto &&card : hand->cards) {
         out << card->getCardNumber() << card->getCardNipe() << " ";
     }
@@ -293,9 +291,7 @@ std::ostream &operator<<(std::ostream &out, const Hand *hand)
     return out;
 }
 
-std::ostream &operator<<(std::ostream &out, const Hand hand)
-{
-    out << "===== Current hand state =====" << std::endl;
+std::ostream &operator<<(std::ostream &out, const Hand hand) {
     for (auto &&card : hand.cards) {
         out << card->getCardNumber() << card->getCardNipe() << " ";
     }
