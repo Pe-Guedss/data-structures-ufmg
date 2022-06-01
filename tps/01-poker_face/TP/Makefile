@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/poker.o $(OBJ)/card.o $(OBJ)/deck.o $(OBJ)/hand.o
-HDRS = $(INC)/card.hpp $(INC)/deck.hpp $(INC)/hand.hpp
+OBJS = $(OBJ)/poker.o $(OBJ)/card.o $(OBJ)/deck.o $(OBJ)/hand.o $(OBJ)/player.o
+HDRS = $(INC)/card.hpp $(INC)/deck.hpp $(INC)/hand.hpp $(INC)/player.hpp
 CFLAGS = -pg -Wall -c -I$(INC)
 ANALISAMEM = ./analisamem/bin/analisamem
 EXE = $(BIN)/poker
@@ -23,7 +23,10 @@ $(OBJ)/deck.o: $(HDRS) $(SRC)/deck.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/deck.o $(SRC)/deck.cpp 
 
 $(OBJ)/hand.o: $(HDRS) $(SRC)/hand.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/hand.o $(SRC)/hand.cpp 
+	$(CC) $(CFLAGS) -o $(OBJ)/hand.o $(SRC)/hand.cpp
+	
+$(OBJ)/player.o: $(HDRS) $(SRC)/player.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/player.o $(SRC)/player.cpp
 
 clean:
 	rm $(OBJ)/*.o $(BIN)/poker
