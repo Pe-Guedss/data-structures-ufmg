@@ -65,6 +65,13 @@ class Player {
         void makeBet(int bet);
 
         /**
+         * @brief Adiciona uma nova carta à mão do usuário.
+         * 
+         * @param cardCode Código da carta que se quer adicionar.
+         */
+        void addCard(std::string cardCode, Deck *cardDeck);
+
+        /**
          * @brief Operador de comparação: Menor que.
          * 
          * @param player Outro jogador que se quer saber se ele é maior que o atual.
