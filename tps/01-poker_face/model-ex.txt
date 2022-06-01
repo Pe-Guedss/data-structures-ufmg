@@ -31,6 +31,9 @@ Round
 - método para verificar o ganhador da rodada
 - pote com o dinheiro dos pingos e apostas
 - método para transferir o dinheiro do pote para o vencedor
+- Ideia: Criar fila de apostas. A cada leitura de um valor de aposta no txt, realizar o teste 
+de sanidade e adicionar o valor à fila. Após feitos todos os testes, os valores são 
+desenfileirados, somados ao pote e subtraídos da conta dos jogadores.
 
 Match
 - array de rodadas
