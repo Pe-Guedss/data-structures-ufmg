@@ -12,6 +12,10 @@ Player::Player(std::string name, int coins) {
     this->hand = new Hand();
 }
 
+std::string Player::getName() {
+    return this->name;
+}
+
 Player::~Player() {
     delete this->hand;
     this->hand = nullptr;
