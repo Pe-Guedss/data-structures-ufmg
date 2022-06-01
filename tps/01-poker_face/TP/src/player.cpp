@@ -28,6 +28,10 @@ void Player::makeBet(int bet) {
     this->coins -= bet;
 }
 
+void Player::addCard(std::string cardCode, Deck *cardDeck) {
+    this->hand->addCard(cardCode, cardDeck);
+}
+
 std::ostream &operator<<(std::ostream &out, const Player *player) {
     out << "===== Player Info =====" << std::endl;
     out << "Name: " << player->name << std::endl;
