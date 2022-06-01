@@ -15,7 +15,9 @@ class Player {
         ~Player();
 
     private:
-        
+        std::string name;
+        int coins;
+        Hand *hand;
 
 };
 
