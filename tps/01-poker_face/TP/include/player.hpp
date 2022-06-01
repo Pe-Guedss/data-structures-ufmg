@@ -33,6 +33,13 @@ class Player {
          */
         ~Player();
 
+        /**
+         * @brief Retorna o nome do jogador.
+         * 
+         * @return std::string this->name.
+         */
+        std::string getName();
+
     private:
         std::string name; // Nome do jogador.
         int coins; // Total de moedas do jogador.
