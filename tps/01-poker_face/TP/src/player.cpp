@@ -1,9 +1,12 @@
 #include "player.hpp"
 
-Player::Player()
-{
+Player::Player() {
+    this->name = "";
+    this->coins = -1;
+    this->hand = nullptr;
 }
 
-Player::~Player()
-{
+Player::~Player() {
+    delete this->hand;
+    this->hand = nullptr;
 }
