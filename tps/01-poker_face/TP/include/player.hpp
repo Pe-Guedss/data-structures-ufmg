@@ -108,6 +108,8 @@ class Player {
         int coins; // Total de moedas do jogador.
         Hand *hand; // Mão atual do jogador.
 
+    friend std::ostream &operator<<(std::ostream &out, const Player *player);
+    friend std::ostream &operator<<(std::ostream &out, const Player player);
 };
 
 #endif
