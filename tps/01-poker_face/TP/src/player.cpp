@@ -20,6 +20,10 @@ int Player::getCoins() {
     return this->coins;
 }
 
+bool Player::sanityTest(int coinAmount) {
+    return (this->coins - coinAmount < 0) ? false : true;
+}
+
 Player::~Player() {
     delete this->hand;
     this->hand = nullptr;
