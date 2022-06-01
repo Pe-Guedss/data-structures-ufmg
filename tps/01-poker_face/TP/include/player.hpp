@@ -47,6 +47,16 @@ class Player {
          */
         int getCoins();
 
+        /**
+         * @brief Realiza o teste de sanidade do jogador, ou seja, se ele pode ou não realizar a aposta.
+         * 
+         * @param coinAmount Quantidade de fichas a serem apostadas na rodada (incluindo o pingo).
+         * 
+         * @return true (1) ou false (0), dependendo se a aposta pode ou não ser realizada.
+         * 
+         */
+        bool sanityTest(int coinAmount);
+
     private:
         std::string name; // Nome do jogador.
         int coins; // Total de moedas do jogador.
