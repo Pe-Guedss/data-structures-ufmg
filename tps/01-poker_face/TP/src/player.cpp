@@ -24,6 +24,10 @@ bool Player::sanityTest(int coinAmount) {
     return (this->coins - coinAmount < 0) ? false : true;
 }
 
+void Player::makeBet(int bet) {
+    this->coins -= bet;
+}
+
 Player::~Player() {
     delete this->hand;
     this->hand = nullptr;
