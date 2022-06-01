@@ -57,6 +57,13 @@ class Player {
          */
         bool sanityTest(int coinAmount);
 
+        /**
+         * @brief Realiza a aposta do jogador.
+         * 
+         * @param bet Quantidade de fichas investidas na aposta.
+         */
+        void makeBet(int bet);
+
     private:
         std::string name; // Nome do jogador.
         int coins; // Total de moedas do jogador.
