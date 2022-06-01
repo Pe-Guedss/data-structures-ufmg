@@ -64,6 +64,10 @@ class Player {
          */
         void makeBet(int bet);
 
+        // TODO:
+        // - Declarar métodos de comparação dos usuários. Verificar se a mão de um é maior que a do outro, igual, menor, etc...
+        // - Declarar método de impressão do usuário para debug. (Nome - fichas - Mão)
+
     private:
         std::string name; // Nome do jogador.
         int coins; // Total de moedas do jogador.
