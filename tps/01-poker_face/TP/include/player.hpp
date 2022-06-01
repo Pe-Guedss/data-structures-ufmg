@@ -64,8 +64,43 @@ class Player {
          */
         void makeBet(int bet);
 
+        /**
+         * @brief Operador de comparação: Menor que.
+         * 
+         * @param player Outro jogador que se quer saber se ele é maior que o atual.
+         * 
+         * @return true (1) ou false (0), dependendo de se um jogador é ou não menor que outro.
+         * 
+         */
+        bool operator < (Player &player) {
+            return *this->hand < *player.hand;
+        }
+
+        /**
+         * @brief Operador de comparação: Maior que.
+         * 
+         * @param player Outro jogador que se quer saber se ele é menor que o atual.
+         * 
+         * @return true (1) ou false (0), dependendo de se um jogador é ou não menor que outro.
+         * 
+         */
+        bool operator > (Player &player) {
+            return *this->hand > *player.hand;
+        }
+
+        /**
+         * @brief Operador de comparação: Igual a.
+         * 
+         * @param player Outro jogador que se quer saber se ele é igual ao atual.
+         * 
+         * @return true (1) ou false (0), dependendo de se um jogador é ou não igual ao outro.
+         * 
+         */
+        bool operator == (Player &player) {
+            return *this->hand == *player.hand;
+        }
+
         // TODO:
-        // - Declarar métodos de comparação dos usuários. Verificar se a mão de um é maior que a do outro, igual, menor, etc...
         // - Declarar método de impressão do usuário para debug. (Nome - fichas - Mão)
 
     private:
