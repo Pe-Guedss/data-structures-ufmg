@@ -271,9 +271,8 @@ void Hand::findBestCombination() {
 }
 
 void Hand::cleanHand() {
-    for (int i = 0; i < this->maxCards; i++)
-    {
-        delete this->cards[i];
+    for (int i = 0; i < this->maxCards; i++) {
+        if (this->cards[i] == nullptr) continue;
         this->cards[i] = nullptr;
     }
 
