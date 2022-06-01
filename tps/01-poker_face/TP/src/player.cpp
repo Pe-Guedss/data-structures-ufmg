@@ -28,6 +28,24 @@ void Player::makeBet(int bet) {
     this->coins -= bet;
 }
 
+std::ostream &operator<<(std::ostream &out, const Player *player) {
+    out << "===== Player Info =====" << std::endl;
+    out << "Name: " << player->name << std::endl;
+    out << "Current amount of coins: " << player->coins << std::endl;
+    out << "Current hand: \n\t" << player->hand << std::endl;
+    
+    return out;
+}
+
+std::ostream &operator<<(std::ostream &out, const Player player) {
+    out << "===== Player Info =====" << std::endl;
+    out << "Name: " << player.name << std::endl;
+    out << "Current amount of coins: " << player.coins << std::endl;
+    out << "Current hand: \n\t" << player.hand << std::endl;
+    
+    return out;
+}
+
 Player::~Player() {
     delete this->hand;
     this->hand = nullptr;
