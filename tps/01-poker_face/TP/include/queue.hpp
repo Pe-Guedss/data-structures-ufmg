@@ -25,7 +25,7 @@ class Bet {
 
     private:
         int bet;
-        Bet *prox;
+        Bet *next;
 
     friend class BetsChainedQueue;
 };
@@ -36,15 +36,15 @@ class BetsChainedQueue : public Queue {
 
         virtual ~BetsChainedQueue();
 
-        void Enqueue(int bet);
+        void enqueue(int bet);
 
-        int Dequeue();
+        int dequeue();
 
-        void Limpa();
+        void clear();
 
     private:
-        Bet* frente;
-        Bet* tras;
+        Bet* front;
+        Bet* back;
 };
 
 #endif
