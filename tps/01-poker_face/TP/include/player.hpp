@@ -40,6 +40,13 @@ class Player {
          */
         std::string getName();
 
+        /**
+         * @brief Retorna a quantidade de fichas do jogador.
+         * 
+         * @return int this->coins.
+         */
+        int getCoins();
+
     private:
         std::string name; // Nome do jogador.
         int coins; // Total de moedas do jogador.
