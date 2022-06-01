@@ -111,7 +111,7 @@ class Hand {
          * 
          * @return true (1) ou false (0), dependendo se a mão é válida ou não.
          */
-        bool checkValidHand();
+        void checkValidHand();
 
         /**
          * @brief Limpa todas as cartas utilizadas da mão, tornando os elementos do array ponteiros nulos.
