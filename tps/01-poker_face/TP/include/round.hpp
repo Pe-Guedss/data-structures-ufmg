@@ -79,15 +79,49 @@ class Round {
         int winningPlayersAmount; // Quantidade de jogadores vencendo.
         Player **winners;
 
-
-        void straightFlushTieBreaker(); // Desempata jogadores com straight Flush
-        void fourOfAKindTieBreaker(); // Desempata jogadores com quadras
-        void fullHouseTieBreaker(); // Desempata jogadores com full house
-        void flushTieBreaker(); // Desempata jogadores com Flush
-        void straightTieBreaker(); // Desempata jogadores com Straight
-        void threeOfAKindTieBreaker(); // Desempata jogadores com trios.
-        void twoPairsTieBreaker(); // Desempata jogadores com dois pares.
-        void onePairTieBreaker(); // Desempata jogadores com um par.
+        /**
+         * @brief Desempata jogadores com straight Flush
+         * 
+         */
+        void straightFlushTieBreaker();
+        /**
+         * @brief Desempata jogadores com quadras 
+         * Obs: nesta implementação, é impossível haver jogadores com quadras iguais
+         * 
+         */
+        void fourOfAKindTieBreaker();
+        /**
+         * @brief Desempata jogadores com full house
+         * Obs: nesta implementação, é impossível haver jogadores com trios iguais
+         * 
+         */
+        void fullHouseTieBreaker();
+        /**
+         * @brief Desempata jogadores com Flush
+         * 
+         */
+        void flushTieBreaker();
+        /**
+         * @brief Desempata jogadores com Straight
+         * 
+         */
+        void straightTieBreaker();
+        /**
+         * @brief Desempata jogadores com trios
+         * Obs: nesta implementação, é impossível haver jogadores com trios iguais
+         * 
+         */
+        void threeOfAKindTieBreaker();
+        /**
+         * @brief Desempata jogadores com dois pares.
+         * 
+         */
+        void twoPairsTieBreaker();
+        /**
+         * @brief Desempata jogadores com um par.
+         * 
+         */
+        void onePairTieBreaker();
 
 };
 
