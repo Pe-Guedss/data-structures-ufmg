@@ -17,6 +17,17 @@ std::string readName(std::string &aux) {
     return playerName;
 }
 
+int readBet(std::string &aux) {
+    std::regex betRegexp("[0-9]+");
+
+    if (!std::regex_match(aux, betRegexp)) {
+        std::cout << "A aposta não é válida!" << std::endl;
+        return 1;
+    }
+
+    return atoi(aux.c_str());
+}
+
 int main() {
     BetsChainedQueue *betsQueue;
     betsQueue = new BetsChainedQueue();
@@ -32,7 +43,6 @@ int main() {
     players = new Player*[playersAmount];
     std::cin >> openingBet;
 
-    std::regex betRegexp("[0-9]+");
     std::regex cardRegexp("^[0-9]+[A-Za-z]");
     for (int i = 0; i < playersAmount; i++) {
         std::string aux = "";
@@ -40,11 +50,7 @@ int main() {
         std::string currentPlayerName = readName(aux);
         players[i] = new Player(currentPlayerName, initialCoins);
 
-        if (!std::regex_match(aux, betRegexp)) {
-            std::cout << "A aposta não é válida!" << std::endl;
-            return 1;
-        }
-        int currentPlayerBet = openingBet + atoi(aux.c_str());
+        int currentPlayerBet = openingBet + readBet(aux);
         if (!players[i]->sanityTest(currentPlayerBet)) {
             std::cout << "Jogador \"" << players[i]->getName() << "\" não possui fichas o suficiente." << std::endl;
             return 1;
