@@ -50,6 +50,7 @@ void Round::addPlayer(int pos, Player *player) {
 // Lembre-se de alterar quando a classe "Match" for criada.
 void Round::demandOpeningBet() {
     for (int i = 0; i < this->playersAmount; i++) {
+        this->pot += this->openingBet;
         this->enrolledPlayers[i]->makeBet(this->openingBet);
     }
 }
@@ -64,7 +65,9 @@ void Round::pushCardToPlayer(int pos, std::string cardCode) {
 
 void Round::collectBets() {
     for (int i = 0; i < this->playersAmount; i++) {
-        this->enrolledPlayers[i]->makeBet(this->betsQueue->dequeue());
+        int bet = this->betsQueue->dequeue();
+        this->enrolledPlayers[i]->makeBet(bet);
+        this->pot += bet;
     }
 }
 
