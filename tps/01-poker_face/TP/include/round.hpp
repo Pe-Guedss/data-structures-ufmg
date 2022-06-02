@@ -1,0 +1,82 @@
+//---------------------------------------------------------------------
+// Arquivo	: round.hpp
+// Conteudo	: definicoes da classe Round (Rodada).
+// Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
+//---------------------------------------------------------------------
+
+#ifndef ROUND_H
+#define ROUND_H
+
+#include "bets_queue.hpp"
+#include "player.hpp"
+
+/**
+ * @brief Classe Rodada. Define os atributos e métodos relacionados a uma das rodadas do jogo.
+ * 
+ */
+class Round {
+    public:
+        /**
+         * @brief Constrói uma nova rodada.
+         * 
+         */
+        Round();
+
+        /**
+         * @brief Destrói a rodada atual.
+         * 
+         */
+        ~Round();
+
+        /**
+         * @brief Cobra o pingo de todos os jogadores da partida.
+         * 
+         */
+        void demandOpeningBet();
+
+        /**
+         * @brief Coleta as apostas de todos os jogadores da rodada.
+         * 
+         */
+        void collectBets();
+
+        /**
+         * @brief Ordena o array de jogadores de forma decrescente, deixando os que possuem melhores combinações de cartas primeiro.
+         * 
+         */
+        void sortEnrolledPlayers();
+
+        /**
+         * @brief Após o array de jogadores ordenado, seleciona os com melhores combinações e remove os de combinações inferiores do array.
+         * 
+         */
+        void decideWinningPlayers();
+
+        /**
+         * @brief Decide, entre os jogadores restantes no array, qual o vencedor, de acordo com critérios de desempate.
+         * 
+         */
+        void tieBreaker();
+
+        /**
+         * @brief Depois do desempate da rodada, divide o prêmio do pote de fichas para o(s) jogador(es) vencedor(es).
+         * 
+         */
+        void transferPotCoinsToWinners();
+
+    private:
+        int openingBet; // Mínimo de aposta inicial que será feita neste Round.
+        int playersAmount; // Quantidade de players disputando o round atual.
+        int pot; // Pote de dinheiro do Round.
+        bool isValidRound; // Atributo que guarda true (1) quando a rodada é válida e false (0) caso contrário.
+
+        Deck *cardDeck; // Baralho de cartas do Round.
+
+        BetsChainedQueue *betsQueue; // Fila de apostas dos jogadores do round.
+
+        Player **enrolledPlayers; // Jogadores participando da rodada.
+        int winningPlayersAmount; // Quantidade de jogadores vencendo.
+
+};
+
+#endif
