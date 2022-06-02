@@ -43,6 +43,10 @@ Round::~Round() {
     this->winners = nullptr;
 }
 
+void Round::addPlayer(int pos, Player *player) {
+    this->enrolledPlayers[pos] = player;
+}
+
 // Lembre-se de alterar quando a classe "Match" for criada.
 void Round::demandOpeningBet() {
     for (int i = 0; i < this->playersAmount; i++) {

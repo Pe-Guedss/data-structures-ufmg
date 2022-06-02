@@ -35,6 +35,14 @@ class Round {
         ~Round();
 
         /**
+         * @brief Adiciona um novo jogador ao array dinâmico.
+         * 
+         * @param pos Posição do array em que se deve inserir o jogador.
+         * @param player Jogador que se irá inserir na partida
+         */
+        void addPlayer(int pos, Player *player);
+
+        /**
          * @brief Cobra o pingo de todos os jogadores da partida.
          * 
          */
