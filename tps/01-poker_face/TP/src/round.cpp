@@ -12,7 +12,7 @@ Round::Round() {
     this->playersAmount = 0;
     this->pot = 0;
     this->isValidRound = true;
-    this->winningPlayersAmount;
+    this->winningPlayersAmount = 0;
 }
 
 Round::~Round() {
@@ -55,9 +55,7 @@ void Round::decideWinningPlayers() {
             this->winningPlayersAmount++;
             continue;
         }
-        break;
     }
-    
 }
 
 void Round::straightFlushTieBreaker() {
