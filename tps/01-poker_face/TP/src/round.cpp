@@ -297,7 +297,79 @@ void Round::twoPairsTieBreaker() {
     return;
 }
 
+void Round::onePairTieBreaker() {
+    Player **winnersAux;
+
+    // ============================= Decidindo empate pelo maior par ==============================
+    int highestSinglePair = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair > highestSinglePair) {
+            highestSinglePair = this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair) {
+            winnersAux = new Player*[1];
+            winnersAux[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+
+    if (tieWinners == 1) {
+        for (int i = 0; i < tieWinners; i++) {
+            delete []winnersAux[i];
+        }
+        delete []winnersAux;
+
+        for (int i = 0; i < this->winningPlayersAmount; i++) {
+            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair) {
+                this->winners = new Player*[1];
+                this->winners[0] = this->enrolledPlayers[i];
+                break;
+            }
+        }
+        this->winningPlayersAmount = tieWinners;
+        return;
+    }
+
+    // ============================ Decidindo empate pela maior carta ===========================
+    int highestCard = -1;
+    for (int i = 0; i < tieWinners; i++) {
+        if(winnersAux[i]->hand->bestCombinationInfo.highestCard > highestCard) {
+            highestCard = winnersAux[i]->hand->bestCombinationInfo.highestCard;
+        }
+    }
+
+    for (int i = 0; i < tieWinners; i++)
+    {
+        delete []winnersAux[i];
+    }
+    delete []winnersAux;
+    
+    int newTieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair &&
+            this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
+            this->winners = new Player*[1];
+            this->winners[newTieWinners] = this->enrolledPlayers[i];
+            newTieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = newTieWinners;
+    return;
+}
+
 void Round::tieBreaker() {
+    this->decideWinningPlayers();
+    if (this->winningPlayersAmount == 1) {
+        this->winners = new Player*[1];
+        this->winners[0] = this->enrolledPlayers[0];
+        return;
+    }
+
     Hand cardCombinations;
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.RSF) return;
@@ -328,6 +400,10 @@ void Round::tieBreaker() {
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TP) {
         this->twoPairsTieBreaker();
+    }
+
+    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.OP) {
+        this->onePairTieBreaker();
     }
 
 }
