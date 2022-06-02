@@ -43,6 +43,13 @@ class Round {
         void addPlayer(int pos, Player *player);
 
         /**
+         * @brief Adiciona uma nova aposta à fila
+         * 
+         * @param bet Aposta a ser feita
+         */
+        void pushBet(int bet);
+
+        /**
          * @brief Cobra o pingo de todos os jogadores da partida.
          * 
          */

@@ -54,6 +54,10 @@ void Round::demandOpeningBet() {
     }
 }
 
+void Round::pushBet(int bet) {
+    this->betsQueue->enqueue(bet);
+}
+
 void Round::collectBets() {
     for (int i = 0; i < this->playersAmount; i++) {
         this->enrolledPlayers[i]->makeBet(this->betsQueue->dequeue());
