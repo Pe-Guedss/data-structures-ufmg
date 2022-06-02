@@ -60,60 +60,211 @@ void Round::decideWinningPlayers() {
     
 }
 
+void Round::straightFlushTieBreaker() {
+    int highestStraight = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest > highestStraight) {
+            highestStraight = this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::fourOfAKindTieBreaker() {
+    int highestFourOfAKind = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind > highestFourOfAKind) {
+            highestFourOfAKind = this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind == highestFourOfAKind) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::fullHouseTieBreaker() {
+    int highestTrio = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio > highestTrio) {
+            highestTrio = this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio == highestTrio) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::flushTieBreaker() {
+    int highestCard = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard > highestCard) {
+            highestCard = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::straightTieBreaker() {
+    int highestStraight = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest > highestStraight) {
+            highestStraight = this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::threeOfAKindTieBreaker() {
+    int highestTrio = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind > highestTrio) {
+            highestTrio = this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestTrio) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
+void Round::twoPairsTieBreaker() {
+    int highestPair = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair > highestPair) {
+            highestPair = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+
+    if (tieWinners == 1) {
+        this->winningPlayersAmount = tieWinners;
+        return;
+    }
+
+    int lowestPair = -1;
+    for (int i = 0; i < tieWinners; i++) {
+        if(this->winners[i]->hand->bestCombinationInfo.lowestPair > lowestPair) {
+            lowestPair = this->winners[i]->hand->bestCombinationInfo.lowestPair;
+        }
+    }
+    
+    int newTieWinners = 0;
+    for (int i = 0; i < tieWinners; i++) {
+        if(this->winners[i]->hand->bestCombinationInfo.lowestPair == lowestPair) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners + newTieWinners] = this->winners[i];
+            newTieWinners++;
+        }
+    }
+
+    tieWinners = 0;
+    delete [] this->winners;
+    this->winners = nullptr;
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
 void Round::tieBreaker() {
     Hand cardCombinations;
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.RSF) return;
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.SF) {
-        int highestStraight = -1;
-        for (int i = 0; i < this->winningPlayersAmount; i++) {
-            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest > highestStraight) {
-                highestStraight = this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest;
-            }
-        }
-        
-        int tieWinners = 0;
-        for (int i = 0; i < this->winningPlayersAmount; i++) {
-            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
-                this->winners = new Player*[1];
-                this->winners[tieWinners] = this->enrolledPlayers[i];
-                tieWinners++;
-            }
-        }
-        
-        this->winningPlayersAmount = tieWinners;
+        this->straightFlushTieBreaker();
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.FK) {
-        int highestFourOfAKind = -1;
-        for (int i = 0; i < this->winningPlayersAmount; i++) {
-            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind > highestFourOfAKind) {
-                highestFourOfAKind = this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind;
-            }
-        }
-        
-        int tieWinners = 0;
-        for (int i = 0; i < this->winningPlayersAmount; i++) {
-            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind == highestFourOfAKind) {
-                this->winners = new Player*[1];
-                this->winners[tieWinners] = this->enrolledPlayers[i];
-                tieWinners++;
-            }
-        }
-        
-        this->winningPlayersAmount = tieWinners;
+        this->fourOfAKindTieBreaker();
     }
+
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.FH) {
-        /* code */
+        this->fullHouseTieBreaker();
     }
+
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.F) {
-        /* code */
+        this->flushTieBreaker();
     }
+
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.S) {
-        /* code */
+        this->straightTieBreaker();
     }
     
+    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TK) {
+        this->threeOfAKindTieBreaker();
+    }
+    
+    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TP) {
+        this->twoPairsTieBreaker();
+    }
+
 }
 
 void Round::transferPotCoinsToWinners() {
