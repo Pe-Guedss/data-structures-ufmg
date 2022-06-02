@@ -187,6 +187,10 @@ void Round::threeOfAKindTieBreaker() {
 }
 
 void Round::twoPairsTieBreaker() {
+    Player **winnersAux;
+
+    // ============================= Desempata pelo maior par ==================================
+
     int highestPair = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair > highestPair) {
@@ -197,38 +201,99 @@ void Round::twoPairsTieBreaker() {
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
-            this->winners = new Player*[1];
-            this->winners[tieWinners] = this->enrolledPlayers[i];
+            winnersAux = new Player*[1];
+            winnersAux[tieWinners] = this->enrolledPlayers[i];
             tieWinners++;
         }
     }
 
     if (tieWinners == 1) {
+        for (int i = 0; i < tieWinners; i++) {
+            delete []winnersAux[i];
+        }
+        delete []winnersAux;
+
+        for (int i = 0; i < this->winningPlayersAmount; i++) {
+            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
+                this->winners = new Player*[1];
+                this->winners[0] = this->enrolledPlayers[i];
+                break;
+            }
+        }
         this->winningPlayersAmount = tieWinners;
         return;
     }
 
+    // =========================== Desempata pelo menor par ======================================
+
     int lowestPair = -1;
     for (int i = 0; i < tieWinners; i++) {
-        if(this->winners[i]->hand->bestCombinationInfo.lowestPair > lowestPair) {
-            lowestPair = this->winners[i]->hand->bestCombinationInfo.lowestPair;
+        if(winnersAux[i]->hand->bestCombinationInfo.lowestPair > lowestPair) {
+            lowestPair = winnersAux[i]->hand->bestCombinationInfo.lowestPair;
         }
     }
+
+    for (int i = 0; i < tieWinners; i++)
+    {
+        delete []winnersAux[i];
+    }
+    delete []winnersAux;
     
     int newTieWinners = 0;
-    for (int i = 0; i < tieWinners; i++) {
-        if(this->winners[i]->hand->bestCombinationInfo.lowestPair == lowestPair) {
-            this->winners = new Player*[1];
-            this->winners[tieWinners + newTieWinners] = this->winners[i];
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
+            this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
+            winnersAux = new Player*[1];
+            winnersAux[newTieWinners] = this->enrolledPlayers[i];
             newTieWinners++;
         }
     }
 
-    tieWinners = 0;
-    delete [] this->winners;
-    this->winners = nullptr;
+    if (newTieWinners == 1) {
+        for (int i = 0; i < tieWinners; i++) {
+            delete []winnersAux[i];
+        }
+        delete []winnersAux;
+
+        for (int i = 0; i < this->winningPlayersAmount; i++) {
+            if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
+                this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
+
+                this->winners = new Player*[1];
+                this->winners[0] = this->enrolledPlayers[i];
+                return;
+            }
+        }
+        this->winningPlayersAmount = newTieWinners;
+        return;
+    }
+
+    // ========================= Desempata pela maior carta =============================
+
+    int highestCard = -1;
+    for (int i = 0; i < tieWinners; i++) {
+        if(winnersAux[i]->hand->bestCombinationInfo.highestCard > highestCard) {
+            highestCard = winnersAux[i]->hand->bestCombinationInfo.highestCard;
+        }
+    }
+
+    for (int i = 0; i < newTieWinners; i++)
+    {
+        delete []winnersAux[i];
+    }
+    delete []winnersAux;
     
-    this->winningPlayersAmount = tieWinners;
+    newTieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
+            this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
+            this->winners = new Player*[1];
+            this->winners[newTieWinners] = this->enrolledPlayers[i];
+            newTieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = newTieWinners;
     return;
 }
 
