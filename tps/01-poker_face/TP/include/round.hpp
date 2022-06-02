@@ -93,6 +93,12 @@ class Round {
          */
         void transferPotCoinsToWinners();
 
+        /**
+         * @brief Imprime na tela as informações do round atual.
+         * 
+         */
+        void printRoundInfo();
+
     private:
         int openingBet; // Mínimo de aposta inicial que será feita neste Round.
         int playersAmount; // Quantidade de players disputando o round atual.

@@ -469,6 +469,21 @@ void Round::tieBreaker() {
 
 }
 
+void Round::printRoundInfo() {
+    std::cout << "================= Round Info ====================" << std::endl;
+    std::cout << "Pingo: " << this->openingBet << std::endl;
+    std::cout << "Quantidade de jogadores: " << this->playersAmount << std::endl;
+    std::cout << "Jogadores:" << std::endl;
+    for (int i = 0; i < this->playersAmount; i++) {
+        std::cout << "\t" << this->enrolledPlayers[i] << std::endl;
+    }
+    std::cout << "Quantidade de vencedores: " << this->winningPlayersAmount << std::endl;
+    std::cout << "Vencedores: " << std::endl;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        std::cout << "\t" << this->winners[i] << std::endl;
+    }
+}
+
 void Round::transferPotCoinsToWinners() {
     this->tieBreaker();
     int potCoins = this->pot / this->winningPlayersAmount;
