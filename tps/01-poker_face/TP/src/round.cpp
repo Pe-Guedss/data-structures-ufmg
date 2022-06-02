@@ -432,5 +432,11 @@ void Round::tieBreaker() {
 }
 
 void Round::transferPotCoinsToWinners() {
+    this->tieBreaker();
+    int potCoins = this->pot / this->winningPlayersAmount;
 
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        this->winners[i]->coins += potCoins;
+    }
+    
 }
