@@ -14,14 +14,10 @@
  * 
  */
 struct bestCombinationInfo {
-    int straightFlushHighest;
-
     int fourOfAKind;
 
     int fullHousePair;
     int fullHouseTrio;
-
-    int flushHighest;
 
     int straightHighest;
 
