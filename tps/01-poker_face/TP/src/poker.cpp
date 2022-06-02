@@ -1,6 +1,6 @@
 #include <regex>
 #include "player.hpp"
-#include "queue.hpp"
+#include "bets_queue.hpp"
 
 std::string readName(std::string &aux) {
     std::regex nameRegexp("[A-za-z]+");
