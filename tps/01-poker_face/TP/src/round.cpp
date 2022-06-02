@@ -15,9 +15,32 @@ Round::Round() {
     this->winningPlayersAmount = 0;
 }
 
+Round::Round(int playersAmount, int openingBet) {
+    this->openingBet = openingBet;
+    this->playersAmount = playersAmount;
+    this->pot = 0;
+    this->isValidRound = true;
+    this->winningPlayersAmount = 0;
+
+    this->enrolledPlayers = new Player*[playersAmount];
+    this->cardDeck = new Deck();
+    this->betsQueue = new BetsChainedQueue();
+}
+
 Round::~Round() {
+    for (int i = 0; i < this->playersAmount; i++) {
+        delete [] this->enrolledPlayers[i];
+        this->enrolledPlayers[i] = nullptr;
+    }
     delete [] this->enrolledPlayers;
     this->enrolledPlayers = nullptr;
+
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        delete [] this->winners[i];
+        this->winners = nullptr;
+    }
+    delete [] this->winners;
+    this->winners = nullptr;
 }
 
 // Lembre-se de alterar quando a classe "Match" for criada.

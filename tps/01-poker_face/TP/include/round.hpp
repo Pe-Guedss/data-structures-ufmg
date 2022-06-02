@@ -23,6 +23,12 @@ class Round {
         Round();
 
         /**
+         * @brief Constrói uma nova rodada com os dados lidos do arquivo.
+         * 
+         */
+        Round(int playersAmount, int openingBet);
+
+        /**
          * @brief Destrói a rodada atual.
          * 
          */
