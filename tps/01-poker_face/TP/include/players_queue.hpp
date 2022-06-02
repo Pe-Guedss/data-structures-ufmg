@@ -58,7 +58,7 @@ class QueuedPlayer {
         QueuedPlayer();
 
     private:
-        Player player; // Valor da aposta que se vai empilhar.
+        Player *player; // Valor da aposta que se vai empilhar.
         QueuedPlayer *next; // Referência à próxima aposta da fila.
 
     friend class PlayersChainedQueue;
@@ -103,8 +103,8 @@ class PlayersChainedQueue : public Queue {
         void clear();
 
     private:
-        Player* front; // Primeiro elemento da fila.
-        Player* back; // Último elemento da fila.
+        QueuedPlayer* front; // Primeiro elemento da fila.
+        QueuedPlayer* back; // Último elemento da fila.
 };
 
 #endif
