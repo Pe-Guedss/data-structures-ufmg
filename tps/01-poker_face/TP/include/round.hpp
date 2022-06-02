@@ -122,6 +122,11 @@ class Round {
          * 
          */
         void onePairTieBreaker();
+        /**
+         * @brief Desempata jogadores que não tenham nenhuma combinação.
+         * 
+         */
+        void highestCardTieBreaker();
 
 };
 
