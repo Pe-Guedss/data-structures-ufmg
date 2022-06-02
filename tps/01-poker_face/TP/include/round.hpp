@@ -43,6 +43,14 @@ class Round {
         void addPlayer(int pos, Player *player);
 
         /**
+         * @brief Adiciona uma carta à mão de um dos jogadores.
+         * 
+         * @param pos Posição do jogador que se quer adicionar a carta.
+         * @param cardCode Código da carta que se quer adicionar.
+         */
+        void pushCardToPlayer(int pos, std::string cardCode);
+
+        /**
          * @brief Adiciona uma nova aposta à fila
          * 
          * @param bet Aposta a ser feita

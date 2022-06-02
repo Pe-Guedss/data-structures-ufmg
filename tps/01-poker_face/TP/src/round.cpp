@@ -58,6 +58,10 @@ void Round::pushBet(int bet) {
     this->betsQueue->enqueue(bet);
 }
 
+void Round::pushCardToPlayer(int pos, std::string cardCode) {
+    this->enrolledPlayers[pos]->addCard(cardCode, this->cardDeck);
+}
+
 void Round::collectBets() {
     for (int i = 0; i < this->playersAmount; i++) {
         this->enrolledPlayers[i]->makeBet(this->betsQueue->dequeue());
