@@ -75,7 +75,9 @@ class Round {
         BetsChainedQueue *betsQueue; // Fila de apostas dos jogadores do round.
 
         Player **enrolledPlayers; // Jogadores participando da rodada.
+
         int winningPlayersAmount; // Quantidade de jogadores vencendo.
+        Player **winners;
 
 };
 
