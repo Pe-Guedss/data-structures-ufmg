@@ -362,6 +362,27 @@ void Round::onePairTieBreaker() {
     return;
 }
 
+void Round::highestCardTieBreaker() {
+    int highestCard = -1;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard > highestCard) {
+            highestCard = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard;
+        }
+    }
+    
+    int tieWinners = 0;
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
+            this->winners = new Player*[1];
+            this->winners[tieWinners] = this->enrolledPlayers[i];
+            tieWinners++;
+        }
+    }
+    
+    this->winningPlayersAmount = tieWinners;
+    return;
+}
+
 void Round::tieBreaker() {
     this->decideWinningPlayers();
     if (this->winningPlayersAmount == 1) {
@@ -404,6 +425,10 @@ void Round::tieBreaker() {
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.OP) {
         this->onePairTieBreaker();
+    }
+
+    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.HC) {
+        this->highestCardTieBreaker();
     }
 
 }
