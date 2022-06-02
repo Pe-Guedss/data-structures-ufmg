@@ -11,7 +11,6 @@
 Hand::Hand() {
     this->cleanHand();
     this->bestCombination = -1;
-    this->highestCard = nullptr;
 }
 
 Hand::~Hand() {
@@ -38,6 +37,7 @@ bool Hand::checkStraight() {
         }
         previousNumber = this->cards[i]->number;
     }
+    this->bestCombinationInfo.straightHighest = this->cards[4]->number;
     return true;
 }
 
@@ -71,7 +71,14 @@ bool Hand::checkFourOfAKind() {
     bool isFirstFour, isLastFour;
 
     isFirstFour = *this->cards[0] == *this->cards[3];
+    if (isFirstFour) {
+        this->bestCombinationInfo.fourOfAKind = this->cards[3]->number;
+    }
+    
     isLastFour = *this->cards[1] == *this->cards[4];
+    if (isLastFour) {
+        this->bestCombinationInfo.fourOfAKind = this->cards[4]->number;
+    }
     
     return isFirstFour || isLastFour;
 }
@@ -81,6 +88,7 @@ bool Hand::checkOnePair() {
 
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
+            this->bestCombinationInfo.singlePair = this->cards[i]->number;
             return true;
         }
         previousNumber = this->cards[i]->number;
@@ -90,14 +98,18 @@ bool Hand::checkOnePair() {
 }
 
 bool Hand::checkTwoPairs() {
-    bool firstPairFound = false, secondPairFound = false;
+    bool firstPairFound = false;
 
     int previousNumber = this->cards[0]->number;
 
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
-            firstPairFound == false ? (firstPairFound = true) : (secondPairFound = true);
-            if (secondPairFound) {
+            if (!firstPairFound) {
+                this->bestCombinationInfo.lowestPair = this->cards[i]->number;
+                firstPairFound = true;
+            } 
+            else {
+                this->bestCombinationInfo.highestPair = this->cards[i]->number;
                 return true;
             }
             
@@ -116,8 +128,13 @@ bool Hand::checkThreeOfAKind() {
     bool isFirstThree = false, isMiddleThree = false, isLastThree = false;
 
     isFirstThree = *this->cards[0] == *this->cards[2];
+    if (isFirstThree) this->bestCombinationInfo.threeOfAKind = this->cards[2]->number;
+
     isMiddleThree = *this->cards[1] == *this->cards[3];
+    if (isFirstThree) this->bestCombinationInfo.threeOfAKind = this->cards[3]->number;
+
     isLastThree = *this->cards[2] == *this->cards[4];
+    if (isFirstThree) this->bestCombinationInfo.threeOfAKind = this->cards[4]->number;
 
     return isFirstThree || isMiddleThree || isLastThree;
 }
@@ -126,7 +143,16 @@ bool Hand::checkFullHouse() {
     bool isPairFirst = false, isPairLast = false;
 
     isPairFirst = (*this->cards[0] == *this->cards[1]) && (*this->cards[2] == *this->cards[4]);
+    if (isPairFirst) {
+        this->bestCombinationInfo.fullHousePair = this->cards[1]->number;
+        this->bestCombinationInfo.fullHouseTrio = this->cards[4]->number;
+    }
+    
     isPairLast = (*this->cards[3] == *this->cards[4]) && (*this->cards[0] == *this->cards[2]);
+    if (isPairFirst) {
+        this->bestCombinationInfo.fullHousePair = this->cards[4]->number;
+        this->bestCombinationInfo.fullHouseTrio = this->cards[2]->number;
+    }
 
     return isPairFirst || isPairLast;
 }
@@ -141,9 +167,9 @@ void Hand::findHighestCard() {
     this->checkValidHand();
 
     if (this->cards[0]->number == 1) {
-        this->highestCard = this->cards[0];
+        this->bestCombinationInfo.highestCard = this->cards[0]->number;
     } else {
-        this->highestCard = this->cards[this->maxCards - 1];
+        this->bestCombinationInfo.highestCard = this->cards[4]->number;
     }
 }
 
@@ -275,9 +301,6 @@ void Hand::cleanHand() {
         if (this->cards[i] == nullptr) continue;
         this->cards[i] = nullptr;
     }
-
-    delete this->highestCard;
-    this->highestCard = nullptr;
 
     this->bestCombination = -1;
 }
