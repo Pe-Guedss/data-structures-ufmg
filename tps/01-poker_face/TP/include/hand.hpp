@@ -10,6 +10,32 @@
 #include "deck.hpp"
 
 /**
+ * @brief Estrutura para auxiliar no desempate das mãos.
+ * 
+ */
+struct bestCombinationInfo {
+    int straightFlushHighest;
+
+    int fourOfAKind;
+
+    int fullHousePair;
+    int fullHouseTrio;
+
+    int flushHighest;
+
+    int straightHighest;
+
+    int threeOfAKind;
+
+    int lowestPair;
+    int highestPair;
+
+    int singlePair;
+
+    int highestCard;
+};
+
+/**
  * @brief Classe para armazenar as cartas na mão do jogador.
  * 
  */
@@ -122,8 +148,9 @@ class Hand {
     private:
         const int maxCards = 5;
         Card *cards[5];
+
         int bestCombination;
-        Card *highestCard;
+        bestCombinationInfo bestCombinationInfo;
 
         /**
          * @brief Verifica se há uma sequência de cartas no baralho.
@@ -190,6 +217,8 @@ class Hand {
     
     friend std::ostream &operator<<(std::ostream &out, const Hand *hand);
     friend std::ostream &operator<<(std::ostream &out, const Hand hand);
+
+    friend class Round;
 };
 
 #endif
