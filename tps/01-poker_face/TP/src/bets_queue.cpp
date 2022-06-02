@@ -1,4 +1,4 @@
-#include "queue.hpp"
+#include "bets_queue.hpp"
 
 Bet::Bet() {
     this->bet = -1;

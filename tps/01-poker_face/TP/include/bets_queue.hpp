@@ -4,8 +4,8 @@
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
 
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef BETS_QUEUE_H
+#define BETS_QUEUE_H
 
 /**
  * @brief Classe Fila. É pai de todas as outras filas, declarando métodos comuns.
