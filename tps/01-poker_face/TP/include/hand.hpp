@@ -13,7 +13,7 @@
  * @brief Estrutura para auxiliar no desempate das mãos.
  * 
  */
-struct bestCombinationInfo {
+struct bestCombinationInfos {
     int fourOfAKind;
 
     int fullHousePair;
@@ -146,7 +146,7 @@ class Hand {
         Card *cards[5];
 
         int bestCombination;
-        bestCombinationInfo bestCombinationInfo;
+        bestCombinationInfos bestCombinationInfo;
 
         /**
          * @brief Verifica se há uma sequência de cartas no baralho.
