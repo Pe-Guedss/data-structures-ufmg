@@ -220,7 +220,7 @@ void Hand::findHighestCard() {
     this->checkValidHand();
 
     if (this->cards[0]->number == 1) {
-        this->bestCombinationInfo.highestCard = this->cards[0]->number;
+        this->bestCombinationInfo.highestCard = 14;
     } else {
         this->bestCombinationInfo.highestCard = this->cards[4]->number;
     }
