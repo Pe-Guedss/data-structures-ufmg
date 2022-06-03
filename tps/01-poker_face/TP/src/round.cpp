@@ -397,7 +397,7 @@ void Round::onePairTieBreaker() {
     }
     delete []this->winners;
     
-    int tieWinners = 0;
+    tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
