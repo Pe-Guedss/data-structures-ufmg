@@ -102,7 +102,7 @@ bool Hand::checkOnePair() {
 }
 
 bool Hand::checkTwoPairs() {
-    bool firstPairFound = false;
+    bool firstPairFound = false, secondPairFound = false;
 
     int previousNumber = this->cards[0]->number;
 
@@ -118,18 +118,28 @@ bool Hand::checkTwoPairs() {
                     this->bestCombinationInfo.lowestPair = this->bestCombinationInfo.highestPair;
                     this->bestCombinationInfo.highestPair = 14;
                 }
-                return true;
+                secondPairFound = true;
+                break;
             }
             
             i++;
             if (i >= this->maxCards) {
-                return false;
+                break;
             }
         }
         previousNumber = this->cards[i]->number;
     }
 
-    return false;
+    for (auto &&card : this->cards) {
+        if (card->number != this->bestCombinationInfo.lowestPair &&
+            card->number != this->bestCombinationInfo.highestCard)
+        {
+            this->bestCombinationInfo.twoPairHighestCard = card->number;
+            break;
+        }
+    }
+    
+    return firstPairFound && secondPairFound;
 }
 
 bool Hand::checkThreeOfAKind() {
