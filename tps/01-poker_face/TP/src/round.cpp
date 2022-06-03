@@ -43,6 +43,12 @@ Round::~Round() {
     this->winners = nullptr;
 }
 
+void Round::checkPlayerHand(int playerPos) {
+    if ( !this->enrolledPlayers[playerPos]->hand->checkValidHand() ) {
+        this->invalidateRound();
+    }
+}
+
 void Round::invalidateRound() {
     this->isValidRound = false;
 }

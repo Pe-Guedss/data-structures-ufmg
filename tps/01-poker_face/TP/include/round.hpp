@@ -41,6 +41,12 @@ class Round {
         void invalidateRound();
 
         /**
+         * @brief Invalida a rodada quando a mão do jogador está inválida.
+         * 
+         */
+        void checkPlayerHand(int playerPos);
+
+        /**
          * @brief Verifica se o round é válido.
          * 
          */
