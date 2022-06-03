@@ -71,11 +71,6 @@ int main() {
         round->transferPotCoinsToWinners();
         round->printRoundInfo();
     }
-    
-    // for (int i = 0; i < playersAmount; i++) {
-    //     delete players[i];
-    // }
-    // delete []players;
 
     return 0;
 }
