@@ -17,44 +17,34 @@ Card* Deck::locateCard(int cardNum, std::string cardNipe) {
         paus
     };
 
-    if (cardNum > 13) {
-        return nullptr;
-    }
+    erroAssert(cardNum <= 13 && cardNum > 0, "Esta carta não existe no baralho!");
 
-    if (cardNipe == "O")
-    {
+    if (cardNipe == "O") {
         Card *aux;
         aux = this->cardDeck[ (cardNum + ouro * this->cardsPerNipe) - 1 ];
-        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + ouro * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
-    else if (cardNipe == "E")
-    {
+    else if (cardNipe == "E") {
         Card *aux;
         aux = this->cardDeck[ (cardNum + espada * this->cardsPerNipe) - 1 ];
-        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + espada * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
-    else if (cardNipe == "C")
-    {
+    else if (cardNipe == "C") {
         Card *aux;
         aux = this->cardDeck[ (cardNum + copas * this->cardsPerNipe) - 1 ];
-        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + copas * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
-    else if (cardNipe == "P")
-    {
+    else if (cardNipe == "P") {
         Card *aux;
         aux = this->cardDeck[ (cardNum + paus * this->cardsPerNipe) - 1 ];
-        erroAssert(aux != nullptr, "Essa carta já foi utilizada por outro jogador!");
         this->cardDeck[ (cardNum + paus * this->cardsPerNipe) - 1 ] = nullptr;
         return aux;
     }
     else {
-        return nullptr;
+        erroAssert(false, "Esta carta não existe no baralho!");
     }
 }
 
@@ -70,10 +60,7 @@ Card* Deck::getCard(std::string cardCode) {
     std::string num = cardCode.substr(0, it);
     std::string cardNipe = cardCode.substr(it, cardCode.length() - 1);
 
-    Card *card = this->locateCard(atoi(num.c_str()), cardNipe);
-    erroAssert(card != nullptr, "Essa carta não existe no baralho!");
-
-    return card;
+    return this->locateCard(atoi(num.c_str()), cardNipe);
 }
 
 void Deck::showDeck() {
