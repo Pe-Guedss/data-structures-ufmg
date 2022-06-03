@@ -407,7 +407,6 @@ void Round::onePairTieBreaker() {
         if(this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard > highestCard) {
             highestCard = this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard;
         }
-        std::cout << "Carta mais alta: " << highestCard << std::endl;
     }
     
     tieWinners = 0;
@@ -472,7 +471,14 @@ void Round::tieBreaker() {
 
     Hand cardCombinations;
 
-    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.RSF) return;
+    if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.RSF) {
+        this->winners = new Player*[winningPlayersAmount];
+        for (int i = 0; i < this->winningPlayersAmount; i++) {
+            this->winners[i] = this->enrolledPlayers[i];
+        }
+        
+        return;
+    }
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.SF) {
         this->straightFlushTieBreaker();
