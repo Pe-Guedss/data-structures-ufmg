@@ -62,6 +62,8 @@ int main() {
                 round->pushCardToPlayer(i, aux);
             }
         }
+        
+        round->checkPlayerHand(i);
     }
 
     if (round->isRoundValid()) {
