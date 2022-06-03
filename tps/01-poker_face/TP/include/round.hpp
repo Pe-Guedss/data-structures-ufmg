@@ -35,6 +35,18 @@ class Round {
         ~Round();
 
         /**
+         * @brief Invalida a rodada quando um teste de sanidade falha.
+         * 
+         */
+        void invalidateRound();
+
+        /**
+         * @brief Verifica se o round é válido.
+         * 
+         */
+        bool isRoundValid();
+
+        /**
          * @brief Adiciona um novo jogador ao array dinâmico.
          * 
          * @param pos Posição do array em que se deve inserir o jogador.

@@ -43,6 +43,13 @@ Round::~Round() {
     this->winners = nullptr;
 }
 
+void Round::invalidateRound() {
+    this->isValidRound = false;
+}
+bool Round::isRoundValid() {
+    return this->isValidRound;
+}
+
 void Round::addPlayer(int pos, Player *player) {
     this->enrolledPlayers[pos] = player;
 }
