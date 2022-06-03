@@ -135,7 +135,7 @@ class Hand {
          * 
          * @return true (1) ou false (0), dependendo se a mão é válida ou não.
          */
-        void checkValidHand();
+        bool checkValidHand();
 
         /**
          * @brief Limpa todas as cartas utilizadas da mão, tornando os elementos do array ponteiros nulos.
@@ -213,8 +213,8 @@ class Hand {
         void findHighestCard();
 
     
-    friend std::ostream &operator<<(std::ostream &out, const Hand *hand);
-    friend std::ostream &operator<<(std::ostream &out, const Hand hand);
+    friend std::ostream &operator<<(std::ostream &out, Hand *hand);
+    friend std::ostream &operator<<(std::ostream &out, Hand hand);
 
     friend class Round;
 };

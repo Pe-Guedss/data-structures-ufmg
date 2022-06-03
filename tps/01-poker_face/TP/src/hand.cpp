@@ -217,14 +217,16 @@ bool Hand::checkFullHouse() {
     return isPairFirst || isPairLast;
 }
 
-void Hand::checkValidHand() {
+bool Hand::checkValidHand() {
     for (auto &&card : this->cards) {
-        erroAssert(card != nullptr, "Esta mão não é válida. Há cartas faltantes.");
+        if (!card) return false;
     }
+
+    return true;
 }
 
 void Hand::findHighestCard() {
-    this->checkValidHand();
+    if(!this->checkValidHand()) return;
 
     if (this->cards[0]->number == 1) {
         this->bestCombinationInfo.highestCard = 14;
@@ -243,7 +245,7 @@ void Hand::addCard(std::string cardCode, Deck *cardDeck) {
 }
 
 std::string Hand::getBestCombinationCode() {
-    this->checkValidHand();
+    if (!this->checkValidHand()) return "";
 
     if (this->bestCombination == -1) {
         this->findBestCombination();
@@ -297,7 +299,7 @@ std::string Hand::getBestCombinationCode() {
 }
 
 void Hand::findBestCombination() {
-    this->checkValidHand();
+    if (!this->checkValidHand()) return;
 
     this->sortHand();
     this->findHighestCard();
@@ -365,7 +367,12 @@ void Hand::cleanHand() {
     this->bestCombination = -1;
 }
 
-std::ostream &operator<<(std::ostream &out, const Hand *hand) {
+std::ostream &operator<<(std::ostream &out, Hand *hand) {
+    if (!hand->checkValidHand()) {
+        out << "Esta mão é inválida." << std::endl;
+        return out;
+    }
+
     for (auto &&card : hand->cards) {
         out << card->getCardNumber() << card->getCardNipe() << " ";
     }
@@ -374,7 +381,12 @@ std::ostream &operator<<(std::ostream &out, const Hand *hand) {
     return out;
 }
 
-std::ostream &operator<<(std::ostream &out, const Hand hand) {
+std::ostream &operator<<(std::ostream &out, Hand hand) {
+    if (!hand.checkValidHand()) {
+        out << "Esta mão é inválida." << std::endl;
+        return out;
+    }
+
     for (auto &&card : hand.cards) {
         out << card->getCardNumber() << card->getCardNipe() << " ";
     }
