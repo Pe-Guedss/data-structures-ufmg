@@ -48,9 +48,9 @@ int main() {
         players[i] = new Player(currentPlayerName, initialCoins);
 
         int currentPlayerBet = readBet(aux);
-        if (!players[i]->sanityTest(currentPlayerBet)) {
+        if (!players[i]->sanityTest(currentPlayerBet + openingBet)) {
             std::cout << "Jogador \"" << players[i]->getName() << "\" não possui fichas o suficiente." << std::endl;
-            return 1;
+            round->invalidateRound();
         }
 
         round->pushBet(currentPlayerBet);
@@ -64,11 +64,14 @@ int main() {
         }
     }
 
-    round->demandOpeningBet();
-    round->collectBets();
-    round->transferPotCoinsToWinners();
-    round->printRoundInfo();
+    if (round->isRoundValid()) {
 
+        round->demandOpeningBet();
+        round->collectBets();
+        round->transferPotCoinsToWinners();
+        round->printRoundInfo();
+    }
+    
     // for (int i = 0; i < playersAmount; i++) {
     //     delete players[i];
     // }
