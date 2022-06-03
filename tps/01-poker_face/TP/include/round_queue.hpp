@@ -4,10 +4,10 @@
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
 
-#ifndef PLAYERS_QUEUE_H
-#define PLAYERS_QUEUE_H
+#ifndef ROUND_QUEUE_H
+#define ROUND_QUEUE_H
 
-#include "player.hpp"
+#include "round.hpp"
 
 /**
  * @brief Classe Fila. É pai de todas as outras filas, declarando métodos comuns.
@@ -46,55 +46,55 @@ class Queue {
 };
 
 /**
- * @brief Classe para armazenar um item do tipo Aposta na fila.
+ * @brief Classe para armazenar um item do tipo Rodada na fila.
  * 
  */
-class QueuedPlayer {
+class QueuedRound {
     public:
         /**
-         * @brief Construtor padrão da classe Aposta.
+         * @brief Construtor padrão da classe Rodada Enfileirada.
          * 
          */
-        QueuedPlayer();
+        QueuedRound();
 
     private:
-        Player *player; // Valor da aposta que se vai empilhar.
-        QueuedPlayer *next; // Referência à próxima aposta da fila.
+        Round *round; // Rodada enfileirada nesta célula.
+        QueuedRound *next; // Referência à próxima rodada da fila.
 
-    friend class PlayersChainedQueue;
+    friend class RoundsChainedQueue;
 };
 
 /**
- * @brief Classe Fila Encadeada de Apostas. Herda as propriedades da classe pai Fila.
+ * @brief Classe Fila Encadeada de Rodadas. Herda as propriedades da classe pai Fila.
  * 
  */
-class PlayersChainedQueue : public Queue {
+class RoundsChainedQueue : public Queue {
     public:
         /**
-         * @brief Construtor padrão da classe Fila Encadeada de Apostas.
+         * @brief Construtor padrão da classe Fila Encadeada de Rodadas.
          * 
          */
-        PlayersChainedQueue();
+        RoundsChainedQueue();
 
         /**
-         * @brief Destrutor padrão da classe Fila Encadeada de Apostas.
+         * @brief Destrutor padrão da classe Fila Encadeada de Rodadas.
          * 
          */
-        virtual ~PlayersChainedQueue();
+        virtual ~RoundsChainedQueue();
 
         /**
-         * @brief Método para enfileirar uma nova aposta.
+         * @brief Método para enfileirar uma nova Rodada.
          * 
-         * @param bet Valor da aposta que se quer enfileirar.
+         * @param round Ponteiro para a rodada que se quer enfileirar.
          */
-        void enqueue(Player *player);
+        void enqueue(Round *round);
 
         /**
-         * @brief Método para desenfileirar a primeira aposta da fila.
+         * @brief Método para desenfileirar a primeira rodada da fila.
          * 
-         * @return int Valor da aposta desenfileirada.
+         * @return Round* Rodada desenfileirada.
          */
-        Player* dequeue();
+        Round* dequeue();
 
         /**
          * @brief Limpador padrão da fila.
@@ -103,8 +103,8 @@ class PlayersChainedQueue : public Queue {
         void clear();
 
     private:
-        QueuedPlayer* front; // Primeiro elemento da fila.
-        QueuedPlayer* back; // Último elemento da fila.
+        QueuedRound* front; // Primeiro elemento da fila.
+        QueuedRound* back; // Último elemento da fila.
 };
 
 #endif
