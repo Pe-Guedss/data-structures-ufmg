@@ -310,11 +310,6 @@ void Round::twoPairsTieBreaker() {
             lowestPair = this->winners[i]->hand->bestCombinationInfo.lowestPair;
         }
     }
-
-    for (int i = 0; i < tieWinners; i++) {
-        delete []this->winners[i];
-    }
-    delete []this->winners;
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
@@ -349,11 +344,6 @@ void Round::twoPairsTieBreaker() {
             highestCard = this->winners[i]->hand->bestCombinationInfo.highestCard;
         }
     }
-
-    for (int i = 0; i < tieWinners; i++) {
-        delete []this->winners[i];
-    }
-    delete []this->winners;
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
@@ -418,11 +408,6 @@ void Round::onePairTieBreaker() {
             highestCard = this->winners[i]->hand->bestCombinationInfo.highestCard;
         }
     }
-
-    for (int i = 0; i < tieWinners; i++) {
-        delete []this->winners[i];
-    }
-    delete []this->winners;
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
@@ -513,6 +498,7 @@ void Round::tieBreaker() {
     }
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TP) {
+        std::cout << "Two pairs!" << std::endl;
         this->twoPairsTieBreaker();
     }
 
