@@ -382,7 +382,7 @@ void Round::onePairTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
-        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair) {
             tieWinners++;
         }
     }
@@ -390,7 +390,7 @@ void Round::onePairTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
-        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
         }
@@ -404,15 +404,16 @@ void Round::onePairTieBreaker() {
     // ============================ Decidindo empate pela maior carta ===========================
     int highestCard = -1;
     for (int i = 0; i < tieWinners; i++) {
-        if(this->winners[i]->hand->bestCombinationInfo.highestCard > highestCard) {
-            highestCard = this->winners[i]->hand->bestCombinationInfo.highestCard;
+        if(this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard > highestCard) {
+            highestCard = this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard;
         }
+        std::cout << "Carta mais alta: " << highestCard << std::endl;
     }
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
-        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair &&
-            this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair &&
+           this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePairHighestCard == highestCard) {
 
             tieWinners++;
         }
@@ -421,8 +422,8 @@ void Round::onePairTieBreaker() {
     this->winners = new Player*[tieWinners];
     playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
-        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestSinglePair &&
-            this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair &&
+           this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePairHighestCard == highestCard) {
 
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
@@ -475,39 +476,47 @@ void Round::tieBreaker() {
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.SF) {
         this->straightFlushTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.FK) {
         this->fourOfAKindTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.FH) {
         this->fullHouseTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.F) {
         this->flushTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.S) {
         this->straightTieBreaker();
+        return;
     }
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TK) {
         this->threeOfAKindTieBreaker();
+        return;
     }
     
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.TP) {
-        std::cout << "Two pairs!" << std::endl;
         this->twoPairsTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.OP) {
         this->onePairTieBreaker();
+        return;
     }
 
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.HC) {
         this->highestCardTieBreaker();
+        return;
     }
 
 }
