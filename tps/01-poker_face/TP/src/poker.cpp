@@ -1,6 +1,5 @@
 #include <regex>
-#include "player.hpp"
-#include "bets_queue.hpp"
+#include "round.hpp"
 
 std::string readName(std::string &aux) {
     std::regex nameRegexp("[A-za-z]+");
@@ -29,19 +28,17 @@ int readBet(std::string &aux) {
 }
 
 int main() {
-    BetsChainedQueue *betsQueue;
-    betsQueue = new BetsChainedQueue();
-
-    Deck *cardDeck;
-    cardDeck = new Deck();
-
     Player **players;
-    int pot = 0;
     int playersAmount = 0, initialCoins = 1000, openingBet = 0;
+
+
+    Round *round;
 
     std::cin >> playersAmount;
     players = new Player*[playersAmount];
     std::cin >> openingBet;
+
+    round = new Round(playersAmount, openingBet);
 
     std::regex cardRegexp("^[0-9]+[A-Za-z]");
     for (int i = 0; i < playersAmount; i++) {
@@ -50,32 +47,32 @@ int main() {
         std::string currentPlayerName = readName(aux);
         players[i] = new Player(currentPlayerName, initialCoins);
 
-        int currentPlayerBet = openingBet + readBet(aux);
+        int currentPlayerBet = readBet(aux);
         if (!players[i]->sanityTest(currentPlayerBet)) {
             std::cout << "Jogador \"" << players[i]->getName() << "\" não possui fichas o suficiente." << std::endl;
             return 1;
         }
-        pot += currentPlayerBet;
-        betsQueue->enqueue(currentPlayerBet);
+
+        round->pushBet(currentPlayerBet);
+        round->addPlayer(i, players[i]);
         
         for (int j = 0; j < 5; j++) {
             std::cin >> aux;
             if (std::regex_match(aux, cardRegexp)) {
-                players[i]->addCard(aux, cardDeck);
+                round->pushCardToPlayer(i, aux);
             }
         }
     }
 
-    std::cout << "The pot currently is: " << pot << std::endl;
-    for (int i = 0; i < playersAmount; i++) {
-        players[i]->makeBet(betsQueue->dequeue());
-        std::cout << players[i] << std::endl;
-    }
+    round->demandOpeningBet();
+    round->collectBets();
+    round->transferPotCoinsToWinners();
+    round->printRoundInfo();
 
-    for (int i = 0; i < playersAmount; i++) {
-        delete players[i];
-    }
-    delete []players;
+    // for (int i = 0; i < playersAmount; i++) {
+    //     delete players[i];
+    // }
+    // delete []players;
 
     return 0;
 }
