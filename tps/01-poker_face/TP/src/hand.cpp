@@ -93,8 +93,15 @@ bool Hand::checkOnePair() {
     int previousNumber = this->cards[0]->number;
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
+            if (previousNumber == 1) {
+                this->bestCombinationInfo.singlePair = 14;
+                isPairFound = true;
+                break;
+            }
+            
             this->bestCombinationInfo.singlePair = this->cards[i]->number;
             isPairFound = true;
+            break;
         }
         previousNumber = this->cards[i]->number;
     }
