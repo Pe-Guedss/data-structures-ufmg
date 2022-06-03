@@ -148,7 +148,7 @@ bool Hand::checkTwoPairs() {
 
     for (auto &&card : this->cards) {
         if (card->number != this->bestCombinationInfo.lowestPair &&
-            card->number != this->bestCombinationInfo.highestCard)
+            card->number != this->bestCombinationInfo.highestPair)
         {
             this->bestCombinationInfo.twoPairHighestCard = card->number;
             break;
