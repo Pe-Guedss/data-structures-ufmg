@@ -117,8 +117,6 @@ class Player {
 
     friend std::ostream &operator<<(std::ostream &out, const Player *player);
     friend std::ostream &operator<<(std::ostream &out, const Player player);
-
-    friend class Round;
 };
 
 #endif
