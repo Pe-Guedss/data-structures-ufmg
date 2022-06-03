@@ -535,6 +535,7 @@ void Round::printRoundInfo() {
     for (int i = 0; i < this->playersAmount; i++) {
         std::cout << "\t" << this->enrolledPlayers[i] << std::endl;
     }
+    std::cout << "Combinação vencedora: " << this->enrolledPlayers[0]->hand->getBestCombinationCode() << std::endl;
     std::cout << "Quantidade de vencedores: " << this->winningPlayersAmount << std::endl;
     std::cout << "Vencedores: " << std::endl;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
