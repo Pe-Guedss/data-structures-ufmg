@@ -88,17 +88,33 @@ bool Hand::checkFourOfAKind() {
 }
 
 bool Hand::checkOnePair() {
-    int previousNumber = this->cards[0]->number;
+    bool isPairFound = false;
 
+    int previousNumber = this->cards[0]->number;
     for (int i = 1; i < this->maxCards; i++) {
         if (this->cards[i]->number == previousNumber) {
             this->bestCombinationInfo.singlePair = this->cards[i]->number;
-            return true;
+            isPairFound = true;
         }
         previousNumber = this->cards[i]->number;
     }
 
-    return false;
+    int highestCard = -1;
+    for (auto &&card : this->cards) {
+        if (card->number != this->bestCombinationInfo.singlePair)  {
+            if (highestCard == 1) {
+                highestCard = 14;
+                this->bestCombinationInfo.singlePairHighestCard = highestCard;
+                break;
+            }
+            else if (card->number > highestCard) {
+                highestCard = card->number;
+                this->bestCombinationInfo.singlePairHighestCard = highestCard;
+            }
+        }
+    }
+    
+    return isPairFound;
 }
 
 bool Hand::checkTwoPairs() {

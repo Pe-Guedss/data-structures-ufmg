@@ -28,6 +28,7 @@ struct bestCombinationInfos {
     int twoPairHighestCard;
 
     int singlePair;
+    int singlePairHighestCard;
 
     int highestCard;
 };
