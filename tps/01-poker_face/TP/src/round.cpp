@@ -107,9 +107,14 @@ void Round::straightFlushTieBreaker() {
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
-            this->winners = new Player*[1];
-            this->winners[tieWinners] = this->enrolledPlayers[i];
             tieWinners++;
+        }
+    }
+
+    this->winners = new Player*[tieWinners];
+    for (int i = 0; i < this->winningPlayersAmount; i++) {
+        if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
+            this->winners[i] = this->enrolledPlayers[i];
         }
     }
     
