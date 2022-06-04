@@ -13,38 +13,6 @@
  * @brief Classe Fila. É pai de todas as outras filas, declarando métodos comuns.
  * 
  */
-class Queue {
-    public:
-        /**
-         * @brief Construtor padrão da fila pai. Apenas inicia o tamanho como 0.
-         * 
-         */
-        Queue() {
-            size = 0;
-        };
-
-        /**
-         * @brief Retorna o tamanho atual da fila.
-         * 
-         * @return int this->size.
-         */
-        int getSize() {
-            return size;
-        };
-
-        /**
-         * @brief Verifica se a fila está vazia.
-         * 
-         * @return true (1) ou false (0), dependendo se a fila está vazia ou não.
-         */
-        bool isEmpty() {
-            return size == 0;
-        };
-
-    protected:
-        int size; // Atributo para registrar o tamanho da fila.
-};
-
 /**
  * @brief Classe para armazenar um item do tipo Rodada na fila.
  * 
