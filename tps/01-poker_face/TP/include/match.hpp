@@ -7,7 +7,7 @@
 #ifndef MATCH_H
 #define MATCH_H
 
-#include "round.hpp"
+#include "round_queue.hpp"
 
 class Match {
     public:
@@ -23,7 +23,7 @@ class Match {
     private:
         int initialPlayerCoins;
         Player **players;
-        Round **rounds;
+        RoundsChainedQueue *rounds;
 
         std::string readPlayerName(std::string &aux);
         int readPlayerBet(std::string &aux);
