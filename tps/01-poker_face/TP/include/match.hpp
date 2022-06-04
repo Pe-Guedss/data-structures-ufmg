@@ -22,11 +22,12 @@ class Match {
 
     private:
         int initialPlayerCoins;
-        Player **players;
-        RoundsChainedQueue *rounds;
 
-        std::string readPlayerName(std::string &aux);
-        int readPlayerBet(std::string &aux);
+        int playersAmount;
+        Player **players;
+
+        RoundsChainedQueue *rounds;
+        
 };
 
 #endif
