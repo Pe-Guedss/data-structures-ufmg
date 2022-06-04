@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/poker.o $(OBJ)/card.o $(OBJ)/deck.o $(OBJ)/hand.o $(OBJ)/player.o $(OBJ)/bets_queue.o $(OBJ)/round.o
-HDRS = $(INC)/card.hpp $(INC)/deck.hpp $(INC)/hand.hpp $(INC)/player.hpp $(INC)/bets_queue.hpp $(INC)/round.hpp
+OBJS = $(OBJ)/poker.o $(OBJ)/card.o $(OBJ)/deck.o $(OBJ)/hand.o $(OBJ)/player.o $(OBJ)/bets_queue.o $(OBJ)/round.o $(OBJ)/round_queue.o $(OBJ)/match.o
+HDRS = $(INC)/card.hpp $(INC)/deck.hpp $(INC)/hand.hpp $(INC)/player.hpp $(INC)/bets_queue.hpp $(INC)/round.hpp $(INC)/round_queue.hpp $(INC)/match.hpp
 CFLAGS = -pg -Wall -c -I$(INC)
 ANALISAMEM = ./analisamem/bin/analisamem
 EXE = $(BIN)/poker
@@ -33,6 +33,12 @@ $(OBJ)/bets_queue.o: $(HDRS) $(SRC)/bets_queue.cpp
 
 $(OBJ)/round.o: $(HDRS) $(SRC)/round.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/round.o $(SRC)/round.cpp
+
+$(OBJ)/round_queue.o: $(HDRS) $(SRC)/round_queue.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/round_queue.o $(SRC)/round_queue.cpp
+
+$(OBJ)/match.o: $(HDRS) $(SRC)/match.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/match.o $(SRC)/match.cpp
 
 clean:
 	rm $(OBJ)/*.o $(BIN)/poker
