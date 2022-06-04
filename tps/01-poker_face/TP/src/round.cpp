@@ -61,11 +61,8 @@ void Round::addPlayer(int pos, Player *player) {
 }
 
 // Lembre-se de alterar quando a classe "Match" for criada.
-void Round::demandOpeningBet() {
-    for (int i = 0; i < this->playersAmount; i++) {
-        this->pot += this->openingBet;
-        this->enrolledPlayers[i]->makeBet(this->openingBet);
-    }
+void Round::addOpeningBetToPot(int openingBetTotal) {
+    this->pot += openingBetTotal;
 }
 
 void Round::pushBet(int bet) {

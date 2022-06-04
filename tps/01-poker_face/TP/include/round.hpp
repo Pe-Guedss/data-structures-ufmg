@@ -79,7 +79,7 @@ class Round {
          * @brief Cobra o pingo de todos os jogadores da partida.
          * 
          */
-        void demandOpeningBet();
+        void addOpeningBetToPot(int openingBetTotal);
 
         /**
          * @brief Coleta as apostas de todos os jogadores da rodada.
@@ -181,6 +181,7 @@ class Round {
          */
         void highestCardTieBreaker();
 
+    friend class Match;
 };
 
 #endif

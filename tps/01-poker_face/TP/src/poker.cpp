@@ -1,78 +1,69 @@
+#include <getopt.h>
 #include <regex>
-#include "round.hpp"
 
-std::string readName(std::string &aux) {
-    std::regex nameRegexp("[A-za-z]+");
-    std::string playerName = "";
+#include "match.hpp"
+#include "msgassert.hpp"
 
-    std::cin >> aux;
-    // Reads the player name
-    while (std::regex_match(aux, nameRegexp)) {
-        playerName += aux + " ";
-        std::cin >> aux;
-    }
-    playerName[playerName.length() -1] = *"";
-
-    return playerName;
+void uso() {
+    std::cout << "============= Utilização do programa =============\n" << std::endl;
+    std::cout << "\t-i \t<inputs_da_partida.txt> (arquivos de entrada para a partida)" << std::endl;
+    std::cout << "\t-o \t<outputs_da_partida.txt> (arquivo para registrar os resultados da partida)" << std::endl;
+    std::cout << "\n" << std::endl;
+    std::cout << "\tOBS: O programa também pode ser executado sem parâmetro algum.\n\tEle está configurado para, por padrão, acessar como input o arquivo \"entrada.txt\" e como output o arquivo \"saida.txt\"." << std::endl;
 }
 
-int readBet(std::string &aux) {
-    std::regex betRegexp("[0-9]+");
+std::string matchInputsPath = "entrada.txt";
+std::string matchResultsPath = "saida.txt";
 
-    if (!std::regex_match(aux, betRegexp)) {
-        std::cout << "A aposta não é válida!" << std::endl;
-        return 1;
+void parse_args(int argc, char **argv) {
+    // variaveis externas do getopt
+    extern char *optarg;
+
+    // variavel auxiliar
+    int c;
+
+    // getopt - letra indica a opcao, : junto a letra indica parametro
+    // no caso de escolher mais de uma operacao, vale a ultima
+    while (( c = getopt(argc, argv, "i:o:h") ) != EOF){
+        switch(c) {
+            case 'i':
+                if (!optarg) {
+                    break;
+                }
+                avisoAssert(matchInputsPath == "entrada.txt", "Ja havia sido informado um arquivo para as entradas do programa.");
+                
+                matchInputsPath = optarg;
+            break;
+
+            case 'o':
+                if (!optarg) {
+                    break;
+                }
+                avisoAssert(matchResultsPath == "saida.txt", "Ja havia sido informado um arquivo para a saída do programa.");
+                
+                matchResultsPath = optarg;
+            break;
+            
+            case 'h':
+                uso();
+                exit(1);
+            break;
+
+            default:
+                uso();
+                exit(1);
+        }
     }
 
-    return atoi(aux.c_str());
 }
 
-int main() {
-    Player **players;
-    int playersAmount = 0, initialCoins = 1000, openingBet = 0;
+int main(int argc, char **argv) {
+    parse_args(argc, argv);
 
+    Match *match;
+    match = new Match(matchInputsPath);
 
-    Round *round;
-
-    std::cin >> playersAmount;
-    players = new Player*[playersAmount];
-    std::cin >> openingBet;
-
-    round = new Round(playersAmount, openingBet);
-
-    std::regex cardRegexp("^[0-9]+[A-Za-z]");
-    for (int i = 0; i < playersAmount; i++) {
-        std::string aux = "";
-
-        std::string currentPlayerName = readName(aux);
-        players[i] = new Player(currentPlayerName, initialCoins);
-
-        int currentPlayerBet = readBet(aux);
-        if (!players[i]->sanityTest(currentPlayerBet + openingBet)) {
-            std::cout << "Jogador \"" << players[i]->getName() << "\" não possui fichas o suficiente." << std::endl;
-            round->invalidateRound();
-        }
-
-        round->pushBet(currentPlayerBet);
-        round->addPlayer(i, players[i]);
-        
-        for (int j = 0; j < 5; j++) {
-            std::cin >> aux;
-            if (std::regex_match(aux, cardRegexp)) {
-                round->pushCardToPlayer(i, aux);
-            }
-        }
-        
-        round->checkPlayerHand(i);
-    }
-
-    if (round->isRoundValid()) {
-
-        round->demandOpeningBet();
-        round->collectBets();
-        round->transferPotCoinsToWinners();
-        round->printRoundInfo();
-    }
+    match->play(matchResultsPath);
 
     return 0;
 }
