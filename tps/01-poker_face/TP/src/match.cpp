@@ -168,7 +168,7 @@ void Match::printMatchResults() {
 
 void Match::play(std::string matchResultsPath) {
     this->sortPlayersByCoins();
-    
+
     std::ofstream matchResults(matchResultsPath);
     Round *aux;
 
@@ -181,7 +181,7 @@ void Match::play(std::string matchResultsPath) {
             }
         }
         else {
-            matchResults << "0 0 I";
+            matchResults << "0 0 I" << std::endl;
         }
     }
 
