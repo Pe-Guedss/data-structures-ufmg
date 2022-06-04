@@ -1,4 +1,8 @@
+2 1000
 3 50
 Pedro de Oliveira Guedes 500 5O 12P 11C 3O 2P
-Marcela Cunha de Jesus 501 3E 8E 9E 11C 13C
-Clara de Oliveira Guedes 502 5P 9C 6E 2E 10C
+Marcela Cunha de Jesus 550 3E 8E 9E 11E 13C
+Clara de Oliveira Guedes 600 5P 9C 6E 2E 10C
+2 50
+Pedro de Oliveira Guedes 50 3E 8E 9E 11E 13C
+Marcela Cunha de Jesus 2000 5O 13P 11C 3O 2P
