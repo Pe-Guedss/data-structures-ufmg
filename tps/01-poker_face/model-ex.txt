@@ -27,13 +27,17 @@ Player
 Round
 - array de jogadores
 - atributo contendo o valor do pingo
-- método para cobrar o pingo de todos os jogadores (inclusive os que não estão na rodada)
 - método para verificar o ganhador da rodada
 - pote com o dinheiro dos pingos e apostas
 - método para transferir o dinheiro do pote para o vencedor
+- Ideia: Criar fila de apostas. A cada leitura de um valor de aposta no txt, realizar o teste 
+de sanidade e adicionar o valor à fila. Após feitos todos os testes, os valores são 
+desenfileirados, somados ao pote e subtraídos da conta dos jogadores.
 
 Match
-- array de rodadas
+- fila de rodadas
+- lista com todos os jogadores
 - Valor de fichas iniciais para os jogadores
+- método para cobrar o pingo de todos os jogadores
 - Método para verificar vencedor da partida
 - Imprimir resultado da partida

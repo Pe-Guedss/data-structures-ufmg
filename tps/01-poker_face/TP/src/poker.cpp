@@ -1,25 +1,89 @@
-#include "card.hpp"
+#include <getopt.h>
+#include <regex>
 
-int main()
-{
-    Card *card1 = new Card("2A");
-    Card *card2 = new Card("3A");
-    Card *card3 = new Card("13A");
-    Card *card4 = new Card("13A");
+#include "match.hpp"
+#include "msgassert.hpp"
+#include "memlog.hpp"
 
-    bool a = card2 < card1;
-    bool b = card2 > card1;
-    bool c = *card2 == *card3;
-    bool d = *card3 == *card4;
+void uso() {
+    std::cout << "============= Utilização do programa =============\n" << std::endl;
+    std::cout << "\t-i \t<inputs_da_partida.txt> (arquivos de entrada para a partida)" << std::endl;
+    std::cout << "\t-o \t<outputs_da_partida.txt> (arquivo para registrar os resultados da partida)" << std::endl;
+    std::cout << "\n" << std::endl;
+    std::cout << "\tOBS: O programa também pode ser executado sem parâmetro algum.\n\tEle está configurado para, por padrão, acessar como input o arquivo \"entrada.txt\" e como output o arquivo \"saida.txt\"." << std::endl;
+}
 
-    std::cout << "card2 < card1 -> " << a << std::endl;
-    std::cout << "card2 > card1 -> " << b << std::endl;
-    std::cout << "card2 == card3 -> " << c << std::endl;
-    std::cout << "card3 == card4 -> " << d << std::endl;
+std::string matchInputsPath = "entrada.txt";
+std::string matchResultsPath = "saida.txt";
+std::string logNameStr = "";
+bool memoryRegister = false;
 
-    std::cout << card1 << std::endl;
-    std::cout << *card2 << std::endl;
-    std::cout << card3 << std::endl;
+void parse_args(int argc, char **argv) {
+    // variaveis externas do getopt
+    extern char *optarg;
 
-    return 0;
+    // variavel auxiliar
+    int c;
+
+    // getopt - letra indica a opcao, : junto a letra indica parametro
+    // no caso de escolher mais de uma operacao, vale a ultima
+    while (( c = getopt(argc, argv, "i:o:hp:l") ) != EOF){
+        switch(c) {
+            case 'i':
+                avisoAssert(matchInputsPath == "entrada.txt", "Ja havia sido informado um arquivo para as entradas do programa.");
+                
+                matchInputsPath = optarg;
+            break;
+
+            case 'o':
+                avisoAssert(matchResultsPath == "saida.txt", "Ja havia sido informado um arquivo para a saída do programa.");
+                
+                matchResultsPath = optarg;
+            break;
+            
+            case 'h':
+                uso();
+                exit(1);
+            break;
+
+            case 'p':
+                logNameStr = optarg;
+            break;
+
+            case 'l':
+                memoryRegister = true;
+            break;
+
+            default:
+                uso();
+                exit(1);
+        }
+    }
+
+}
+
+int main(int argc, char **argv) {
+    parse_args(argc, argv);
+
+    // iniciar registro de acesso
+    char *logNameChars[logNameStr.length()];
+    std::strcpy(*logNameChars, logNameStr.c_str());
+    iniciaMemLog(*logNameChars);
+
+    // ativar ou nao o registro de acesso
+    if (memoryRegister){ 
+        ativaMemLog();
+    }
+    else{
+        desativaMemLog();
+    }
+
+    defineFaseMemLog(1);
+    Match *match;
+    match = new Match(matchInputsPath);
+
+    defineFaseMemLog(2);
+    match->play(matchResultsPath);
+
+    return finalizaMemLog();
 }

@@ -22,6 +22,13 @@ Card::Card(const std::string &cardCode) {
     this->nipe = nipe;
 }
 
+int Card::getCardNumber() {
+    return this->number;
+}
+
+std::string Card::getCardNipe() {
+    return this->nipe;
+}
 
 std::ostream &operator<<(std::ostream &out, const Card *card)
 {

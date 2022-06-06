@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo	: card.h
+// Arquivo	: card.hpp
 // Conteudo	: definicoes da classe Carta
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
@@ -27,6 +27,20 @@ class Card {
          */
         Card(const std::string &cardCode);
 
+        /**
+         * @brief Retorna o número da carta.
+         * 
+         * @return int number
+         */
+        int getCardNumber();
+
+        /**
+         * @brief Retorna o naipe da carta.
+         * 
+         * @return std::string number
+         */
+        std::string getCardNipe();
+
         bool operator < (Card const &card) {
             return this->number < card.number;
         }
@@ -46,12 +60,15 @@ class Card {
             return ( !(this->number > card.number) && !(this->number < card.number) );
         }
 
-        friend std::ostream &operator<<(std::ostream &out, const Card *card);
-        friend std::ostream &operator<<(std::ostream &out, const Card card);
-
     private:
         int number;
         std::string nipe;
+
+    friend class Deck;
+    friend class Hand;
+
+    friend std::ostream &operator<<(std::ostream &out, const Card *card);
+    friend std::ostream &operator<<(std::ostream &out, const Card card);
 };
 
 #endif
