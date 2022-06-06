@@ -33,7 +33,7 @@ Match::Match(std::string matchDataPath) {
         matchInput >> playersAmount >> openingBet;
 
         Round *round;
-        round = new Round(playersAmount, openingBet);
+        round = new Round(i + 1, playersAmount, openingBet);
 
         if (i == 0) {
             this->playersAmount = playersAmount;

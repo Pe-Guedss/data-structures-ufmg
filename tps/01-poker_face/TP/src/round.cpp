@@ -15,7 +15,9 @@ Round::Round() {
     this->winningPlayersAmount = 0;
 }
 
-Round::Round(int playersAmount, int openingBet) {
+Round::Round(int roundId, int playersAmount, int openingBet) {
+    this->roundId = roundId;
+
     this->openingBet = openingBet;
     this->playersAmount = playersAmount;
     this->pot = 0;
