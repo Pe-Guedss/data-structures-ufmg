@@ -1,25 +1,42 @@
 #include <iostream>
 
-void swapElements(int *arr, int pos, int *element)
-{
-    int aux = -1;
-    aux = arr[pos];
-    arr[pos] = *element;
-    *element = aux;
-}
+#define swapElements(A, B) \
+    {                      \
+        int aux = A;       \
+        A = B;             \
+        B = aux;           \
+    }
 
 void orderArr(int *arr, int n)
 {
-    int i = 0, j = 0;
+    int i, j, min;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n - 1; j++)
+        {
+            if (arr[j] > arr[i])
+            {
+                swapElements(arr[j], arr[i]);
+            }
+        }
+    }
+}
+
+void countDuplicates(int *arr, int n)
+{
+    int i = 0;
+    int count = 0, aux = arr[i];
     while (i < n)
     {
-        int minimumValue = arr[i];
-        for (j = i; j < n; j++)
-        {
-            minimumValue >= arr[j] ? 0 : minimumValue = arr[j];
-        }
-        swapElements(arr, i, &minimumValue);
+        count++;
         i++;
+        if (arr[i] != aux)
+        {
+            std::cout << aux << " aparece " << count << " vez(es)" << std::endl;
+            count = 0;
+        }
+
+        aux = arr[i];
     }
 }
 
@@ -29,7 +46,7 @@ int main()
     std::cin >> valQuantity;
 
     int *numArr = nullptr;
-    numArr = new (int[valQuantity]);
+    numArr = new int[valQuantity];
     int aux;
     while (i < valQuantity)
     {
@@ -39,6 +56,7 @@ int main()
     }
 
     orderArr(numArr, valQuantity);
+    countDuplicates(numArr, valQuantity);
 
     delete[] numArr;
     return 0;
