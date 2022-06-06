@@ -20,22 +20,14 @@ Round::Round(int roundId, int playersAmount, int openingBet) {
     this->roundId = roundId;
 
     this->openingBet = openingBet;
-    ESCREVEMEMLOG( (long int) &this->openingBet, sizeof(int), roundId );
     this->playersAmount = playersAmount;
-    ESCREVEMEMLOG( (long int) &this->playersAmount, sizeof(int), roundId );
     this->pot = 0;
-    ESCREVEMEMLOG( (long int) &this->pot, sizeof(int), roundId );
     this->isValidRound = true;
-    ESCREVEMEMLOG( (long int) &this->isValidRound, sizeof(int), roundId );
     this->winningPlayersAmount = 0;
-    ESCREVEMEMLOG( (long int) &this->winningPlayersAmount, sizeof(int), roundId );
 
     this->enrolledPlayers = new Player*[playersAmount];
-    ESCREVEMEMLOG( (long int) &this->enrolledPlayers, sizeof(int), roundId );
     this->cardDeck = new Deck();
-    ESCREVEMEMLOG( (long int) &this->cardDeck, sizeof(int), roundId );
     this->betsQueue = new BetsChainedQueue();
-    ESCREVEMEMLOG( (long int) &this->betsQueue, sizeof(int), roundId );
 }
 
 Round::~Round() {
@@ -55,6 +47,7 @@ Round::~Round() {
 }
 
 void Round::checkPlayerHand(int playerPos) {
+    LEMEMLOG( (long int) (&this->enrolledPlayers[playerPos]->hand), sizeof(Hand), this->roundId );
     if ( !this->enrolledPlayers[playerPos]->hand->checkValidHand() ) {
         this->invalidateRound();
     }
@@ -68,6 +61,7 @@ bool Round::isRoundValid() {
 }
 
 void Round::addPlayer(int pos, Player *player) {
+    ESCREVEMEMLOG( (long int) (&this->enrolledPlayers[pos]), sizeof(Player), this->roundId );
     this->enrolledPlayers[pos] = player;
 }
 
@@ -77,10 +71,12 @@ void Round::addOpeningBetToPot(int openingBetTotal) {
 }
 
 void Round::pushBet(int bet) {
+    ESCREVEMEMLOG( (long int) (&this->betsQueue), sizeof(int), this->roundId );
     this->betsQueue->enqueue(bet);
 }
 
 void Round::pushCardToPlayer(int pos, std::string cardCode) {
+    ESCREVEMEMLOG( (long int) (&this->enrolledPlayers[pos]->hand), sizeof(Card), this->roundId );
     this->enrolledPlayers[pos]->addCard(cardCode, this->cardDeck);
 }
 
@@ -89,6 +85,7 @@ void Round::collectBets() {
         int bet = this->betsQueue->dequeue();
         this->enrolledPlayers[i]->makeBet(bet);
         this->pot += bet;
+        ESCREVEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
     }
 }
 
@@ -96,11 +93,14 @@ void Round::sortEnrolledPlayers() {
     for (int i = 0; i < this->playersAmount; i++) {
         int maxPlayer = i;
         for (int j = i; j < this->playersAmount; j++) {
+            LEMEMLOG( (long int) (&this->enrolledPlayers[j]), sizeof(int), this->roundId );
             if (*this->enrolledPlayers[j] > *this->enrolledPlayers[maxPlayer]) {
                 maxPlayer = j;
             }
         }
         swapPlayers(this->enrolledPlayers[i], this->enrolledPlayers[maxPlayer]);
+        ESCREVEMEMLOG( (long int) (&this->enrolledPlayers[maxPlayer]), sizeof(Player), this->roundId );
+        ESCREVEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(Player), this->roundId );
     }
 }
 
@@ -108,8 +108,10 @@ void Round::decideWinningPlayers() {
     this->sortEnrolledPlayers();
 
     int highestCombination = this->enrolledPlayers[0]->hand->bestCombination;
+    LEMEMLOG( (long int) (&this->enrolledPlayers[0]), sizeof(int), this->roundId );
     this->winningPlayersAmount++;
     for (int i = 1; i < this->playersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if (this->enrolledPlayers[i]->hand->bestCombination == highestCombination) {
             this->winningPlayersAmount++;
             continue;
@@ -120,6 +122,7 @@ void Round::decideWinningPlayers() {
 void Round::straightFlushTieBreaker() {
     int highestStraight = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest > highestStraight) {
             highestStraight = this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest;
         }
@@ -127,6 +130,7 @@ void Round::straightFlushTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
             tieWinners++;
         }
@@ -135,7 +139,9 @@ void Round::straightFlushTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
         }
@@ -148,6 +154,7 @@ void Round::straightFlushTieBreaker() {
 void Round::fourOfAKindTieBreaker() {
     int highestFourOfAKind = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind > highestFourOfAKind) {
             highestFourOfAKind = this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind;
         }
@@ -155,6 +162,7 @@ void Round::fourOfAKindTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind == highestFourOfAKind) {
             tieWinners++;
         }
@@ -163,9 +171,11 @@ void Round::fourOfAKindTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fourOfAKind == highestFourOfAKind) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -176,6 +186,7 @@ void Round::fourOfAKindTieBreaker() {
 void Round::fullHouseTieBreaker() {
     int highestTrio = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio > highestTrio) {
             highestTrio = this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio;
         }
@@ -183,6 +194,7 @@ void Round::fullHouseTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio == highestTrio) {
             tieWinners++;
         }
@@ -191,9 +203,11 @@ void Round::fullHouseTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.fullHouseTrio == highestTrio) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -204,6 +218,7 @@ void Round::fullHouseTieBreaker() {
 void Round::flushTieBreaker() {
     int highestCard = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard > highestCard) {
             highestCard = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard;
         }
@@ -211,6 +226,7 @@ void Round::flushTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
             tieWinners++;
         }
@@ -219,9 +235,11 @@ void Round::flushTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -232,6 +250,7 @@ void Round::flushTieBreaker() {
 void Round::straightTieBreaker() {
     int highestStraight = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest > highestStraight) {
             highestStraight = this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest;
         }
@@ -239,6 +258,7 @@ void Round::straightTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
             tieWinners++;
         }
@@ -247,9 +267,11 @@ void Round::straightTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.straightHighest == highestStraight) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -260,6 +282,7 @@ void Round::straightTieBreaker() {
 void Round::threeOfAKindTieBreaker() {
     int highestTrio = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind > highestTrio) {
             highestTrio = this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind;
         }
@@ -267,6 +290,7 @@ void Round::threeOfAKindTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestTrio) {
             tieWinners++;
         }
@@ -275,9 +299,11 @@ void Round::threeOfAKindTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.threeOfAKind == highestTrio) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -290,6 +316,7 @@ void Round::twoPairsTieBreaker() {
 
     int highestPair = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair > highestPair) {
             highestPair = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair;
         }
@@ -297,6 +324,7 @@ void Round::twoPairsTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
             tieWinners++;
         }
@@ -305,9 +333,11 @@ void Round::twoPairsTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
 
@@ -320,6 +350,7 @@ void Round::twoPairsTieBreaker() {
 
     int lowestPair = -1;
     for (int i = 0; i < tieWinners; i++) {
+        LEMEMLOG( (long int) (&this->winners[i]), sizeof(int), this->roundId );
         if(this->winners[i]->hand->bestCombinationInfo.lowestPair > lowestPair) {
             lowestPair = this->winners[i]->hand->bestCombinationInfo.lowestPair;
         }
@@ -327,6 +358,7 @@ void Round::twoPairsTieBreaker() {
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
 
@@ -337,11 +369,13 @@ void Round::twoPairsTieBreaker() {
     this->winners = new Player*[tieWinners];
     playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair) {
 
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
 
@@ -354,6 +388,7 @@ void Round::twoPairsTieBreaker() {
 
     int highestCard = -1;
     for (int i = 0; i < tieWinners; i++) {
+        LEMEMLOG( (long int) (&this->winners[i]), sizeof(int), this->roundId );
         if(this->winners[i]->hand->bestCombinationInfo.twoPairHighestCard > highestCard) {
             highestCard = this->winners[i]->hand->bestCombinationInfo.twoPairHighestCard;
         }
@@ -361,6 +396,7 @@ void Round::twoPairsTieBreaker() {
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.twoPairHighestCard == highestCard) {
@@ -372,12 +408,14 @@ void Round::twoPairsTieBreaker() {
     this->winners = new Player*[tieWinners];
     playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.lowestPair == lowestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.highestPair == highestPair &&
             this->enrolledPlayers[i]->hand->bestCombinationInfo.twoPairHighestCard == highestCard) {
 
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -389,6 +427,7 @@ void Round::onePairTieBreaker() {
     // ============================= Decidindo empate pelo maior par ==============================
     int highestSinglePair = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair > highestSinglePair) {
             highestSinglePair = this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair;
         }
@@ -396,6 +435,7 @@ void Round::onePairTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair) {
             tieWinners++;
         }
@@ -404,9 +444,11 @@ void Round::onePairTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
 
@@ -418,6 +460,7 @@ void Round::onePairTieBreaker() {
     // ============================ Decidindo empate pela maior carta ===========================
     int highestCard = -1;
     for (int i = 0; i < tieWinners; i++) {
+        LEMEMLOG( (long int) (&this->winners[i]), sizeof(int), this->roundId );
         if(this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard > highestCard) {
             highestCard = this->winners[i]->hand->bestCombinationInfo.singlePairHighestCard;
         }
@@ -425,6 +468,7 @@ void Round::onePairTieBreaker() {
     
     tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair &&
            this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePairHighestCard == highestCard) {
 
@@ -435,11 +479,13 @@ void Round::onePairTieBreaker() {
     this->winners = new Player*[tieWinners];
     playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePair == highestSinglePair &&
            this->enrolledPlayers[i]->hand->bestCombinationInfo.singlePairHighestCard == highestCard) {
 
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -450,6 +496,7 @@ void Round::onePairTieBreaker() {
 void Round::highestCardTieBreaker() {
     int highestCard = -1;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard > highestCard) {
             highestCard = this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard;
         }
@@ -457,6 +504,7 @@ void Round::highestCardTieBreaker() {
     
     int tieWinners = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
             tieWinners++;
         }
@@ -465,9 +513,11 @@ void Round::highestCardTieBreaker() {
     this->winners = new Player*[tieWinners];
     int playerPos = 0;
     for (int i = 0; i < this->winningPlayersAmount; i++) {
+        LEMEMLOG( (long int) (&this->enrolledPlayers[i]), sizeof(int), this->roundId );
         if(this->enrolledPlayers[i]->hand->bestCombinationInfo.highestCard == highestCard) {
             this->winners[playerPos] = this->enrolledPlayers[i];
             playerPos++;
+            ESCREVEMEMLOG( (long int) (&this->winners[playerPos]), sizeof(Player), this->roundId );
         }
     }
     
@@ -479,15 +529,19 @@ void Round::tieBreaker() {
     this->decideWinningPlayers();
     if (this->winningPlayersAmount == 1) {
         this->winners = new Player*[1];
+        ESCREVEMEMLOG( (long int) (&this->winners[0]), sizeof(Player), this->roundId );
         this->winners[0] = this->enrolledPlayers[0];
         return;
     }
 
     Hand cardCombinations;
 
+    LEMEMLOG( (long int) (&this->enrolledPlayers[0]), sizeof(int), this->roundId );
+
     if (this->enrolledPlayers[0]->hand->bestCombination == cardCombinations.RSF) {
         this->winners = new Player*[winningPlayersAmount];
         for (int i = 0; i < this->winningPlayersAmount; i++) {
+            ESCREVEMEMLOG( (long int) (&this->winners[i]), sizeof(Player), this->roundId );
             this->winners[i] = this->enrolledPlayers[i];
         }
         
@@ -563,6 +617,7 @@ void Round::transferPotCoinsToWinners() {
 
     for (int i = 0; i < this->winningPlayersAmount; i++) {
         this->winners[i]->coins += potCoins;
+        ESCREVEMEMLOG( (long int) (&this->winners[i]), sizeof(int), this->roundId );
     }
     
 }
