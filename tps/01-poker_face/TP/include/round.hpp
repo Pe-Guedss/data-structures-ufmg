@@ -26,7 +26,7 @@ class Round {
          * @brief Constrói uma nova rodada com os dados lidos do arquivo.
          * 
          */
-        Round(int playersAmount, int openingBet);
+        Round(int roundId, int playersAmount, int openingBet);
 
         /**
          * @brief Destrói a rodada atual.
@@ -118,6 +118,8 @@ class Round {
         void printRoundInfo();
 
     private:
+        int roundId;
+
         int openingBet; // Mínimo de aposta inicial que será feita neste Round.
         int playersAmount; // Quantidade de players disputando o round atual.
         int pot; // Pote de dinheiro do Round.
