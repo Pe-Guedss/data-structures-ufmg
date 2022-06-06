@@ -3,6 +3,7 @@
 
 #include "match.hpp"
 #include "msgassert.hpp"
+#include "memlog.hpp"
 
 void uso() {
     std::cout << "============= Utilização do programa =============\n" << std::endl;
@@ -14,6 +15,8 @@ void uso() {
 
 std::string matchInputsPath = "entrada.txt";
 std::string matchResultsPath = "saida.txt";
+std::string logNameStr = "";
+bool memoryRegister = false;
 
 void parse_args(int argc, char **argv) {
     // variaveis externas do getopt
@@ -24,21 +27,15 @@ void parse_args(int argc, char **argv) {
 
     // getopt - letra indica a opcao, : junto a letra indica parametro
     // no caso de escolher mais de uma operacao, vale a ultima
-    while (( c = getopt(argc, argv, "i:o:h") ) != EOF){
+    while (( c = getopt(argc, argv, "i:o:hp:l") ) != EOF){
         switch(c) {
             case 'i':
-                if (!optarg) {
-                    break;
-                }
                 avisoAssert(matchInputsPath == "entrada.txt", "Ja havia sido informado um arquivo para as entradas do programa.");
                 
                 matchInputsPath = optarg;
             break;
 
             case 'o':
-                if (!optarg) {
-                    break;
-                }
                 avisoAssert(matchResultsPath == "saida.txt", "Ja havia sido informado um arquivo para a saída do programa.");
                 
                 matchResultsPath = optarg;
@@ -47,6 +44,14 @@ void parse_args(int argc, char **argv) {
             case 'h':
                 uso();
                 exit(1);
+            break;
+
+            case 'p':
+                logNameStr = optarg;
+            break;
+
+            case 'l':
+                memoryRegister = true;
             break;
 
             default:
@@ -60,10 +65,25 @@ void parse_args(int argc, char **argv) {
 int main(int argc, char **argv) {
     parse_args(argc, argv);
 
+    // iniciar registro de acesso
+    char *logNameChars[logNameStr.length()];
+    std::strcpy(*logNameChars, logNameStr.c_str());
+    iniciaMemLog(*logNameChars);
+
+    // ativar ou nao o registro de acesso
+    if (memoryRegister){ 
+        ativaMemLog();
+    }
+    else{
+        desativaMemLog();
+    }
+
+    defineFaseMemLog(1);
     Match *match;
     match = new Match(matchInputsPath);
 
+    defineFaseMemLog(2);
     match->play(matchResultsPath);
 
-    return 0;
+    return finalizaMemLog();
 }
