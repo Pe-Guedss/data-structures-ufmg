@@ -1,4 +1,5 @@
 #include "round.hpp"
+#include "memlog.hpp"
 
 #define swapPlayers(A, B) \
     {                      \
@@ -19,14 +20,22 @@ Round::Round(int roundId, int playersAmount, int openingBet) {
     this->roundId = roundId;
 
     this->openingBet = openingBet;
+    ESCREVEMEMLOG( (long int) &this->openingBet, sizeof(int), roundId );
     this->playersAmount = playersAmount;
+    ESCREVEMEMLOG( (long int) &this->playersAmount, sizeof(int), roundId );
     this->pot = 0;
+    ESCREVEMEMLOG( (long int) &this->pot, sizeof(int), roundId );
     this->isValidRound = true;
+    ESCREVEMEMLOG( (long int) &this->isValidRound, sizeof(int), roundId );
     this->winningPlayersAmount = 0;
+    ESCREVEMEMLOG( (long int) &this->winningPlayersAmount, sizeof(int), roundId );
 
     this->enrolledPlayers = new Player*[playersAmount];
+    ESCREVEMEMLOG( (long int) &this->enrolledPlayers, sizeof(int), roundId );
     this->cardDeck = new Deck();
+    ESCREVEMEMLOG( (long int) &this->cardDeck, sizeof(int), roundId );
     this->betsQueue = new BetsChainedQueue();
+    ESCREVEMEMLOG( (long int) &this->betsQueue, sizeof(int), roundId );
 }
 
 Round::~Round() {
