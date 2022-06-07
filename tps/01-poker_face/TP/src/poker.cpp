@@ -9,7 +9,7 @@ void uso() {
     std::cout << "============= Utilização do programa =============\n" << std::endl;
     std::cout << "\t-i \t<inputs_da_partida.txt> (arquivos de entrada para a partida)" << std::endl;
     std::cout << "\t-o \t<outputs_da_partida.txt> (arquivo para registrar os resultados da partida)" << std::endl;
-    std::cout << "\t-p \t<arquivo_de_logs.txt> (arquivo para registrar os resultados computacionais de performance e/ou memória da partida)" << std::endl;
+    std::cout << "\t-p \t<arquivo_de_logs.out> (arquivo para registrar os resultados computacionais de performance e/ou memória da partida)" << std::endl;
     std::cout << "\t-l \tCaso esta flag esteja presente, o acesso à memória é registrado no arquivo de logs de -p" << std::endl;
     std::cout << "\n" << std::endl;
     std::cout << "\tOBS: O programa também pode ser executado sem parâmetro algum.\n\tEle está configurado para, por padrão, acessar como input o arquivo \"entrada.txt\" e como output o arquivo \"saida.txt\"." << std::endl;
@@ -17,7 +17,7 @@ void uso() {
 
 std::string matchInputsPath = "entrada.txt";
 std::string matchResultsPath = "saida.txt";
-std::string logNameStr = "";
+std::string logNameStr = "log.out";
 bool memoryRegister = false;
 
 void parse_args(int argc, char **argv) {
@@ -68,9 +68,10 @@ int main(int argc, char **argv) {
     parse_args(argc, argv);
 
     // iniciar registro de acesso
-    char *logNameChars[logNameStr.length()];
-    std::strcpy(*logNameChars, logNameStr.c_str());
-    iniciaMemLog(*logNameChars);
+    char *logNameChars;
+    logNameChars = new char[logNameStr.length()];
+    std::strcpy(logNameChars, logNameStr.c_str());
+    iniciaMemLog(logNameChars);
 
     // ativar ou nao o registro de acesso
     if (memoryRegister){ 
