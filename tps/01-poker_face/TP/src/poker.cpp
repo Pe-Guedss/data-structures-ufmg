@@ -78,11 +78,9 @@ int main(int argc, char **argv) {
         desativaMemLog();
     }
 
-    defineFaseMemLog(0);
     Match *match;
     match = new Match(matchInputsPath);
 
-    defineFaseMemLog(1);
     match->play(matchResultsPath);
 
     return finalizaMemLog();

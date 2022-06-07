@@ -1,6 +1,7 @@
 #include "match.hpp"
 #include <fstream>
 #include <regex>
+#include "memlog.hpp"
 
 #define swapPlayers(A, B) \
     {                      \
@@ -45,6 +46,7 @@ Match::Match(std::string matchDataPath) {
             }
         }
 
+        defineFaseMemLog(0);
         for (int j = 0; j < playersAmount; j++) {
             // ==================== Handles player name readings ========================
             std::string currentPlayerName = "";
@@ -73,7 +75,7 @@ Match::Match(std::string matchDataPath) {
                 round->enrolledPlayers[j]->hand->cleanHand();
             }
 
-            // ================== Handles pleyer bet reading =============================
+            // ================== Handles player bet reading =============================
             if (!std::regex_match(aux, betRegexp)) {
                 round->invalidateRound();
                 continue;
@@ -111,6 +113,7 @@ Match::Match(std::string matchDataPath) {
             round->checkPlayerHand(j);
         }
 
+        defineFaseMemLog(1);
         if (round->isRoundValid()) {
 
             this->chargeOpeningBet(openingBet);
