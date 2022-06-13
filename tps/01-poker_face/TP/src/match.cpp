@@ -178,7 +178,7 @@ void Match::play(std::string matchResultsPath) {
     while (!this->rounds->isEmpty()) {
         aux = this->rounds->dequeue();
         if (aux->isRoundValid()) {
-            matchResults << aux->winningPlayersAmount << " " << aux->pot << " " << aux->winners[0]->hand->getBestCombinationCode() << std::endl;
+            matchResults << aux->winningPlayersAmount << " " << aux->pot << " " << aux->winningCombination << std::endl;
             for (int i = 0; i < aux->winningPlayersAmount; i++) {
                 matchResults << aux->winners[i]->getName() << std::endl;
             }
