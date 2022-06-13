@@ -620,4 +620,5 @@ void Round::transferPotCoinsToWinners() {
         ESCREVEMEMLOG( (long int) (&this->winners[i]), sizeof(int), this->roundId );
     }
     
+    this->winningCombination = this->winners[0]->hand->getBestCombinationCode();
 }

@@ -133,6 +133,7 @@ class Round {
 
         int winningPlayersAmount; // Quantidade de jogadores vencendo.
         Player **winners;
+        std::string winningCombination;
 
         /**
          * @brief Desempata jogadores com straight Flush
