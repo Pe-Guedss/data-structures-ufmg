@@ -41,15 +41,19 @@ PERF_OUTPUTS = analises/perf/resultados
 # 	$(ANALISAMEM) -i $(MEM_EXEC_LOGS)/memlog.out -p $(MEM_OUTPUTS)/mem_analysis
 
 # perf: $(EXE)
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_1000.txt -o $(PERF_INPUTS)/saida_1000.txt -p $(PERF_EXEC_LOGS)/memlog_1000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_1000.out -o $(PERF_INPUTS)/saida_1000.out -p $(PERF_EXEC_LOGS)/perf_res_1000.out
 
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_5000.txt -o $(PERF_INPUTS)/saida_5000.txt -p $(PERF_EXEC_LOGS)/memlog_5000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_5000.out -o $(PERF_INPUTS)/saida_5000.out -p $(PERF_EXEC_LOGS)/perf_res_5000.out
 	
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_10000.txt -o $(PERF_INPUTS)/saida_10000.txt -p $(PERF_EXEC_LOGS)/memlog_10000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_10000.out -o $(PERF_INPUTS)/saida_10000.out -p $(PERF_EXEC_LOGS)/perf_res_10000.out
 
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_15000.txt -o $(PERF_INPUTS)/saida_15000.txt -p $(PERF_EXEC_LOGS)/memlog_15000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_15000.out -o $(PERF_INPUTS)/saida_15000.out -p $(PERF_EXEC_LOGS)/perf_res_15000.out
 	
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_20000.txt -o $(PERF_INPUTS)/saida_20000.txt -p $(PERF_EXEC_LOGS)/memlog_20000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_20000.out -o $(PERF_INPUTS)/saida_20000.out -p $(PERF_EXEC_LOGS)/perf_res_20000.out
+
+# gprof: $(EXE)
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_20000.out -o $(PERF_INPUTS)/saida_20000.out -p $(GPROF)/perf_res_20000.out
+# 	gprof $(EXE) gmon.out > $(GPROF)/perf_res_20000.txt
 
 $(BIN)/tp1.exe: $(OBJS)
 	$(CC) -pg -o $(BIN)/tp1.exe $(OBJS) $(LIBS)
