@@ -82,6 +82,11 @@ class OlimpicCountries {
             countries = new Country[countriesAmount];
         }
 
+        ~OlimpicCountries() {
+            delete []this->countries;
+            this->countries = nullptr;
+        }
+
     private:
         int countriesAmount;
         Country *countries;
