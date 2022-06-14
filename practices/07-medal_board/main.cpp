@@ -48,8 +48,27 @@ class Country {
         int goldMedals;
         int silverMedals;
         int bronzeMedals;
+
+    friend class OlimpicCountries;
 };
- 
+
+class OlimpicCountries {
+    public:
+        OlimpicCountries() {
+            this->countriesAmount = -1;
+            countries = nullptr;
+        }
+
+        OlimpicCountries(int countriesAmount) {
+            this->countriesAmount = countriesAmount;
+            countries = new Country[countriesAmount];
+        }
+
+    private:
+        int countriesAmount;
+        Country *countries;
+};
+
 int main() {
  
     /**
