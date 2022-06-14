@@ -3,6 +3,13 @@
  
 using namespace std;
 
+#define swapCountries(A, B) \
+    {                      \
+        Country aux = A;       \
+        A = B;             \
+        B = aux;           \
+    }
+
 class Country {
     public:
         Country() {
@@ -85,6 +92,18 @@ class OlimpicCountries {
         ~OlimpicCountries() {
             delete []this->countries;
             this->countries = nullptr;
+        }
+
+        void sortCountriesByName() {
+            for (int i = 0; i < this->countriesAmount; i++) {
+                int minCountry = i;
+                for (int j = i; j < this->countriesAmount; j++) {
+                    if (this->countries[j].getName() < this->countries[minCountry].getName()) {
+                        minCountry = j;
+                    }
+                }
+                swapCountries(this->countries[i], this->countries[minCountry]);
+            }
         }
 
     private:
