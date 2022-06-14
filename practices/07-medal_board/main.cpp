@@ -39,6 +39,10 @@ class Country {
             return true;
         }
 
+        std::string getName() {
+            return this->name;
+        }
+
     private:
         std::string name;
         int goldMedals;
