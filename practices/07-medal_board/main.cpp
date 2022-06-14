@@ -18,7 +18,7 @@ class Country {
             return false;
         }
 
-        bool operator > (Country const &country) {
+        bool operator > (Country const country) {
             if (this->goldMedals > country.goldMedals) return true;
             else if (this->goldMedals < country.goldMedals) return false;
 
@@ -29,6 +29,14 @@ class Country {
             else if (this->bronzeMedals < country.bronzeMedals) return false;
 
             return false;
+        }
+
+        bool operator == (Country const country) {
+            if (this->goldMedals != country.goldMedals) return false;
+            if (this->silverMedals != country.silverMedals) return false;
+            if (this->bronzeMedals != country.bronzeMedals) return false;
+            
+            return true;
         }
 
     private:
