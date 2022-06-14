@@ -5,6 +5,24 @@ using namespace std;
 
 class Country {
     public:
+        Country() {
+            this->name = "";
+            this->goldMedals = -1;
+            this->silverMedals = -1;
+            this->bronzeMedals = -1;
+        }
+
+        Country(std::string countryName,
+                int goldMedals,
+                int silverMedals,
+                int bronzeMedals) {
+            
+            this->name = countryName;
+            this->goldMedals = goldMedals;
+            this->silverMedals = silverMedals;
+            this->bronzeMedals = bronzeMedals;
+        }
+
         bool operator < (Country const country) {
             if (this->goldMedals < country.goldMedals) return true;
             else if (this->goldMedals > country.goldMedals) return false;
