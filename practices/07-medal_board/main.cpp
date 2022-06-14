@@ -95,26 +95,30 @@ class OlimpicCountries {
         }
 
         void sortCountriesByName() {
-            for (int i = 0; i < this->countriesAmount; i++) {
-                int minCountry = i;
-                for (int j = i; j < this->countriesAmount; j++) {
-                    if (this->countries[j].getName() < this->countries[minCountry].getName()) {
-                        minCountry = j;
+            bool swapped;
+            for (int i = 0; i < this->countriesAmount - 1; i++) {
+                swapped = false;
+                for (int j = 0; j < this->countriesAmount - i - 1; j++) {
+                    if (this->countries[j].getName() < this->countries[j + 1].getName()) {
+                        swapCountries(this->countries[j], this->countries[j + 1]);
+                        swapped = true;
                     }
                 }
-                swapCountries(this->countries[i], this->countries[minCountry]);
+                if (swapped == false) break;
             }
         }
 
         void sortCountriesByMedals() {
-            for (int i = 0; i < this->countriesAmount; i++) {
-                int minCountry = i;
-                for (int j = i; j < this->countriesAmount; j++) {
-                    if (this->countries[j] < this->countries[minCountry]) {
-                        minCountry = j;
+            bool swapped;
+            for (int i = 0; i < this->countriesAmount - 1; i++) {
+                swapped = false;
+                for (int j = 0; j < this->countriesAmount - i - 1; j++) {
+                    if (this->countries[j] > this->countries[j + 1]) {
+                        swapCountries(this->countries[j], this->countries[j + 1]);
+                        swapped = true;
                     }
                 }
-                swapCountries(this->countries[i], this->countries[minCountry]);
+                if (swapped == false) break;
             }
         }
 
