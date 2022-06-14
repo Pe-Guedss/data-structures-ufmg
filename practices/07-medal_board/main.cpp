@@ -68,6 +68,13 @@ class Country {
             return this->name;
         }
 
+        void print() {
+            std::cout << this->name << " ";
+            std::cout << this->goldMedals << " ";
+            std::cout << this->silverMedals << " ";
+            std::cout << this->bronzeMedals << std::endl;
+        }
+
     private:
         std::string name;
         int goldMedals;
@@ -120,6 +127,16 @@ class OlimpicCountries {
                 }
                 if (swapped == false) break;
             }
+        }
+
+        void printCountries() {
+            this->sortCountriesByName();
+            this->sortCountriesByMedals();
+
+            for (int i = 0; i < this->countriesAmount; i++) {
+                this->countries[i].print();
+            }
+            
         }
 
     private:
