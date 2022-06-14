@@ -106,6 +106,18 @@ class OlimpicCountries {
             }
         }
 
+        void sortCountriesByMedals() {
+            for (int i = 0; i < this->countriesAmount; i++) {
+                int minCountry = i;
+                for (int j = i; j < this->countriesAmount; j++) {
+                    if (this->countries[j] < this->countries[minCountry]) {
+                        minCountry = j;
+                    }
+                }
+                swapCountries(this->countries[i], this->countries[minCountry]);
+            }
+        }
+
     private:
         int countriesAmount;
         Country *countries;
