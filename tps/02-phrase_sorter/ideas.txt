@@ -1,0 +1,36 @@
+lex-order:
+	-> 26 variáveis inteiras de "a" até "z", todas começando com 0;
+	-> Método construtor:
+		-> Seta todos os inteiros para 0 ou -1
+		-> Itera pela linha (obtida através do getline do leitor do arquivo) separando os caracteres por espaço
+		-> Para cada um dos caracteres lidos, atribui o número da iteração à sua variável correspondente (switch case).
+	-> Método getLetterValue:
+		-> Recebe um caractere como parâmetro (ou uma string de um único caractere, o que for mais conveniente)
+		-> Através de um switch case com os possíveis caracteres de "a" a "z", retornar a variável atribuída a eles.
+		-> Lembrar de aplicar "tolower()" nos caracteres lidos
+		-> Valores que fujam dos casos específicos (A-Z) devem retornar o valor padrão em ascii (return (int)str[0])
+	-> Método booleano de comparação:
+		-> Recebe as duas letras a serem comparadas
+		-> Chama o getLetterValue para cada uma das letras
+		-> Retorna se a primeira letra é menor que a segunda (true) ou não (false)
+
+word:
+	-> Atributo string para armazenar a palavra lida;
+	-> Atributo para armazenar o tamanho da palavra lida;
+	-> Atributo para armazenar a quantidade de vezes que a palavra aparece;
+	-> Método construtor:
+		-> Recebe a string como parâmetro
+		-> Calcula o tamanho da string
+		-> Define a quantidade de vezes que a palavra aparece como 1
+	-> Método booleano isLessThan:
+		-> Recebe dois parâmetros: um deles é outro objeto Word, o outro é o lex-order padrão
+		-> Vai chamando o método booleano de comparação do lex order para cada uma das letras
+		-> Retorna se this é menor (true) ou maior/igual (false) que o parâmetro word recebido
+
+word-list:
+	-> Define uma lista cujos objetos são do tipo Word
+	-> Método de impressão da lista
+
+phrase-sorter:
+	-> Possui um objeto word-list
+	-> Define o quicksort para a lista
