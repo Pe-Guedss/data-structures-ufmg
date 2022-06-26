@@ -72,5 +72,5 @@ int LexOrder::getLetterValue(std::string letter) {
 }
 
 bool LexOrder::isLessThan(std::string a, std::string b) {
-
+    return this->getLetterValue(a) < this->getLetterValue(b);
 }
