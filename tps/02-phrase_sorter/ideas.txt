@@ -13,6 +13,18 @@ lex-order:
 		-> Recebe as duas letras a serem comparadas
 		-> Chama o getLetterValue para cada uma das letras
 		-> Retorna se a primeira letra é menor que a segunda (true) ou não (false)
+_____________________________________________________________________________________________________________________________
+	-> Ideia de otimização:
+		-> Criar uma classe Letter:
+			-> Atributo de string para guardar o a letra
+			-> Atributo inteiro para guardar o valor da letra
+			-> Método para retornar o valor.
+		-> Ao invés de 26 variáveis, ter um array de 26 posições da classe Letter
+		-> Inicializar o array de A-Z utilizando um laço for e convertendo o inteiro para uma string
+		-> O acesso ao array seria menos custoso (tempo constante) que passar por todos os ifs
+_____________________________________________________________________________________________________________________________
+
+---------------------------------------------------------------------------------------------------------------------------------
 
 word:
 	-> Atributo string para armazenar a palavra lida;
