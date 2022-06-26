@@ -1,7 +1,16 @@
 #include "lex-order.hpp"
+#include <sstream>
 
-LexOrder::LexOrder(std::string LexOrder) {
+LexOrder::LexOrder(std::string lexOrder) {
+    std::string letter;
+    int value = 0;
 
+    std::stringstream auxLexOrder(lexOrder);
+    while ( std::getline(auxLexOrder, letter, ' ') ) {
+        this->setLetterValue(letter, value);
+        value++;
+    }
+    
 }
 
 int LexOrder::getLetterValue(std::string letter) {
