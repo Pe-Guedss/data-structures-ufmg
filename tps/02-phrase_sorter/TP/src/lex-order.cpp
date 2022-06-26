@@ -43,7 +43,32 @@ void LexOrder::setLetterValue(std::string letter, int value) {
 }
 
 int LexOrder::getLetterValue(std::string letter) {
-
+    if (letter == "a") return this->a;
+    else if (letter == "b") return this->b;
+    else if (letter == "c") return this->c;
+    else if (letter == "d") return this->d;
+    else if (letter == "e") return this->e;
+    else if (letter == "f") return this->f;
+    else if (letter == "g") return this->g;
+    else if (letter == "h") return this->h;
+    else if (letter == "i") return this->i;
+    else if (letter == "j") return this->j;
+    else if (letter == "k") return this->k;
+    else if (letter == "l") return this->l;
+    else if (letter == "m") return this->m;
+    else if (letter == "n") return this->n;
+    else if (letter == "o") return this->o;
+    else if (letter == "p") return this->p;
+    else if (letter == "q") return this->q;
+    else if (letter == "r") return this->r;
+    else if (letter == "s") return this->s;
+    else if (letter == "t") return this->t;
+    else if (letter == "u") return this->u;
+    else if (letter == "v") return this->v;
+    else if (letter == "w") return this->w;
+    else if (letter == "x") return this->x;
+    else if (letter == "y") return this->y;
+    else if (letter == "z") return this->z;
 }
 
 bool LexOrder::isLessThan(std::string a, std::string b) {
