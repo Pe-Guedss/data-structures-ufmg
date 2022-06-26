@@ -32,6 +32,14 @@ class LexOrder {
         int getLetterValue(std::string letter);
 
         /**
+         * @brief Define o valor associado à letra recebida na nova ordem lexicográfica.
+         * 
+         * @param letter Letra que se quer definir o valor.
+         * @param value Valor a ser associado à letra.
+         */
+        void setLetterValue(std::string letter, int value);
+
+        /**
          * @brief Método para definir, de acordo com a nova ordem lexicográfica, se a letra recebida em "a" é menor que a recebida em "b".
          * 
          * @param a Letra do alfabeto
