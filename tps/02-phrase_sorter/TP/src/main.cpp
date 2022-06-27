@@ -19,9 +19,7 @@ int main() {
             if ( word[j]->isLessThan(word[minStr], lexOrder) ) {
                 minStr = j;
             }
-            std::cout << "\tMenor palavra: " << word[minStr]->getWord() << std::endl;
         }
-        std::cout << "Trocando " << word[i]->getWord() << " por " << word[minStr]->getWord() << std::endl;
         aux = word[i];
         word[i] = word[minStr];
         word[minStr] = aux;
