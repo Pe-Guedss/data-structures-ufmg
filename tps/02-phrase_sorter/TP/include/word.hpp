@@ -67,6 +67,11 @@ class Word {
         std::string word; // Palavra armazenada pela classe.
         int occurrences; // Quantidade de vezes que essa palavra foi lida.
         int size; // Tamanho da palavra armazenada.
+    
+    /**
+     * @brief Método para imprimir as informações da palavra.
+     */
+    friend std::ostream &operator<<(std::ostream &out, const Word *word);
 };
 
 #endif

@@ -24,12 +24,9 @@ int main() {
         word[i] = word[minStr];
         word[minStr] = aux;
     }
-    
-    std::cout << word[0]->getWord() << std::endl;
-    std::cout << word[1]->getWord() << std::endl;
-    std::cout << word[2]->getWord() << std::endl;
 
     for (int i = 0; i < 3; i++) {
+        std::cout << word[i] << std::endl;
         delete word[i];
         word[i] = nullptr;
     }

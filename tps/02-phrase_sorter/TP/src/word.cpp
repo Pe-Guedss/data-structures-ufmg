@@ -50,3 +50,12 @@ bool Word::isLessThan(Word *word, LexOrder *lexOrder) {
 
     return smallerWordSize == this->size;
 }
+
+std::ostream &operator<<(std::ostream &out, const Word *word) {
+    out << "===== Word Info =====" << std::endl;
+    out << "Word: " << word->word << std::endl;
+    out << "Word Size: " << word->size << std::endl;
+    out << "Word Occurrences: " << word->occurrences << std::endl;
+    
+    return out;
+}
