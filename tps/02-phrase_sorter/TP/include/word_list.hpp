@@ -74,7 +74,15 @@ class WordList {
         int size; // Tamanho da lista de palavras.
         Word *first; // Primeira palavra da lista.
         Word *last; // Última palavra da lista.
-        Word *insertHelper(int pos, bool before); // Método de auxílio à inserção de palavras em posições específicas da lista.
+
+        /**
+         * @brief Método de auxílio à inserção de palavras em posições específicas da lista.
+         * 
+         * @param pos Posição em que se quer inserir a palavra.
+         * @param before True(1) se for para inserir antes, ou false(0) caso contrário.
+         * @return Word* 
+         */
+        Word *insertHelper(int pos, bool before);
 };
 
 #endif

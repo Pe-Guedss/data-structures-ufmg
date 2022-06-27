@@ -80,6 +80,8 @@ class Word {
      * @brief Método para imprimir as informações da palavra.
      */
     friend std::ostream &operator<<(std::ostream &out, const Word *word);
+
+    friend class WordList;
 };
 
 #endif
