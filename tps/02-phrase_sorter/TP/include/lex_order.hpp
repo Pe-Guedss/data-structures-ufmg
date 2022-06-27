@@ -39,15 +39,6 @@ class LexOrder {
          */
         void setLetterValue(std::string letter, int value);
 
-        /**
-         * @brief Método para definir, de acordo com a nova ordem lexicográfica, se a letra recebida em "a" é menor que a recebida em "b".
-         * 
-         * @param a Letra do alfabeto
-         * @param b Letra do alfabeto
-         * @return true (1) ou false (0), respectivamente se a < b ou não.
-         */
-        bool isLessThan(std::string a, std::string b);
-
     private:
         /**
          * @brief Letra do alfabeto.

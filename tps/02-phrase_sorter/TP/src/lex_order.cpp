@@ -5,7 +5,6 @@ LexOrder::LexOrder(std::string lexOrder) {
     std::string letter;
     int value = 0;
 
-    lexOrder = this->toLower(lexOrder);
     std::stringstream auxLexOrder(lexOrder);
     while ( std::getline(auxLexOrder, letter, ' ') ) {
         this->setLetterValue(letter, value);
@@ -71,21 +70,4 @@ int LexOrder::getLetterValue(int letter) {
     else if (letter == 'y') return this->y;
     else if (letter == 'z') return this->z;
     else return letter;
-}
-
-bool LexOrder::isLessThan(std::string a, std::string b) {
-    a = this->toLower(a);
-    b = this->toLower(b);
-    long unsigned int size = (a.length() < b.length() ? a.length() : b.length());
-    for (long unsigned int i = 0; i < size; i++) {
-        if ( this->getLetterValue(a[i]) < this->getLetterValue(b[i]) ) {
-            return true;
-        }
-        else if (a[i] == b[i]) {
-            continue;
-        }
-        return false;
-    }
-
-    return (size == a.length() ? true : false);
 }

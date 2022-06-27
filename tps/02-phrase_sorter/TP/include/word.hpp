@@ -31,6 +31,13 @@ class Word {
         std::string toLower(std::string str);
 
         /**
+         * @brief Retorna o tamanho da palavra armazenada.
+         * 
+         * @return int Atributo this->size.
+         */
+        int getSize();
+
+        /**
          * @brief Verifica se a string recebida é igual à palavra que este objeto armazena.
          * 
          * @param newWord Palavra que se quer verificar a igualdade.
@@ -52,6 +59,7 @@ class Word {
     private:
         std::string word; // Palavra armazenada pela classe.
         int occurrences; // Quantidade de vezes que essa palavra foi lida.
+        int size; // Tamanho da palavra armazenada.
 };
 
 #endif
