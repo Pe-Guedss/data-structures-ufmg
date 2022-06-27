@@ -29,7 +29,7 @@ class LexOrder {
          * @param letter Letra que se quer saber o valor na nova ordem lexicográfica.
          * @return int Valor da letra na ordem lexicográfica atual.
          */
-        int getLetterValue(std::string letter);
+        int getLetterValue(int letter);
 
         /**
          * @brief Define o valor associado à letra recebida na nova ordem lexicográfica.
