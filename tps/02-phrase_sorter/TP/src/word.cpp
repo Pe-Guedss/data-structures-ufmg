@@ -43,5 +43,5 @@ bool Word::isLessThan(Word *word, LexOrder *lexOrder) {
         return false;
     }
 
-    return (smallerWordSize == this->size ? true : false);
+    return smallerWordSize == this->size;
 }
