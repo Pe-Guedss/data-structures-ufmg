@@ -38,6 +38,13 @@ class Word {
         int getSize();
 
         /**
+         * @brief Retorna a palavra que a classe armazena.
+         * 
+         * @return std::string Atributo this->word.
+         */
+        std::string getWord();
+
+        /**
          * @brief Verifica se a string recebida é igual à palavra que este objeto armazena.
          * 
          * @param newWord Palavra que se quer verificar a igualdade.

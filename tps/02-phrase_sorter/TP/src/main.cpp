@@ -1,32 +1,40 @@
-#include "lex_order.hpp"
+#include "word.hpp"
 #include <sstream>
 #include <iostream>
 
 int main() {
-    std::string aaa;
     LexOrder *lexOrder;
 
-    std::getline(std::cin, aaa);
-    lexOrder = new LexOrder(aaa);
+    Word *word[3];
+    word[0] = new Word("Era"), word[1] = new Word("uma"), word[2] = new Word("umas");
 
-    std::string test[3];
-    test[0] = "Era", test[1] = "uma", test[2] = "umas";
+    std::string aaa;
+    std::getline(std::cin, aaa);
+    lexOrder = new LexOrder(word[0]->toLower(aaa));
+
+    Word *aux;
     for (int i = 0; i < 3; i++) {
-        std::string aux = "";
         int minStr = i;
-        for (int j = i; j < 3; j++) {
-            if ( lexOrder->isLessThan(test[j], test[minStr]) ) {
+        for (int j = i + 1; j < 3; j++) {
+            if ( word[j]->isLessThan(word[minStr], lexOrder) ) {
                 minStr = j;
             }
+            std::cout << "\tMenor palavra: " << word[minStr]->getWord() << std::endl;
         }
-        aux = test[i];
-        test[i] = test[minStr];
-        test[minStr] = aux;
+        std::cout << "Trocando " << word[i]->getWord() << " por " << word[minStr]->getWord() << std::endl;
+        aux = word[i];
+        word[i] = word[minStr];
+        word[minStr] = aux;
     }
     
-    std::cout << test[0] << std::endl;
-    std::cout << test[1] << std::endl;
-    std::cout << test[2] << std::endl;
+    std::cout << word[0]->getWord() << std::endl;
+    std::cout << word[1]->getWord() << std::endl;
+    std::cout << word[2]->getWord() << std::endl;
 
+    for (int i = 0; i < 3; i++) {
+        delete word[i];
+        word[i] = nullptr;
+    }
+    
     return 0;
 }

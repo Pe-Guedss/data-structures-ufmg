@@ -5,9 +5,9 @@ OBJ = obj
 INC = include
 BIN = bin
 
-OBJS = $(OBJ)/main.o $(OBJ)/lex_order.o
+OBJS = $(OBJ)/main.o $(OBJ)/lex_order.o $(OBJ)/word.o
 
-HDRS = $(INC)/lex_order.hpp
+HDRS = $(INC)/lex_order.hpp $(INC)/word.hpp
 
 CFLAGS = -pg -Wall -c -I$(INC)
 
@@ -32,3 +32,6 @@ $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 
 $(OBJ)/lex_order.o: $(HDRS) $(SRC)/lex_order.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/lex_order.o $(SRC)/lex_order.cpp 
+
+$(OBJ)/word.o: $(HDRS) $(SRC)/word.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/word.o $(SRC)/word.cpp 
