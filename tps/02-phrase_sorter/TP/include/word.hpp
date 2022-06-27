@@ -23,6 +23,14 @@ class Word {
         Word(std::string word);
 
         /**
+         * @brief Método para retornar a string recebida em caixa baixa.
+         * 
+         * @param str String que se quer converter para caixa baixa.
+         * @return std::string String convertida em caixa baixa.
+         */
+        std::string toLower(std::string str);
+
+        /**
          * @brief Verifica se a string recebida é igual à palavra que este objeto armazena.
          * 
          * @param newWord Palavra que se quer verificar a igualdade.
