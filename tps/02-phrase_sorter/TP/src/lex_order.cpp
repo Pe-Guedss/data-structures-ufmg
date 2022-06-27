@@ -1,10 +1,11 @@
-#include "lex-order.hpp"
+#include "lex_order.hpp"
 #include <sstream>
 
 LexOrder::LexOrder(std::string lexOrder) {
     std::string letter;
     int value = 0;
 
+    lexOrder = this->toLower(lexOrder);
     std::stringstream auxLexOrder(lexOrder);
     while ( std::getline(auxLexOrder, letter, ' ') ) {
         this->setLetterValue(letter, value);
@@ -72,9 +73,24 @@ int LexOrder::getLetterValue(int letter) {
     else return letter;
 }
 
+std::string LexOrder::toLower(std::string str) {
+    const uint diff = 'a' - 'A';
+
+    std::string lower;
+    lower.reserve(str.length());
+
+    for (long unsigned int i = 0; i < str.size(); i++) {
+        lower += (str[i] >= 'A' && str[i] <= 'Z') ? str[i] + diff : str[i];
+    }
+
+    return lower;
+}
+
 bool LexOrder::isLessThan(std::string a, std::string b) {
-    int size = (a.length() < b.length() ? a.length() : b.length());
-    for (int i = 0; i < size; i++) {
+    a = this->toLower(a);
+    b = this->toLower(b);
+    long unsigned int size = (a.length() < b.length() ? a.length() : b.length());
+    for (long unsigned int i = 0; i < size; i++) {
         if ( this->getLetterValue(a[i]) < this->getLetterValue(b[i]) ) {
             return true;
         }
@@ -84,5 +100,5 @@ bool LexOrder::isLessThan(std::string a, std::string b) {
         return false;
     }
 
-    return true;
+    return (size == a.length() ? true : false);
 }
