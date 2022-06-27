@@ -6,7 +6,12 @@ Word::Word(std::string word) {
 }
 
 bool Word::matches(std::string newWord) {
-    return this->word == newWord;
+    if (this->word == newWord) {
+        this->occurrences++;
+        return true;
+    }
+    
+    return false;
 }
 
 std::string Word::toLower(std::string str) {
