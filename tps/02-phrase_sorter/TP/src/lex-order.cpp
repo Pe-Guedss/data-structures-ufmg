@@ -69,6 +69,7 @@ int LexOrder::getLetterValue(std::string letter) {
     else if (letter == "x") return this->x;
     else if (letter == "y") return this->y;
     else if (letter == "z") return this->z;
+    return letter[0];
 }
 
 bool LexOrder::isLessThan(std::string a, std::string b) {
