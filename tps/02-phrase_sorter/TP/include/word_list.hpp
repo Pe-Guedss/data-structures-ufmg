@@ -70,6 +70,14 @@ class WordList {
          */
         void clean();
 
+        /**
+         * @brief Método para retornar a string recebida em caixa baixa.
+         * 
+         * @param str String que se quer converter para caixa baixa.
+         * @return std::string String convertida em caixa baixa.
+         */
+        std::string toLower(std::string str);
+
     private:
         int size; // Tamanho da lista de palavras.
         Word *first; // Primeira palavra da lista.

@@ -29,14 +29,6 @@ class Word {
         Word(std::string word);
 
         /**
-         * @brief Método para retornar a string recebida em caixa baixa.
-         * 
-         * @param str String que se quer converter para caixa baixa.
-         * @return std::string String convertida em caixa baixa.
-         */
-        std::string toLower(std::string str);
-
-        /**
          * @brief Retorna o tamanho da palavra armazenada.
          * 
          * @return int Atributo this->size.
