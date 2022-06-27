@@ -1,4 +1,4 @@
-#include "lex-order.hpp"
+#include "lex_order.hpp"
 #include <sstream>
 #include <iostream>
 
