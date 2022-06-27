@@ -1,6 +1,5 @@
 #include "word.hpp"
 #include <sstream>
-#include <iostream>
 
 int main() {
     LexOrder *lexOrder;

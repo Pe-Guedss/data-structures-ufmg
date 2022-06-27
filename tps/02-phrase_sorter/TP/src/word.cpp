@@ -1,9 +1,19 @@
 #include "word.hpp"
 
+Word::Word() {
+    this->word = "";
+    this->occurrences = 0;
+    this->size = -1;
+
+    this->next = nullptr;
+}
+
 Word::Word(std::string word) {
     this->word = this->toLower(word);
     this->occurrences = 1;
     this->size = word.length();
+
+    this->next = nullptr;
 }
 
 bool Word::matches(std::string newWord) {

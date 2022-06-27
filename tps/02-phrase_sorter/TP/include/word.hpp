@@ -16,6 +16,12 @@
 class Word {
     public:
         /**
+         * @brief Construtor padrão da classe Word.
+         * 
+         */
+        Word();
+
+        /**
          * @brief Construtor da classe Word. Atribui a string recebida à palavra que o objeto armazena.
          * 
          * @param word Palavra que se quer armazenar.
@@ -67,6 +73,8 @@ class Word {
         std::string word; // Palavra armazenada pela classe.
         int occurrences; // Quantidade de vezes que essa palavra foi lida.
         int size; // Tamanho da palavra armazenada.
+
+        Word *next; // Próxima palavra.
     
     /**
      * @brief Método para imprimir as informações da palavra.
