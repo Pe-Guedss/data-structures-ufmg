@@ -39,9 +39,13 @@ word:
 		-> Vai chamando o método booleano de comparação do lex order para cada uma das letras
 		-> Retorna se this é menor (true) ou maior/igual (false) que o parâmetro word recebido
 
+---------------------------------------------------------------------------------------------------------------------------------
+
 word-list:
 	-> Define uma lista cujos objetos são do tipo Word
 	-> Método de impressão da lista
+
+--------------------------------------------------------------------------------------------------------------------------------
 
 phrase-sorter:
 	-> Possui um objeto word-list

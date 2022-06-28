@@ -3,11 +3,12 @@
 WordList::WordList() {
     this->first = new Word();
     this->last = this->first;
+    this->size = 0;
 }
 
 Word* WordList::insertHelper(int pos, bool before) {
     Word *w;
-    if ( (pos > this->size) || (pos <= 0) ) throw "ERRO: Posicao Invalida!";
+    if ( (pos > this->size + 1) || (pos <= 0) ) throw "ERRO: Posicao Invalida!";
 
     w = this->first;
     for(int i = 1; i < pos; i++) {
@@ -20,6 +21,13 @@ Word* WordList::insertHelper(int pos, bool before) {
 }
 
 void WordList::push(std::string word) {
+    Word *aux;
+    aux = this->first;
+    for (int i = 0; i < this->size; i++) {
+        aux = aux->next;
+        if ( aux->matches( this->toLower(word) ) ) return;        
+    }
+    
     Word *newWord;
     newWord = new Word( this->toLower(word) );
 
