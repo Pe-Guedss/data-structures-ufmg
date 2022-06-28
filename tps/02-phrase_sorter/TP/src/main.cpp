@@ -1,15 +1,17 @@
-#include "word.hpp"
+#include "word_list.hpp"
 #include <sstream>
 
 int main() {
+    WordList *wordList;
+    wordList->push("Era");
+    wordList->push("uma");
+    wordList->push("umas");
+
     LexOrder *lexOrder;
-
-    Word *word[3];
-    word[0] = new Word("Era"), word[1] = new Word("uma"), word[2] = new Word("umas");
-
     std::string aaa;
     std::getline(std::cin, aaa);
-    lexOrder = new LexOrder(word[0]->toLower(aaa));
+    lexOrder = new LexOrder(wordList->toLower(aaa));
+
 
     Word *aux;
     for (int i = 0; i < 3; i++) {
