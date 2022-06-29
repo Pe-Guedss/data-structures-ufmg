@@ -13,11 +13,13 @@ class PhraseSorter {
     public:
         PhraseSorter(std::string inputFile, int median, int insertionSize);
 
-        void print(std::string outputFile);
-
         ~PhraseSorter();
 
+        void print(std::string outputFile);
+
     private:
+        LexOrder *lexOrder;
+
         WordList *wordList;
         Word **words;
 
