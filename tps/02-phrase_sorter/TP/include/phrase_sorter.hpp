@@ -37,6 +37,14 @@ class PhraseSorter {
          */
         void print(std::string outputFile);
 
+        /**
+         * @brief Método para retornar a string recebida em caixa baixa.
+         * 
+         * @param str String que se quer converter para caixa baixa.
+         * @return std::string String convertida em caixa baixa.
+         */
+        std::string toLower(std::string str);
+
     private:
         LexOrder *lexOrder; // Objeto com a ordem lexicográfica vigente para o arquivo.
 

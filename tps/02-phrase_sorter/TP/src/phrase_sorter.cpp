@@ -1,9 +1,16 @@
 #include "phrase_sorter.hpp"
 
-PhraseSorter::PhraseSorter() {
+#include <fstream>
 
-}
+std::string PhraseSorter::toLower(std::string str) {
+    const uint diff = 'a' - 'A';
 
-PhraseSorter::~PhraseSorter() {
+    std::string lower;
+    lower.reserve(str.length());
 
+    for (long unsigned int i = 0; i < str.size(); i++) {
+        lower += (str[i] >= 'A' && str[i] <= 'Z') ? str[i] + diff : str[i];
+    }
+
+    return lower;
 }

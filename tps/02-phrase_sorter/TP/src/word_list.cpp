@@ -25,11 +25,11 @@ void WordList::push(std::string word) {
     aux = this->first;
     for (int i = 0; i < this->size; i++) {
         aux = aux->next;
-        if ( aux->matches( this->toLower(word) ) ) return;        
+        if ( aux->matches(word) ) return;        
     }
     
     Word *newWord;
-    newWord = new Word( this->toLower(word) );
+    newWord = new Word(word);
 
     this->last->next = newWord;
     this->last = newWord;
@@ -42,7 +42,7 @@ void WordList::insert(int pos, std::string word) {
     aux = this->insertHelper(pos, true);
 
     Word *newWord;
-    newWord = new Word( this->toLower(word) );
+    newWord = new Word(word);
 
     newWord->next = aux->next;
     aux->next = newWord;
@@ -100,17 +100,4 @@ void WordList::clean() {
     }
     this->last = this->first;
     this->size = 0;
-}
-
-std::string WordList::toLower(std::string str) {
-    const uint diff = 'a' - 'A';
-
-    std::string lower;
-    lower.reserve(str.length());
-
-    for (long unsigned int i = 0; i < str.size(); i++) {
-        lower += (str[i] >= 'A' && str[i] <= 'Z') ? str[i] + diff : str[i];
-    }
-
-    return lower;
 }
