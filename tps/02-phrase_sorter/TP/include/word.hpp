@@ -61,6 +61,16 @@ class Word {
          */
         bool isLessThan(Word *word, LexOrder *lexOrder);
 
+        /**
+         * @brief Verifica se o objeto de palavra atual é maior que o fornecido por parâmetro.
+         * 
+         * @param word Objeto que se quer saber se é menor que o objeto atual.
+         * @param lexOrder Ordem lexicográfica na qual os objetos serão comparados.
+         * 
+         * @return true (1) se o objeto palavra atual for maior e false (0) caso contrário.
+         */
+        bool isGreaterThan(Word *word, LexOrder *lexOrder);
+
     private:
         std::string word; // Palavra armazenada pela classe.
         int occurrences; // Quantidade de vezes que essa palavra foi lida.
