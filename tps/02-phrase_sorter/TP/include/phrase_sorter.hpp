@@ -45,6 +45,12 @@ class PhraseSorter {
          */
         std::string toLower(std::string str);
 
+        /**
+         * @brief Algoritmo de ordenação por seleção para testes.
+         * 
+         */
+        void selectionSort();
+
     private:
         LexOrder *lexOrder; // Objeto com a ordem lexicográfica vigente para o arquivo.
 

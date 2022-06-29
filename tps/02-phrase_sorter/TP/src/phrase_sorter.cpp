@@ -52,7 +52,7 @@ PhraseSorter::~PhraseSorter() {
         delete this->words[i];
         this->words[i] = nullptr;
     }
-    
+
     delete []this->words;
     this->words = nullptr;
 }
@@ -60,6 +60,7 @@ PhraseSorter::~PhraseSorter() {
 void PhraseSorter::print(std::string outputFile) {
     std::ofstream sortingResults(outputFile);
 
+    this->selectionSort();
     for (int i = 0; i < this->size; i++) {
         sortingResults << this->words[i];
     }
@@ -78,4 +79,19 @@ std::string PhraseSorter::toLower(std::string str) {
     }
 
     return lower;
+}
+
+void PhraseSorter::selectionSort() {
+    Word *aux;
+    for (int i = 0; i < this->size; i++) {
+        int minStr = i;
+        for (int j = i + 1; j < this->size; j++) {
+            if ( this->words[j]->isLessThan(this->words[minStr], this->lexOrder) ) {
+                minStr = j;
+            }
+        }
+        aux = this->words[i];
+        this->words[i] = this->words[minStr];
+        this->words[minStr] = aux;
+    }
 }
