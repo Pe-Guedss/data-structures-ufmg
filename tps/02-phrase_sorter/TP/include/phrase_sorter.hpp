@@ -51,6 +51,8 @@ class PhraseSorter {
          */
         void selectionSort();
 
+        void qsPartition(int Esq, int Dir, int *i, int *j);
+
     private:
         LexOrder *lexOrder; // Objeto com a ordem lexicográfica vigente para o arquivo.
 

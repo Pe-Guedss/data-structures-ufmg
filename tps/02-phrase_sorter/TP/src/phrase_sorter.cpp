@@ -95,3 +95,21 @@ void PhraseSorter::selectionSort() {
         this->words[minStr] = aux;
     }
 }
+
+void PhraseSorter::qsPartition(int Esq, int Dir, int *i, int *j) {
+    *i = Esq;
+    *j = Dir;
+
+    Word *x, *w;
+    x = this->words[(*i + *j)/2];
+    do {
+        while ( x->isGreaterThan(this->words[*i], this->lexOrder) ) (*i)++;
+        while ( x->isLessThan(this->words[*j], this->lexOrder) ) (*j)--;
+        if (*i <= *j) {
+            w = this->words[*i];
+            this->words[*i] = this->words[*j];
+            this->words[*j] = w;
+            (*i)++; (*j)--;
+        }
+    } while (*i <= *j);
+}
