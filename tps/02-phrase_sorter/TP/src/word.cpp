@@ -47,7 +47,7 @@ bool Word::isLessThan(Word *word, LexOrder *lexOrder) {
         return false;
     }
 
-    return smallerWordSize == this->size;
+    return false;
 }
 
 bool Word::isGreaterThan(Word *word, LexOrder *lexOrder) {
@@ -64,7 +64,7 @@ bool Word::isGreaterThan(Word *word, LexOrder *lexOrder) {
         return false;
     }
 
-    return smallerWordSize == this->size;
+    return false;
 }
 
 std::ostream &operator<<(std::ostream &out, const Word *word) {
