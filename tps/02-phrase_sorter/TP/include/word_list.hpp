@@ -83,6 +83,8 @@ class WordList {
          * @return Word* 
          */
         Word *insertHelper(int pos, bool before);
+    
+    friend class PhraseSorter;
 };
 
 #endif
