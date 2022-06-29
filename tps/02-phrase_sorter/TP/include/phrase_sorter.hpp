@@ -43,8 +43,10 @@ class PhraseSorter {
         WordList *wordList; // Lista encadeada inicial das palavras lidas.
         Word **words; // Array dinâmico de palavras para ser ordenado.
 
-        int size; // Tamanho do array de palavras.
         int median; // Quantidade de elementos levados em consideração na heurística de mediana no quick sort.
+        Word **medianArr; // Array com a quantidade this->median de elementos para que o cálculo seja feito.
+
+        int size; // Tamanho do array de palavras.
         int insertionSize; // Tamanho do subarray que será ordenado por inserção como otimização do Quick Sort.
 };
 
