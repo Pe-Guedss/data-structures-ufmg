@@ -60,7 +60,8 @@ PhraseSorter::~PhraseSorter() {
 void PhraseSorter::print(std::string outputFile) {
     std::ofstream sortingResults(outputFile);
 
-    this->selectionSort();
+    // this->selectionSort();
+    this->quickSort();
     for (int i = 0; i < this->size; i++) {
         sortingResults << this->words[i];
     }
@@ -86,7 +87,7 @@ void PhraseSorter::selectionSort() {
     for (int i = 0; i < this->size; i++) {
         int minStr = i;
         for (int j = i + 1; j < this->size; j++) {
-            if ( this->words[j]->isLessThan(this->words[minStr], this->lexOrder) ) {
+            if ( this->words[j]->isGreaterThan(this->words[minStr], this->lexOrder) ) {
                 minStr = j;
             }
         }
@@ -103,13 +104,29 @@ void PhraseSorter::qsPartition(int Esq, int Dir, int *i, int *j) {
     Word *x, *w;
     x = this->words[(*i + *j)/2];
     do {
-        while ( x->isGreaterThan(this->words[*i], this->lexOrder) ) (*i)++;
+        while ( x->isGreaterThan(this->words[*i], this->lexOrder) ) (*i)++; 
         while ( x->isLessThan(this->words[*j], this->lexOrder) ) (*j)--;
         if (*i <= *j) {
             w = this->words[*i];
             this->words[*i] = this->words[*j];
             this->words[*j] = w;
-            (*i)++; (*j)--;
+            (*i)++;
+            (*j)--;
         }
     } while (*i <= *j);
+}
+
+void PhraseSorter::sort(int Esq, int Dir) {
+    int i, j;
+
+    this->qsPartition(Esq, Dir, &i, &j);
+
+    if (Esq < j)
+        this->sort(Esq, j);
+    if (i < Dir)
+        this->sort(i, Dir);
+}
+
+void PhraseSorter::quickSort() {
+    this->sort(0, this->size - 1);
 }
