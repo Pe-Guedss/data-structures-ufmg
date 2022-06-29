@@ -9,23 +9,43 @@
 
 #include "word_list.hpp"
 
+/**
+ * @brief Classe PhraseSorter. Define os atributos e métodos necessários para a ordenação das frases.
+ * 
+ */
 class PhraseSorter {
     public:
+        /**
+         * @brief Constrói uma nova instância de PhraseSorter.
+         * 
+         * @param inputFile Caminho para o arquivo com as entradas do programa.
+         * @param median Quantidade de números utilizados na heurística de mediana do Quick Sort.
+         * @param insertionSize Tamanho do sub-array que será ordenado por inserção como otimização do Quick Sort.
+         */
         PhraseSorter(std::string inputFile, int median, int insertionSize);
 
+        /**
+         * @brief Destrutor padrão do objeto PhraseSorter.
+         * 
+         */
         ~PhraseSorter();
 
+        /**
+         * @brief Método para imprimir as palavras já ordenadas.
+         * 
+         * @param outputFile Caminho para o arquivo em que os resultados serão impressos.
+         */
         void print(std::string outputFile);
 
     private:
-        LexOrder *lexOrder;
+        LexOrder *lexOrder; // Objeto com a ordem lexicográfica vigente para o arquivo.
 
-        WordList *wordList;
-        Word **words;
+        WordList *wordList; // Lista encadeada inicial das palavras lidas.
+        Word **words; // Array dinâmico de palavras para ser ordenado.
 
-        int size;
-        int median;
-        int insertionSize;
+        int size; // Tamanho do array de palavras.
+        int median; // Quantidade de elementos levados em consideração na heurística de mediana no quick sort.
+        int insertionSize; // Tamanho do subarray que será ordenado por inserção como otimização do Quick Sort.
 };
 
 #endif
