@@ -51,10 +51,28 @@ class PhraseSorter {
          */
         void selectionSort();
 
+        /**
+         * @brief Método de partição para a ordenação em Quick Sort
+         * 
+         * @param Esq Elemento que delimita a porção a ser ordenada pela esquerda.
+         * @param Dir Elemento que delimita a porção a ser ordenada pela direita.
+         * @param i Posição atual do iterador que vai de "Esq" ao pivô.
+         * @param j Posição atual do iterador que vai de "Dir" ao pivô.
+         */
         void qsPartition(int Esq, int Dir, int *i, int *j);
 
+        /**
+         * @brief Realiza e orquestra as operações do Quick Sort.
+         * 
+         * @param Esq Elemento que delimita a porção a ser ordenada pela esquerda.
+         * @param Dir Elemento que delimita a porção a ser ordenada pela direita.
+         */
         void sort(int Esq, int Dir);
 
+        /**
+         * @brief Método para realizar o Quick Sort no array this->words.
+         * 
+         */
         void quickSort();
 
     private:
