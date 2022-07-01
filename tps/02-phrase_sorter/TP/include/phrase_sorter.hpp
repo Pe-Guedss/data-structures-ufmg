@@ -49,7 +49,7 @@ class PhraseSorter {
          * @brief Algoritmo de ordenação por seleção para testes.
          * 
          */
-        void selectionSort();
+        void insertionSort(int esq, int dir);
 
         /**
          * @brief Método de partição para a ordenação em Quick Sort

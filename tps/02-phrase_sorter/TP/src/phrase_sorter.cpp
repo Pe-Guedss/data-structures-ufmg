@@ -60,8 +60,8 @@ PhraseSorter::~PhraseSorter() {
 void PhraseSorter::print(std::string outputFile) {
     std::ofstream sortingResults(outputFile);
 
-    // this->selectionSort();
-    this->quickSort();
+    this->insertionSort(0, this->size);
+    // this->quickSort();
     for (int i = 0; i < this->size; i++) {
         sortingResults << this->words[i];
     }
@@ -82,18 +82,17 @@ std::string PhraseSorter::toLower(std::string str) {
     return lower;
 }
 
-void PhraseSorter::selectionSort() {
+void PhraseSorter::insertionSort(int esq, int dir) {
     Word *aux;
-    for (int i = 0; i < this->size; i++) {
-        int minStr = i;
-        for (int j = i + 1; j < this->size; j++) {
-            if ( this->words[j]->isGreaterThan(this->words[minStr], this->lexOrder) ) {
-                minStr = j;
-            }
-        }
+    for (int i = esq + 1; i < dir; i++) {
         aux = this->words[i];
-        this->words[i] = this->words[minStr];
-        this->words[minStr] = aux;
+        int j = i - 1;
+        while (( j >= 0 ) &&
+               ( aux->isLessThan(this->words[j], this->lexOrder) )) {
+            this->words[j + 1] = this->words[j];
+            j--;
+        }
+        this->words[j + 1] = aux;
     }
 }
 
