@@ -68,10 +68,7 @@ bool Word::isGreaterThan(Word *word, LexOrder *lexOrder) {
 }
 
 std::ostream &operator<<(std::ostream &out, const Word *word) {
-    out << "===== Word Info =====" << std::endl;
-    out << "Word: " << word->word << std::endl;
-    out << "Word Size: " << word->size << std::endl;
-    out << "Word Occurrences: " << word->occurrences << std::endl;
+    out << word->word << " " << word->occurrences << std::endl;
     
     return out;
 }

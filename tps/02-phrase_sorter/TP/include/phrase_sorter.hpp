@@ -22,7 +22,7 @@ class PhraseSorter {
          * @param median Quantidade de números utilizados na heurística de mediana do Quick Sort.
          * @param insertionSize Tamanho do sub-array que será ordenado por inserção como otimização do Quick Sort.
          */
-        PhraseSorter(std::string inputFile, int median, int insertionSize);
+        PhraseSorter(std::string inputFile, int medianSize, int insertionSize);
 
         /**
          * @brief Destrutor padrão do objeto PhraseSorter.

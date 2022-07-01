@@ -3,7 +3,7 @@
 
 int main() {
     PhraseSorter *phraseSorter;
-    phraseSorter = new PhraseSorter("in.txt", 0, 1);
+    phraseSorter = new PhraseSorter("in.txt", 3, 10);
 
     phraseSorter->print("out.txt");
 
