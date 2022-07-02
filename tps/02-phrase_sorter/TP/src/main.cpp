@@ -1,4 +1,5 @@
 #include <getopt.h>
+#include <regex>
 
 #include "phrase_sorter.hpp"
 
@@ -84,7 +85,20 @@ void parse_args(int argc, char **argv) {
 
 int main(int argc, char **argv) {
     parse_args(argc, argv);
-    std::cout << input << std::endl << output << std::endl << medianSize << std::endl << insertionSize << std::endl;
+
+    // iniciar registro de acesso
+    char *logNameChars;
+    logNameChars = new char[logNameStr.length()];
+    std::strcpy(logNameChars, logNameStr.c_str());
+    iniciaMemLog(logNameChars);
+
+    // ativar ou nao o registro de acesso
+    if (memoryRegister){ 
+        ativaMemLog();
+    }
+    else{
+        desativaMemLog();
+    }
 
     PhraseSorter *phraseSorter;
     phraseSorter = new PhraseSorter(input, medianSize, insertionSize);
@@ -93,5 +107,6 @@ int main(int argc, char **argv) {
 
     delete phraseSorter;
     phraseSorter = nullptr;
-    return 0;
+
+    return finalizaMemLog();
 }
