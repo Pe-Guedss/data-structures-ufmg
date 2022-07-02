@@ -3,10 +3,10 @@
 
 LexOrder::LexOrder(std::string lexOrder) {
     std::string letter;
-    int value = 0;
+    int value = 97;
 
     std::stringstream auxLexOrder(lexOrder);
-    while ( std::getline(auxLexOrder, letter, ' ') ) {
+    while ( auxLexOrder >> letter ) {
         this->setLetterValue(letter, value);
         value++;
     }

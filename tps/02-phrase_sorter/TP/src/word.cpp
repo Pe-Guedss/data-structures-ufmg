@@ -35,7 +35,7 @@ std::string Word::getWord() {
 
 bool Word::isLessThan(Word *word, LexOrder *lexOrder) {
     int smallerWordSize = this->getSize() < word->getSize() ? this->getSize() : word->getSize();
-    for ( int i = 0; i < smallerWordSize; i++) {
+    for (int i = 0; i < smallerWordSize; i++) {
         if (this->word[i] == word->word[i]) {
             continue;
         }
@@ -47,12 +47,12 @@ bool Word::isLessThan(Word *word, LexOrder *lexOrder) {
         return false;
     }
 
-    return false;
+    return this->getSize() < word->getSize();
 }
 
 bool Word::isGreaterThan(Word *word, LexOrder *lexOrder) {
     int smallerWordSize = this->getSize() < word->getSize() ? this->getSize() : word->getSize();
-    for ( int i = 0; i < smallerWordSize; i++) {
+    for (int i = 0; i < smallerWordSize; i++) {
         if (this->word[i] == word->word[i]) {
             continue;
         }
@@ -64,11 +64,11 @@ bool Word::isGreaterThan(Word *word, LexOrder *lexOrder) {
         return false;
     }
 
-    return false;
+    return this->getSize() > word->getSize();
 }
 
 std::ostream &operator<<(std::ostream &out, const Word *word) {
-    out << word->word << " " << word->occurrences << std::endl;
+    out << word->word << " " << word->occurrences;
     
     return out;
 }

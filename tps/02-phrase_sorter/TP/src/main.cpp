@@ -2,8 +2,9 @@
 #include <sstream>
 
 int main() {
+    int medianSize = 4, insertionSize = 10;
     PhraseSorter *phraseSorter;
-    phraseSorter = new PhraseSorter("in.txt", 3, 10);
+    phraseSorter = new PhraseSorter("in.txt", medianSize, insertionSize);
 
     phraseSorter->print("out.txt");
 

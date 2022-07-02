@@ -59,7 +59,7 @@ class PhraseSorter {
          * @param i Posição atual do iterador que vai de "Esq" ao pivô.
          * @param j Posição atual do iterador que vai de "Dir" ao pivô.
          */
-        void qsPartition(int Esq, int Dir, int *i, int *j);
+        void qsPartition(int esq, int dir, int *i, int *j);
 
         /**
          * @brief Realiza e orquestra as operações do Quick Sort.
