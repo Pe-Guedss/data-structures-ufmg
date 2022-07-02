@@ -5,9 +5,9 @@ OBJ = obj
 INC = include
 BIN = bin
 
-OBJS = $(OBJ)/main.o $(OBJ)/lex_order.o $(OBJ)/word.o $(OBJ)/word_list.o $(OBJ)/phrase_sorter.o
+OBJS = $(OBJ)/main.o $(OBJ)/lex_order.o $(OBJ)/word.o $(OBJ)/word_list.o $(OBJ)/phrase_sorter.o $(OBJ)/memlog.o
 
-HDRS = $(INC)/lex_order.hpp $(INC)/word.hpp $(INC)/word_list.hpp $(INC)/phrase_sorter.hpp
+HDRS = $(INC)/lex_order.hpp $(INC)/word.hpp $(INC)/word_list.hpp $(INC)/phrase_sorter.hpp $(INC)/memlog.hpp
 
 CFLAGS = -pg -Wall -c -I$(INC)
 
@@ -72,6 +72,9 @@ $(OBJ)/word_list.o: $(HDRS) $(SRC)/word_list.cpp
 
 $(OBJ)/phrase_sorter.o: $(HDRS) $(SRC)/phrase_sorter.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/phrase_sorter.o $(SRC)/phrase_sorter.cpp 
+
+$(OBJ)/memlog.o: $(HDRS) $(SRC)/memlog.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/memlog.o $(SRC)/memlog.cpp 
 
 clean:
 	rm $(OBJ)/*.o $(EXE)
