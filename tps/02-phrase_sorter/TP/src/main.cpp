@@ -101,8 +101,10 @@ int main(int argc, char **argv) {
     }
 
     PhraseSorter *phraseSorter;
+    defineFaseMemLog(0);
     phraseSorter = new PhraseSorter(input, medianSize, insertionSize);
 
+    defineFaseMemLog(1);
     phraseSorter->print(output);
 
     delete phraseSorter;
