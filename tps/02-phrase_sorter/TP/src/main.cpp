@@ -1,5 +1,5 @@
 #include <getopt.h>
-#include "msgassert.hpp"
+
 #include "phrase_sorter.hpp"
 
 void uso() {
@@ -9,12 +9,14 @@ void uso() {
     std::cout << "\t-m / -M \t<numero_inteiro> (quantidade de elementos a serem considerados na mediana para escolha do pivô - 5 por padrão)" << std::endl;
     std::cout << "\t-s / -S \t<numero_inteiro> (Tamanho da subpartição a ser ordenada por inserção - 20 por padrão)" << std::endl;
     std::cout << "\t-p \t<arquivo_de_logs.out> (arquivo para registrar os resultados computacionais de performance e/ou memória da partida)" << std::endl;
-    std::cout << "\t-l \tCaso esta flag esteja presente, o acesso à memória é registrado no arquivo de logs de -p" << std::endl;
+    std::cout << "\t-l \tCaso esta flag esteja presente, o acesso à memória é registrado no arquivo de logs de -p" << std::endl << std::endl;
+
+    std::cout << "Por padrão, o programa acessará os arquivos \"in.txt\" e \"out.txt\", localizados na pasta raiz do trabalho." << std::endl << "Além disso, também não é necessário informar os parâmetros \"m/M\" e \"s/S\", que são definidos por padrão como 5 e 20, respectivamente." << std::endl;
     std::cout << std::endl;
 }
 
-std::string input = "";
-std::string output = "";
+std::string input = "in.txt";
+std::string output = "out.txt";
 
 std::string medianSizeStr = "5";
 int medianSize = 5;
