@@ -15,8 +15,12 @@ void uso() {
 
 std::string input = "";
 std::string output = "";
+
+std::string medianSizeStr = "5";
 int medianSize = 5;
+std::string insertionSizeStr = "20";
 int insertionSize = 20;
+
 std::string logNameStr = "log.out";
 bool memoryRegister = false;
 
@@ -32,27 +36,25 @@ void parse_args(int argc, char **argv) {
     while (( c = getopt(argc, argv, "i:I:o:O:m:M:s:S:hp:l") ) != EOF){
         switch(c) {
             case 'I':
-            case 'i':
-                avisoAssert(input == "entrada.txt", "Ja havia sido informado um arquivo para as entradas do programa.");
-                
+            case 'i':                
                 input = optarg;
             break;
 
             case 'O':
-            case 'o':
-                avisoAssert(output == "saida.txt", "Ja havia sido informado um arquivo para a saída do programa.");
-                
+            case 'o':                
                 output = optarg;
             break;
 
             case 'M':
             case 'm':
-                medianSize = (int) optarg;
+                medianSizeStr = optarg;
+                medianSize = std::stoi(medianSizeStr);
             break;
 
             case 'S':
             case 's':
-                insertionSize = (int) optarg;
+                insertionSizeStr = optarg;
+                insertionSize = std::stoi(insertionSizeStr);
             break;
             
             case 'h':
@@ -78,11 +80,12 @@ void parse_args(int argc, char **argv) {
 
 int main(int argc, char **argv) {
     parse_args(argc, argv);
+    std::cout << input << std::endl << output << std::endl << medianSize << std::endl << insertionSize << std::endl;
 
     PhraseSorter *phraseSorter;
-    phraseSorter = new PhraseSorter("in.txt", medianSize, insertionSize);
+    phraseSorter = new PhraseSorter(input, medianSize, insertionSize);
 
-    phraseSorter->print("out.txt");
+    phraseSorter->print(output);
 
     delete phraseSorter;
     phraseSorter = nullptr;
