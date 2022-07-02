@@ -51,12 +51,14 @@ void parse_args(int argc, char **argv) {
             case 'm':
                 medianSizeStr = optarg;
                 medianSize = std::stoi(medianSizeStr);
+                erroAssert(medianSize > 0, "A quantidade de elementos para a mediana não pode ser negativa.");
             break;
 
             case 'S':
             case 's':
                 insertionSizeStr = optarg;
                 insertionSize = std::stoi(insertionSizeStr);
+                erroAssert(insertionSize > 0, "A quantidade de elementos para a ordenação por inserção não pode ser negativa.");
             break;
             
             case 'h':
