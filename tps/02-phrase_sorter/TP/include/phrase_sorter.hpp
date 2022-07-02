@@ -85,6 +85,8 @@ class PhraseSorter {
         int size; // Tamanho do array de palavras.
         int medianSize; // Tamanho do array que se obterá a mediana para escolha do pivô.
         int insertionSize; // Tamanho do subarray que será ordenado por inserção como otimização do Quick Sort.
+
+        int id; // ID para reconhecimento pelo memlog.
 };
 
 #endif

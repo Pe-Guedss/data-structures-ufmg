@@ -4,6 +4,8 @@
 #include <sstream>
 
 PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionSize) {
+    this->id = 0;
+
     std::ifstream inputPhrases(inputFile); // Abre o arquivo de texto com as entradas.
     erroAssert(inputPhrases, "Ocorreu um erro ao abrir o arquivo de entrada.");
 
