@@ -1,3 +1,4 @@
+#include "msgassert.hpp"
 #include "phrase_sorter.hpp"
 
 #include <fstream>
@@ -5,6 +6,7 @@
 
 PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionSize) {
     std::ifstream inputPhrases(inputFile); // Abre o arquivo de texto com as entradas.
+    erroAssert(inputPhrases, "Ocorreu um erro ao abrir o arquivo de entrada.");
 
     this->medianSize = medianSize; 
     this->insertionSize = insertionSize;
@@ -24,8 +26,10 @@ PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionS
     std::string auxLine, word;
     while( std::getline(inputPhrases, auxLine) ) {
         std::stringstream line(auxLine);
-        while ( std::getline(line, word, ' ') ) {
+        while ( line >> word ) {
             word = this->toLower(word); // Transformação para casa baixa.
+
+            // Remoção dos acentos ao fim da palavra.
             int pos = word.length() - 1;
             while (word[word.length() - 1] == ',' ||
                 word[word.length() - 1] == '.' ||
@@ -39,7 +43,7 @@ PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionS
                 pos--;
             }
 
-            this->wordList->push(word);
+            this->wordList->push(word); // Inserção da palavra lida na lista.
         }
     }
 
@@ -66,6 +70,7 @@ PhraseSorter::~PhraseSorter() {
 
 void PhraseSorter::print(std::string outputFile) {
     std::ofstream sortingResults(outputFile);
+    erroAssert(sortingResults, "Ocorreu um erro ao abrir o arquivo de saída.");
 
     // this->insertionSort(0, this->size);
     this->quickSort();
@@ -74,6 +79,7 @@ void PhraseSorter::print(std::string outputFile) {
     }
     
     sortingResults << "#FIM" << std::endl;
+    sortingResults.close();
 }
 
 std::string PhraseSorter::toLower(std::string str) {
@@ -103,26 +109,14 @@ void PhraseSorter::insertionSort(int esq, int dir) {
     }
 }
 
-void printArr(Word **arr, int n) {
-    for (int i = 0; i < n; i++)
-    {
-        std::cout << arr[i] << std::endl;
-    }
-    
-}
-
 void PhraseSorter::qsPartition(int esq, int dir, int *i, int *j) {
-    // std::cout << "----------------------------" << std::endl;
-    // printArr(this->words, this->size);
     *i = esq;
     *j = dir;
 
+    // Ordenação por inserção quando a partição atinge o pré-requisito de tamanho.
     if (dir - esq <= this->insertionSize) this->insertionSort(esq, dir);
 
-    // std::cout << "----------------------------" << std::endl;
-    // std::cout << "Array antes do pivo: " << std::endl;
-    // printArr(this->words, this->size);
-    // Definição do pivô
+    // Definição do pivô.
     Word *x;
     if (this->medianSize < *j - *i) {
         this->insertionSort(*i, *i + this->medianSize);
@@ -131,18 +125,10 @@ void PhraseSorter::qsPartition(int esq, int dir, int *i, int *j) {
     else {
         x = this->words[(*i + *j) / 2];
     }
-    // std::cout << "_________________________________" << std::endl;
-    // std::cout << "Array depois do pivo: " << std::endl;
-    // printArr(this->words, this->size);
-    // std::cout << "Pivo escolhido: " << x << std::endl;
-    // std::cout << "----------------------------" << std::endl;
 
-    // Particionamento do array
+    // Particionamento do array.
     Word *w;
-    // printArr(this->words, this->size);
     do {
-        // std::cout << "I: " << *i << "\tEsq: " << esq << std::endl;
-        // std::cout << "J: " << *j << "\tDir: " << dir << std::endl;
         while ( x->isGreaterThan(this->words[*i], this->lexOrder) ) (*i)++; 
         while ( x->isLessThan(this->words[*j], this->lexOrder) ) (*j)--;
         if (*i <= *j) {
@@ -152,9 +138,7 @@ void PhraseSorter::qsPartition(int esq, int dir, int *i, int *j) {
             (*i)++;
             (*j)--;
         }
-        // printArr(this->words, this->size);
     } while (*i <= *j);
-    // std::cout << "----------------------------" << std::endl;
 }
 
 void PhraseSorter::sort(int esq, int dir) {
@@ -162,16 +146,10 @@ void PhraseSorter::sort(int esq, int dir) {
 
     this->qsPartition(esq, dir, &i, &j);
 
-    // std::cout << "I: " << i << "\tEsq: " << esq << std::endl;
-    // std::cout << "J: " << j << "\tDir: " << dir << std::endl;
-
-    // std::cout << "Ordenando da esquerda a j..." << std::endl;
     if (esq < j)
         this->sort(esq, j);
-    // std::cout << "Ordenando de i à direita..." << std::endl;
     if (i < dir)
         this->sort(i, dir);
-
 }
 
 void PhraseSorter::quickSort() {
