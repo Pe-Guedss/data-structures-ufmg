@@ -41,3 +41,6 @@ $(OBJ)/word_list.o: $(HDRS) $(SRC)/word_list.cpp
 
 $(OBJ)/phrase_sorter.o: $(HDRS) $(SRC)/phrase_sorter.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/phrase_sorter.o $(SRC)/phrase_sorter.cpp 
+
+clean:
+	rm $(OBJ)/*.o $(EXE)
