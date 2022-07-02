@@ -8,6 +8,7 @@
 #define PHRASESORTER_H
 
 #include "word_list.hpp"
+#include "msgassert.hpp"
 
 /**
  * @brief Classe PhraseSorter. Define os atributos e métodos necessários para a ordenação das frases.
