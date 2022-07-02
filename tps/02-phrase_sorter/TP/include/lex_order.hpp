@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 
+#include "memlog.hpp"
+
 /**
  * @brief Classe LexOrder, define a ordem lexicográfica com a qual as palavras vão ser ordenadas.
  * 
