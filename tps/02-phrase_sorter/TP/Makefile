@@ -22,7 +22,6 @@ MEM_OUTPUTS = analises/mem/resultados
 # --------------------------------------------
 PERF_EXEC_LOGS = analises/perf/logs
 PERF_INPUTS = analises/perf/in_out
-PERF_OUTPUTS = analises/perf/resultados
 
 # folders:
 # 	@echo criando estrutura de pastas para análise dos resultados.
@@ -41,19 +40,19 @@ PERF_OUTPUTS = analises/perf/resultados
 # 	$(ANALISAMEM) -i $(MEM_EXEC_LOGS)/memlog.out -p $(MEM_OUTPUTS)/mem_analysis
 
 # perf: $(EXE)
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_2000.out -o $(PERF_INPUTS)/saida_2000.out -p $(PERF_EXEC_LOGS)/perf_res_2000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_1.out -o $(PERF_INPUTS)/saida_1.out -p $(PERF_EXEC_LOGS)/perf_res_1.out
 
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_4000.out -o $(PERF_INPUTS)/saida_4000.out -p $(PERF_EXEC_LOGS)/perf_res_4000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_2.out -o $(PERF_INPUTS)/saida_2.out -p $(PERF_EXEC_LOGS)/perf_res_2.out
 	
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_6000.out -o $(PERF_INPUTS)/saida_6000.out -p $(PERF_EXEC_LOGS)/perf_res_6000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_3.out -o $(PERF_INPUTS)/saida_3.out -p $(PERF_EXEC_LOGS)/perf_res_3.out
 
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_8000.out -o $(PERF_INPUTS)/saida_8000.out -p $(PERF_EXEC_LOGS)/perf_res_8000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_4.out -o $(PERF_INPUTS)/saida_4.out -p $(PERF_EXEC_LOGS)/perf_res_4.out
 	
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_10000.out -o $(PERF_INPUTS)/saida_10000.out -p $(PERF_EXEC_LOGS)/perf_res_10000.out
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_5.out -o $(PERF_INPUTS)/saida_5.out -p $(PERF_EXEC_LOGS)/perf_res_5.out
 
 # gprof: $(EXE)
-# 	$(EXE) -i $(PERF_INPUTS)/entrada_10000.out -o $(PERF_INPUTS)/saida_10000.out -p $(GPROF)/perf_res_10000.out
-# 	gprof $(EXE) gmon.out > $(GPROF)/perf_res_10000.txt
+# 	$(EXE) -i $(PERF_INPUTS)/entrada_5.out -o $(PERF_INPUTS)/saida_5.out -p $(GPROF)/perf_res_5.out
+# 	gprof $(EXE) gmon.out > $(GPROF)/perf_res_5.txt
 
 $(EXE): $(OBJS)
 	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
