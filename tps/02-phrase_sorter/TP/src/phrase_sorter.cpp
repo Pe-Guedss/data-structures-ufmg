@@ -14,27 +14,20 @@ PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionS
 
     std::string hashBlocksAux; // Variável para coletar blocos de #TEXTO e #ORDEM
     std::getline(inputPhrases, hashBlocksAux); // Coleta o bloco de #ORDEM
-    LEMEMLOG((long int) &inputPhrases, sizeof(hashBlocksAux), this->id);
 
     std::string newLexOrder; // Variável para conter a nova ordem lexicográfica.
     std::getline(inputPhrases, newLexOrder);
     this->lexOrder = new LexOrder( this->toLower(newLexOrder) );
-    LEMEMLOG((long int) &inputPhrases, sizeof(newLexOrder), this->id);
 
     std::getline(inputPhrases, hashBlocksAux); // Coleta o bloco de #TEXTO
-    LEMEMLOG((long int) &inputPhrases, sizeof(hashBlocksAux), this->id);
 
     this->wordList = new WordList();
 
     // Leitura das frases abaixo do bloco #TEXTO e inserção na lista.
     std::string auxLine, word;
     while( std::getline(inputPhrases, auxLine) ) {
-        LEMEMLOG((long int) &inputPhrases, sizeof(auxLine), this->id);
-
         std::stringstream line(auxLine);
         while ( line >> word ) {
-            LEMEMLOG((long int) &inputPhrases, sizeof(word), this->id);
-
             word = this->toLower(word); // Transformação para casa baixa.
 
             // Remoção dos acentos ao fim da palavra.
@@ -51,8 +44,8 @@ PhraseSorter::PhraseSorter(std::string inputFile, int medianSize, int insertionS
                 pos--;
             }
 
-            ESCREVEMEMLOG((long int) &this->wordList->last, sizeof(Word), this->id);
             this->wordList->push(word); // Inserção da palavra lida na lista.
+            ESCREVEMEMLOG((long int) &this->wordList->last, sizeof(Word), this->id);
         }
     }
 
@@ -86,8 +79,8 @@ void PhraseSorter::print(std::string outputFile) {
     // this->insertionSort(0, this->size);
     this->quickSort();
     for (int i = 0; i < this->size; i++) {
-        ESCREVEMEMLOG((long int) &sortingResults, sizeof(this->words[i]), this->id);
         sortingResults << this->words[i] << std::endl;
+        LEMEMLOG((long int) &this->words[i], sizeof(Word), this->id);
     }
     
     sortingResults << "#FIM" << std::endl;
@@ -135,28 +128,29 @@ void PhraseSorter::qsPartition(int esq, int dir, int *i, int *j) {
 
     // Definição do pivô.
     Word *x;
+    int pos;
     if (this->medianSize < *j - *i) {
         this->insertionSort(*i, *i + this->medianSize);
 
-        int pos = (*i + *i + this->medianSize) / 2;
-
+        pos = (*i + *i + this->medianSize) / 2;
         LEMEMLOG((long int) &this->words[pos], sizeof(this->words[pos]), this->id);
         x = this->words[pos];
     }
     else {
-        x = this->words[(*i + *j) / 2];
+        pos = (*i + *j) / 2;
+        x = this->words[pos];
     }
 
     // Particionamento do array.
     Word *w;
     do {
         while ( x->isGreaterThan(this->words[*i], this->lexOrder) ) {
-            LEMEMLOG((long int) &x, sizeof(x), this->id);
+            LEMEMLOG((long int) &this->words[pos], sizeof(Word), this->id);
             LEMEMLOG((long int) &this->words[*i], sizeof(this->words[*i]), this->id);
             (*i)++; 
         }
         while ( x->isLessThan(this->words[*j], this->lexOrder) ) {
-            LEMEMLOG((long int) &x, sizeof(x), this->id);
+            LEMEMLOG((long int) &this->words[pos], sizeof(Word), this->id);
             LEMEMLOG((long int) &this->words[*j], sizeof(this->words[*j]), this->id);
             (*j)--;
         }

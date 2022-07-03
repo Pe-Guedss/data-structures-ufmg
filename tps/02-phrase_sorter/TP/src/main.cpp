@@ -7,8 +7,8 @@ void uso() {
     std::cout << "============= Utilização do programa =============\n" << std::endl;
     std::cout << "\t-i / -I \t<input.txt> (arquivo com as frases a serem ordenadas)" << std::endl;
     std::cout << "\t-o / -O \t<output.txt> (arquivo para registrar as frases ordenadas)" << std::endl;
-    std::cout << "\t-m / -M \t<numero_inteiro> (quantidade de elementos a serem considerados na mediana para escolha do pivô - 5 por padrão)" << std::endl;
-    std::cout << "\t-s / -S \t<numero_inteiro> (Tamanho da subpartição a ser ordenada por inserção - 20 por padrão)" << std::endl;
+    std::cout << "\t-m / -M \t<numero_inteiro> (quantidade de elementos a serem considerados na mediana para escolha do pivô. 5 por padrão)" << std::endl;
+    std::cout << "\t-s / -S \t<numero_inteiro> (Tamanho da subpartição a ser ordenada por inserção. 20 por padrão)" << std::endl;
     std::cout << "\t-p \t<arquivo_de_logs.out> (arquivo para registrar os resultados computacionais de performance e/ou memória da partida)" << std::endl;
     std::cout << "\t-l \tCaso esta flag esteja presente, o acesso à memória é registrado no arquivo de logs de -p" << std::endl << std::endl;
 
