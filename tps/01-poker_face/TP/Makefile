@@ -23,6 +23,10 @@ MEM_OUTPUTS = analises/mem/resultados
 PERF_EXEC_LOGS = analises/perf/logs
 PERF_INPUTS = analises/perf/partidas
 PERF_OUTPUTS = analises/perf/resultados
+# --------------------------------------------
+TEST_INPUTS = in_and_expected_outs/in
+MY_TEST_OUTPUTS = in_and_expected_outs/out
+TEST_OUTPUTS = in_and_expected_outs/expected_out
 
 # folders:
 # 	@echo criando estrutura de pastas para análise dos resultados.
@@ -54,6 +58,12 @@ PERF_OUTPUTS = analises/perf/resultados
 # gprof: $(EXE)
 # 	$(EXE) -i $(PERF_INPUTS)/entrada_20000.out -o $(PERF_INPUTS)/saida_20000.out -p $(GPROF)/perf_res_20000.out
 # 	gprof $(EXE) gmon.out > $(GPROF)/perf_res_20000.txt
+
+test: $(EXE)
+	for number in 1 2 3 4 5 6 7 8; do \
+	$(EXE) -i $(TEST_INPUTS)/entrada_$$number.txt -o $(MY_TEST_OUTPUTS)/saida_$$number.txt; \
+	diff $(MY_TEST_OUTPUTS)/saida_$$number.txt $(TEST_OUTPUTS)/saida_$$number.txt; \
+	done
 
 $(BIN)/tp1.exe: $(OBJS)
 	$(CC) -pg -o $(BIN)/tp1.exe $(OBJS) $(LIBS)
