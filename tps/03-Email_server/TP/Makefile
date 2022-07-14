@@ -5,9 +5,9 @@ OBJ = obj
 INC = include
 BIN = bin
 
-OBJS = $(OBJ)/emailContent.o
+OBJS = $(OBJ)/emailContent.o $(OBJ)/memlog.o $(OBJ)/main.o
 
-HDRS = $(INC)/emailContent.hpp
+HDRS = $(INC)/emailContent.hpp $(INC)/memlog.hpp
 
 CFLAGS = -pg -Wall -c -I$(INC)
 
@@ -67,8 +67,14 @@ TEST_OUTPUTS = analises/tests/correct_outputs
 $(EXE): $(OBJS)
 	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
 
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
+
 $(OBJ)/emailContent.o: $(HDRS) $(SRC)/emailContent.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/emailContent.o $(SRC)/emailContent.cpp
+
+$(OBJ)/memlog.o: $(HDRS) $(SRC)/memlog.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/memlog.o $(SRC)/memlog.cpp 
 
 clean:
 	rm $(OBJ)/*.o $(EXE)
