@@ -26,7 +26,7 @@ class Round {
          * @brief Constrói uma nova rodada com os dados lidos do arquivo.
          * 
          */
-        Round(int playersAmount, int openingBet);
+        Round(int roundId, int playersAmount, int openingBet);
 
         /**
          * @brief Destrói a rodada atual.
@@ -79,7 +79,7 @@ class Round {
          * @brief Cobra o pingo de todos os jogadores da partida.
          * 
          */
-        void demandOpeningBet();
+        void addOpeningBetToPot(int openingBetTotal);
 
         /**
          * @brief Coleta as apostas de todos os jogadores da rodada.
@@ -118,6 +118,8 @@ class Round {
         void printRoundInfo();
 
     private:
+        int roundId;
+
         int openingBet; // Mínimo de aposta inicial que será feita neste Round.
         int playersAmount; // Quantidade de players disputando o round atual.
         int pot; // Pote de dinheiro do Round.
@@ -131,6 +133,7 @@ class Round {
 
         int winningPlayersAmount; // Quantidade de jogadores vencendo.
         Player **winners;
+        std::string winningCombination;
 
         /**
          * @brief Desempata jogadores com straight Flush
@@ -181,6 +184,7 @@ class Round {
          */
         void highestCardTieBreaker();
 
+    friend class Match;
 };
 
 #endif
