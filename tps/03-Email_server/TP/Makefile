@@ -5,9 +5,9 @@ OBJ = obj
 INC = include
 BIN = bin
 
-OBJS = $(OBJ)/email.o
+OBJS = $(OBJ)/emailContent.o
 
-HDRS = $(INC)/email.hpp
+HDRS = $(INC)/emailContent.hpp
 
 CFLAGS = -pg -Wall -c -I$(INC)
 
@@ -67,8 +67,8 @@ TEST_OUTPUTS = analises/tests/correct_outputs
 $(EXE): $(OBJS)
 	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
 
-$(OBJ)/email.o: $(HDRS) $(SRC)/email.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/email.o $(SRC)/email.cpp
+$(OBJ)/emailContent.o: $(HDRS) $(SRC)/emailContent.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/emailContent.o $(SRC)/emailContent.cpp
 
 clean:
 	rm $(OBJ)/*.o $(EXE)
