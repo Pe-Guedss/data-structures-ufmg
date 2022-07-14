@@ -27,14 +27,14 @@ class EmailContent {
         /**
          * @brief Constrói um novo Conteúdo de Email com conteúdos específicos informados.
          * 
-         * @param charactersAmount Quantidade de caracteres da mensagem
+         * @param wordsAmount Quantidade de caracteres da mensagem
          * @param msg Mensagem armazenada pelo e-mail
          */
-        EmailContent(int charactersAmount, std::string msg);
+        EmailContent(int wordsAmount, std::string msg);
 
     private:
         std::string msg;
-        int charactersAmount;
+        int wordsAmount;
 };
 
 #endif
