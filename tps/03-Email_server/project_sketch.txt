@@ -1,0 +1,36 @@
+emailContent:
+	- Mensagem
+	- Número de palavras
+	- Validar se a mensagem possui o mesmo número de palavras informado, assim como cada palavra possui menos de 40 caracteres
+
+
+email (nó da árvore):
+	- Atributo "emailContent"
+	- ID do usuário ao qual o e-mail pertence
+	- ID próprio do e-mail
+	- Método para retornar o ID do usuário
+	- Método para retornar o ID do e-mail
+	- Método para retornar a mensagem armazenada
+	- Ponteiro para o e-mail da esquerda
+	- Ponteiro para o e-mail da direita
+
+
+inbox (árvore binária):
+	- Ponteiro para um e-mail (raiz da árvore)
+	- Método para buscar um e-mail -> Retorna o resultado da operação
+	- Método para excluir um e-mail -> Retorna o resultado da operação
+	- Método para inserir um e-mail -> Retorna o resultado da operação
+
+
+server:
+	- Fila de operações executadas no servidor (entrega, consulta e remoção) para posterior impressão
+	- Método de operação de entrega de e-mail
+	- Método de operação de consulta de e-mail
+	- Método de operação de remoção de e-mail
+	- Método para imprimir as operações executadas no servidor
+
+
+session:
+	- Possui um servidor
+	- Método construtor que lê o arquivo de entrada e realiza as requisições para o servidor
+	- Método de impressão que recebe um arquivo de saída e imprime as operações executadas nele
