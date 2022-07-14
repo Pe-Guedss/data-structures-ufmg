@@ -35,6 +35,11 @@ class EmailContent {
     private:
         std::string msg;
         int wordsAmount;
+
+    /**
+     * @brief Método para imprimir o conteúdo do e-mail.
+     */
+    friend std::ostream &operator<<(std::ostream &out, const EmailContent *emailContent);
 };
 
 #endif
