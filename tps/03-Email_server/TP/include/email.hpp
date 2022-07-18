@@ -10,7 +10,7 @@
 #include "emailContent.hpp"
 
 /**
- * @brief Classe EmailContent. Define o conteúdo que um e-mail apresenta.
+ * @brief Classe Email. Define os atributos que identificam e posicionam um e-mail.
  * 
  */
 class Email {
@@ -28,6 +28,27 @@ class Email {
          * @param userID Identificador do usuário que recebe (destinatário).
          */
         Email(int emailID, int userID);
+
+        /**
+         * @brief Define o e-mail pai do e-mail atual.
+         * 
+         * @param parent Referência para o e-mail pai do atual.
+         */
+        void setParent(Email *parent);
+
+        /**
+         * @brief Define o e-mail à esquerda do e-mail atual.
+         * 
+         * @param leftEmail Referência para o e-mail que se quer deixar à esquerda do atual.
+         */
+        void setLeftEmail(Email *leftEmail);
+
+        /**
+         * @brief Define o e-mail à direita do e-mail atual.
+         * 
+         * @param rightEmail Referência para o e-mail que se quer deixar à direita do atual.
+         */
+        void setRightEmail(Email *rightEmail);
 
         /**
          * @brief Define o conteúdo deste e-mail.
