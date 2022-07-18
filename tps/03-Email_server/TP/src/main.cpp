@@ -1,14 +1,12 @@
-#include "emailContent.hpp"
+#include "email.hpp"
 
 int main() {
-    EmailContent a;
-    try {
-        a = EmailContent(3, "Eu sou Pedro!");
-        std::cout << &a << std::endl;
-    }
-    catch(const std::exception& e) {
-        std::cerr << e.what() << '\n';
-    }
+    Email a;
+    a = Email(3, 5);
+
+    a.setContent(5, "Olá, eu sou Pedro! Prazer!");
+
+    std::cout << &a << std::endl;
     
     return 0;
 }
