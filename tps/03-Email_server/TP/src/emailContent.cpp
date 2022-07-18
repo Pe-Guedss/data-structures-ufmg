@@ -1,5 +1,7 @@
 #include "emailContent.hpp"
+
 #include <sstream>
+#include "msgassert.hpp"
 
 EmailContent::EmailContent() {
     this->wordsAmount = -1;
@@ -14,13 +16,13 @@ EmailContent::EmailContent(int wordsAmount, std::string msg) {
     std::stringstream emailMessage(msg);
     while (emailMessage >> word) {
         // Verifica se as palavras não excedem o limite de caracteres
-        if (word.length() > 40) throw std::invalid_argument("Uma das palavras do e-mail tem tamanho maior que o permitido.");
+        avisoAssert(word.length() < 40, "Uma das palavras do e-mail tem tamanho maior que o permitido.\n");
 
         wordCounter++;
     }
 
     // Verifica se a quantidade de palavras bate com a quantidade informada no arquivo de entrada.
-    if (wordCounter != wordsAmount) throw std::invalid_argument("A quantidade de palavras na frase não bate com a informada na entrada.");
+    avisoAssert(wordCounter == wordsAmount, "A quantidade de palavras na frase não bate com a informada na entrada.");
     
     this->wordsAmount = wordsAmount;
     this->msg = msg;
