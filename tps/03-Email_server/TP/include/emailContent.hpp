@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
-// Arquivo	: email.hpp
-// Conteudo	: definicoes da classe Email
+// Arquivo	: emailContent.hpp
+// Conteudo	: definicoes da classe EmailContent
 // Autor	: Pedro de Oliveira Guedes (pedro.og2002@gmail.com)
 //---------------------------------------------------------------------
 
