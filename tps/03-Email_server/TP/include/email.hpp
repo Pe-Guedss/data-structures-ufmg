@@ -70,7 +70,7 @@ class Email {
          * 
          * @return int -> Identificador do usuário recebedor do e-mail.
          */
-        int getAdressee();
+        int getAddressee();
 
     private:
         int id; // ID referente ao e-mail.

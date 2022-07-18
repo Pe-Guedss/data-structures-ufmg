@@ -42,7 +42,7 @@ int Email::getID() {
     return this->id;
 }
 
-int Email::getAdressee() {
+int Email::getAddressee() {
     return this->addressee;
 }
 
