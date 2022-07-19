@@ -27,7 +27,6 @@ server:
 	- Método de operação de entrega de e-mail
 	- Método de operação de consulta de e-mail
 	- Método de operação de remoção de e-mail
-	- Método para imprimir as operações executadas no servidor
 
 
 session:
