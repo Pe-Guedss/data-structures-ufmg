@@ -42,8 +42,6 @@ class Inbox {
          * @param userID Identificador do destinatário.
          * @param wordsAmount Quantidade de palavras no e-mail.
          * @param msg Mensagem a ser enviada para o destinatário.
-         * 
-         * @return true (1) ou false (0), a depender se a adição foi bem sucedida ou não.
          */
         void addEmail(int emailID, int userID,
                       int wordsAmount, std::string msg);
@@ -52,6 +50,7 @@ class Inbox {
          * @brief Apaga um e-mail enviado para o usuário.
          * 
          * @param emailID Identificador do e-mail que se quer apagar.
+         *
          * @return true (1) ou false (0), a depender se a exclusão foi bem sucedida ou não.
          */
         bool deleteEmail(int emailID);
@@ -95,7 +94,6 @@ class Inbox {
          * @param wordsAmount Quantidade de palavras no e-mail.
          * @param msg Mensagem a ser enviada para o destinatário.
          * 
-         * @return true (1) ou false (0), a depender se a inserção foi bem sucedida ou não.
          */
         void insertEmail(int emailID, int userID,
                          EmailContent emailContent, Email* &email);
