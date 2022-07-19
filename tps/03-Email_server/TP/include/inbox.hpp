@@ -65,6 +65,14 @@ class Inbox {
          */
         void cleanInbox(Email *root);
 
+        /**
+         * @brief Troca o e-mail a ser deletado pelo seu e-mail antecessor.
+         * 
+         * @param deletedEmail E-mail que será deletado.
+         * @param substitute E-mail que substituirá o deletado.
+         */
+        void replacePredecessor(Email *deletedEmail, Email *substitute);
+
     /**
      * @brief Método para imprimir a caixa de entrada por caminhamento pré-ordem.
      */
