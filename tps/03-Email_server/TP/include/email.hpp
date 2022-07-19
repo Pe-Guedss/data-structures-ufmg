@@ -86,6 +86,8 @@ class Email {
      * @brief Método para imprimir o conteúdo do e-mail.
      */
     friend std::ostream &operator<<(std::ostream &out, const Email *email);
+
+    friend class Inbox;
 };
 
 #endif
