@@ -108,6 +108,8 @@ class Inbox {
          */
         bool removeEmail(Email* &email, int emailID);
 
+    friend class Server;
+
 };
 
 #endif
