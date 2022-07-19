@@ -1,18 +1,24 @@
-#include "inbox.hpp"
+#include "server.hpp"
 
 int main() {
-    Inbox *inbox;
-    inbox = new Inbox();
+    Server *server;
+    server = new Server(5);
 
-    inbox->addEmail(10, 15, 5, "Olá, eu sou Pedro! Prazer!");
-    inbox->addEmail(11, 12, 5, "Olá, eu sou Pedro! Prazer!");
-    inbox->addEmail(1, 16, 5, "Olá, eu sou Pedro! Prazer!");
+    server->sendEmail(10, 1, 5, "Olá, eu sou Pedro! Prazer!");
+    server->sendEmail(17, 12, 5, "Olá, eu sou Vinícius! Prazer!");
+    server->sendEmail(1, 5, 5, "Olá, eu sou Carlos! Prazer!");
+    server->sendEmail(5, 85, 5, "Olá, eu sou João! Prazer!");
+    server->sendEmail(19, 9, 5, "Olá, eu sou Outro! Prazer!");
 
-    std::cout << "Consulta U E: " << inbox->searchEmail(1) << std::endl;
+    server->searchEmail(5, 85);
+    server->searchEmail(10, 85);
+    server->searchEmail(1, 5);
 
-    inbox->deleteEmail(10);
+    server->eraseEmail(19, 9);
 
-    inbox->print();
+    OperationsQueue *log;
+    log = server->getServerLog();
+    while (log->getSize() > 0) std::cout << log->dequeue() << std::endl;
     
     return 0;
 }
