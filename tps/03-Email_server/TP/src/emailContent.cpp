@@ -28,6 +28,10 @@ EmailContent::EmailContent(int wordsAmount, std::string msg) {
     this->msg = msg;
 }
 
+std::string EmailContent::getMessage() {
+    return this->msg;
+}
+
 std::ostream &operator<<(std::ostream &out, const EmailContent *emailContent) {
     out << "Este e-mail possui " << emailContent->wordsAmount << " palavras." << std::endl;
     out << "A mensagem dele é:" << std::endl;

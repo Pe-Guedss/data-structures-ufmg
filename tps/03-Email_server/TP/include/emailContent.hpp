@@ -32,6 +32,13 @@ class EmailContent {
          */
         EmailContent(int wordsAmount, std::string msg);
 
+        /**
+         * @brief Retorna a mensagem que o e-mail armazena como conteúdo.
+         * 
+         * @return std::string -> Mensagem armazenada pelo e-mail.
+         */
+        std::string getMessage();
+
     private:
         std::string msg;
         int wordsAmount;
