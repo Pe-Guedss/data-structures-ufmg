@@ -58,6 +58,13 @@ class Inbox {
     private:
         Email *root; // E-mail raiz da caixa de entrada.
 
+        /**
+         * @brief Limpa todos os e-mails da caixa de entrada cujo e-mail raiz foi recebido.
+         * 
+         * @param root E-mail raiz da caixa de entrada.
+         */
+        void cleanInbox(Email *root);
+
     /**
      * @brief Método para imprimir a caixa de entrada por caminhamento pré-ordem.
      */
