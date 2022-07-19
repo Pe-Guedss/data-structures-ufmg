@@ -75,6 +75,8 @@ class Server {
 
         Inbox *usersInbox; // Caixas de entrada dos usuários.
 
+        int usersAmount; // Quantidade de usuários do servidor.
+
 };
 
 #endif
