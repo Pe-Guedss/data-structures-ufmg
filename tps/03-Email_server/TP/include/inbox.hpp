@@ -33,7 +33,7 @@ class Inbox {
          * @param emailID Identificador do e-mail buscado.
          * @return std::string -> Conteúdo de texto do e-mail encontrado.
          */
-        std::string searchEmail(int emailID);
+        std::string searchEmail(int emailID, int userID);
 
         /**
          * @brief Adiciona um novo e-mail à caixa de entrada do destinatário.
@@ -53,7 +53,7 @@ class Inbox {
          *
          * @return true (1) ou false (0), a depender se a exclusão foi bem sucedida ou não.
          */
-        bool deleteEmail(int emailID);
+        bool deleteEmail(int emailID, int userID);
 
         /**
          * @brief Método para imprimir a caixa de entrada por caminhamento pré-ordem.
@@ -106,7 +106,7 @@ class Inbox {
          * 
          * @return true (1) ou false (0), dependendo de se o e-mail foi removido ou não.
          */
-        bool removeEmail(Email* &email, int emailID);
+        bool removeEmail(Email* &email, int emailID, int userID);
 
     friend class Server;
 

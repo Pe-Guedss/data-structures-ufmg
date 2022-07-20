@@ -34,7 +34,7 @@ void Server::sendEmail(int addressee, int emailID, int wordsAmount, std::string 
 
 void Server::searchEmail(int userID, int emailID) {
     int userHash = userID % this->usersAmount;
-    std::string emailMessage = this->usersInbox[userHash].searchEmail(emailID);
+    std::string emailMessage = this->usersInbox[userHash].searchEmail(emailID, userID);
 
     std::string operation = std::string("CONSULTA ");
     operation.append(std::to_string(userID) + " " + std::to_string(emailID) + ": ");
@@ -44,7 +44,7 @@ void Server::searchEmail(int userID, int emailID) {
 
 void Server::eraseEmail(int userID, int emailID) {
     int userHash = userID % this->usersAmount;
-    bool emailDeleted = this->usersInbox[userHash].deleteEmail(emailID);
+    bool emailDeleted = this->usersInbox[userHash].deleteEmail(emailID, userID);
 
     if (emailDeleted) this->operationsLog->enqueue("OK: MENSAGEM APAGADA");
     

@@ -8,12 +8,14 @@ Inbox::~Inbox() {
     this->cleanInbox(this->root);
 }
 
-std::string Inbox::searchEmail(int emailID) {
+std::string Inbox::searchEmail(int emailID, int userID) {
     Email *aux;
     aux = this->root;
 
     while (aux != nullptr) {
-        if (aux->getID() == emailID) return aux->content.getMessage();
+        if (aux->getID() == emailID) 
+        // Caso o ID do e-mail seja encontrado, ainda é necessário verificar se o ID do destinatário do e-mail em questão é o mesmo que se busca.
+            return aux->getAddressee() == userID ? aux->content.getMessage() : "MENSAGEM INEXISTENTE";
         
         else if (emailID < aux->getID()) aux = aux->leftEmail;
 
@@ -44,18 +46,20 @@ void Inbox::insertEmail(int emailID, int userID,
     }
 }
 
-bool Inbox::deleteEmail(int emailID) {
-    return this->removeEmail(this->root, emailID);
+bool Inbox::deleteEmail(int emailID, int userID) {
+    return this->removeEmail(this->root, emailID, userID);
 }
 
-bool Inbox::removeEmail(Email* &email, int emailID) {
+bool Inbox::removeEmail(Email* &email, int emailID, int userID) {
     if (email == nullptr) return false;
 
-    else if (emailID < email->getID()) return this->removeEmail(email->leftEmail, emailID);
+    else if (emailID < email->getID()) return this->removeEmail(email->leftEmail, emailID, userID);
 
-    else if (emailID > email->getID()) return this->removeEmail(email->rightEmail, emailID);
+    else if (emailID > email->getID()) return this->removeEmail(email->rightEmail, emailID, userID);
 
     else {
+        if (email->addressee != userID) return false;
+        
         Email *aux;
         if (email->rightEmail == nullptr) {
             aux = email;
