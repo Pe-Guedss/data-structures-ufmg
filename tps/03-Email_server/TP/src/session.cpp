@@ -57,7 +57,7 @@ void Session::finish(std::string sessionLogs) {
     logs = this->server->getServerLog();
     while (logs->getSize() > 0) {
         sessionResults << logs->dequeue() << std::endl;
-        LEMEMLOG((long int) &logs, sizeof(std::string), 0);
+        LEMEMLOG((long int) this->server->getServerLog(), sizeof(Email), 0);
     }
     sessionResults.close();
 }
