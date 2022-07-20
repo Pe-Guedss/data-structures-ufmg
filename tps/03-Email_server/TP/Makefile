@@ -35,13 +35,15 @@ MY_TEST_OUTPUTS = tests/my_outputs
 # 	@ mkdir $(MEM_EXEC_LOGS) $(PERF_EXEC_LOGS) $(GPROF) $(MEM_INPUTS) $(MEM_OUTPUTS) $(PERF_INPUTS) $(PERF_OUTPUTS)
 
 # mem: $(EXE)
-# 	$(EXE) -i $(MEM_INPUTS)/entrada.txt -o $(MEM_INPUTS)/saida.txt -m 3 -s 4 -p $(MEM_EXEC_LOGS)/memlog.out -l
+# 	$(EXE) -i $(MEM_INPUTS)/entrada.txt -o $(MEM_INPUTS)/saida.txt -p $(MEM_EXEC_LOGS)/memlog.out -l
 
 # 	rm -rf $(MEM_OUTPUTS)
 
 # 	mkdir $(MEM_OUTPUTS)
 
 # 	$(ANALISAMEM) -i $(MEM_EXEC_LOGS)/memlog.out -p $(MEM_OUTPUTS)/mem_analysis
+
+# 	gnuplot $(MEM_OUTPUTS)/*.gp
 
 # perf: $(EXE)
 # 	$(EXE) -i $(PERF_INPUTS)/entrada_1.out -o $(PERF_INPUTS)/saida_1.out -p $(PERF_EXEC_LOGS)/perf_res_1.out
@@ -58,13 +60,13 @@ MY_TEST_OUTPUTS = tests/my_outputs
 # 	$(EXE) -i $(PERF_INPUTS)/entrada_5.out -o $(PERF_INPUTS)/saida_5.out -p $(GPROF)/perf_res_5.out
 # 	gprof $(EXE) gmon.out > $(GPROF)/perf_res_5.txt
 
-test:
-	@ echo "Testing the program..."
-	@ for number in 1 2 3 4; do \
-	$(EXE) -I $(TEST_INPUTS)/entrada_$$number.txt -O $(MY_TEST_OUTPUTS)/saida_$$number.txt; \
-	diff $(MY_TEST_OUTPUTS)/saida_$$number.txt $(TEST_OUTPUTS)/saida_$$number.txt; \
-	done
-	@ echo "Test finished successfully!"
+# test:
+# 	@ echo "Testing the program..."
+# 	@ for number in 1 2 3 4; do \
+# 	$(EXE) -I $(TEST_INPUTS)/entrada_$$number.txt -O $(MY_TEST_OUTPUTS)/saida_$$number.txt; \
+# 	diff $(MY_TEST_OUTPUTS)/saida_$$number.txt $(TEST_OUTPUTS)/saida_$$number.txt; \
+# 	done
+# 	@ echo "Test finished successfully!"
 
 $(EXE): $(OBJS)
 	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
