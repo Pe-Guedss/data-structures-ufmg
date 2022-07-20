@@ -14,7 +14,7 @@ std::string Inbox::searchEmail(int emailID, int userID) {
 
     while (aux != nullptr) {
         if (aux->getID() == emailID) 
-        // Caso o ID do e-mail seja encontrado, ainda é necessário verificar se o ID do destinatário do e-mail em questão é o mesmo que se busca.
+            // Caso o ID do e-mail seja encontrado, ainda é necessário verificar se o ID do destinatário do e-mail em questão é o mesmo que se busca.
             return aux->getAddressee() == userID ? aux->content.getMessage() : "MENSAGEM INEXISTENTE";
         
         else if (emailID < aux->getID()) aux = aux->leftEmail;
