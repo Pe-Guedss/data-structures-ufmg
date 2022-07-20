@@ -56,6 +56,6 @@ def generateFile(fileName: str, messagesPerUser: int):
             outputFile.write("APAGA " + str(key) + " " + str(serverDict[key][randomEmailIdx]))
             outputFile.write("\n")
 
-messagesPerUser = [1000, 5000, 10000, 15000, 20000]
+messagesPerUser = [200000, 400000, 600000, 800000, 1000000]
 for num in range(5):
     generateFile(f'entrada_{num + 1}.out', messagesPerUser[num])
