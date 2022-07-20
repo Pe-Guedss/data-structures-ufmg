@@ -77,6 +77,8 @@ class Server {
 
         int usersAmount; // Quantidade de usuários do servidor.
 
+        int id; // Identificador para as análises de memória.
+
 };
 
 #endif

@@ -87,5 +87,8 @@ int main(int argc, char **argv) {
 
     session->finish(resultsLog);
     
-    return 0;
+    delete session;
+    session = nullptr;
+    
+    return finalizaMemLog();
 }

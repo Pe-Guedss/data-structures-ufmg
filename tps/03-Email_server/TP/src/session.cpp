@@ -55,7 +55,9 @@ void Session::finish(std::string sessionLogs) {
 
     OperationsQueue *logs;
     logs = this->server->getServerLog();
-    while (logs->getSize() > 0) sessionResults << logs->dequeue() << std::endl;
-
+    while (logs->getSize() > 0) {
+        sessionResults << logs->dequeue() << std::endl;
+        LEMEMLOG((long int) &logs, sizeof(std::string), 0);
+    }
     sessionResults.close();
 }
