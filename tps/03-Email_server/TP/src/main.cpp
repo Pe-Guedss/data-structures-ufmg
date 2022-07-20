@@ -82,13 +82,15 @@ int main(int argc, char **argv) {
         desativaMemLog();
     }
 
+    defineFaseMemLog(0);
     Session *session;
     session = new Session(operations);
 
+    defineFaseMemLog(1);
     session->finish(resultsLog);
     
     delete session;
     session = nullptr;
-    
+
     return finalizaMemLog();
 }
